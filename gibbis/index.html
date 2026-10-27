@@ -713,7 +713,7 @@ svg{display:block}
 #room.decorating .m-rug.sel{outline-offset:0}
 .pop-in{animation:popdeco .45s cubic-bezier(.3,1.6,.5,1)}
 @keyframes popdeco{0%{scale:.3}100%{scale:1}}
-#decoPanel{position:absolute;left:0;right:0;top:0;z-index:9;background:var(--paper);border-radius:0 0 28px 28px;box-shadow:0 5px 0 rgba(18,20,23,.25);padding:calc(env(safe-area-inset-top,0px) + 10px) 0 10px;transition:transform .25s ease}
+#decoPanel{position:absolute;left:0;right:0;top:0;z-index:9;background:var(--paper);border-radius:0 0 28px 28px;box-shadow:0 5px 0 rgba(18,20,23,.25);padding:10px 0;transition:transform .25s ease}
 #decoPanel.tuck{transform:translateY(calc(-100% + 10px))}
 .dp-head{display:flex;align-items:center;gap:8px;padding:0 12px}
 .dp-cats{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 2px;touch-action:pan-x}
@@ -4954,13 +4954,18 @@ function enterDecorate(cat,placeId){
   if(R.state==='sleep'||R.state==='tobed')wake(true);if(R.state==='bath')endBath(false);exitPlay(true);closeTray();
   if(R.state==='use')endUse(true);R.useGo=false;
   DECO.on=true;DECO.sel=null;DECO.collapsed=false;if(cat)DECO.cat=cat;R.state='deco';
-  $('#room').classList.add('decorating');$('#decoPanel').hidden=false;renderDecoPanel();
+  $('#room').classList.add('decorating');$('#decoPanel').hidden=false;renderDecoPanel();requestAnimationFrame(rescueHidden);
   if(placeId)addDeco(placeId);
 }
 function exitDecorate(){
   DECO.on=false;DECO.sel=null;$('#room').classList.remove('decorating');$('#decoPanel').hidden=true;$('#decoSel').hidden=true;
   document.querySelectorAll('.deco-i.sel').forEach(e=>e.classList.remove('sel'));
   R.state='idle';R.nextWander=2;save();
+}
+function rescueHidden(){
+  const hd=$('#decoPanel .dp-head');if(!hd)return;const pb=hd.getBoundingClientRect().bottom+10;let moved=false;
+  ensureHome().items.forEach(i=>{if(i.y==null)return;const el=itemEl(i.u);if(!el)return;const r=el.getBoundingClientRect();if(r.top<pb+4){const wallH=L.H*.66;i.y=Math.min(.9,i.y+(pb+8-r.top)/wallH);moved=true}});
+  if(moved){layoutHome();save()}
 }
 function renderDecoPanel(){
   const p=$('#decoPanel');const h=ensureHome();const cat=DECO.cat;
@@ -5025,8 +5030,8 @@ function decoMove(e){
   if(!D.moved&&Math.hypot(dx,dy)<6)return;
   if(!D.moved){D.moved=true;$('#decoPanel').classList.add('tuck');$('#decoSel').hidden=true}
   const it=ITEM[D.i.id];const m=mountOf(it);D.i.x=clamp(D.ix+dx/L.W,.03,.97);
-  if(m==='wall')D.i.y=clamp(D.iy+dy/(L.H*.66),.1,.9);
-  else if(m==='ceil')D.i.y=clamp(D.iy+dy/(L.H*.66),.08,.45);
+  if(m==='wall')D.i.y=clamp(D.iy+dy/(L.H*.66),.18,.9);
+  else if(m==='ceil')D.i.y=clamp(D.iy+dy/(L.H*.66),.16,.45);
   else{const fb=floorBand();D.i.d=clamp(D.id0+dy/(fb.bot-fb.top),0,1)}
   layoutHome();
 }
@@ -5452,7 +5457,7 @@ start({});
 
 <script>
 /* Auto-update: home-screen apps resume instead of reloading, so check for a newer build when the app comes back. */
-(function(){const B='v1793139756';
+(function(){const B='v1793141514';
 function keep(){try{window.__gibbiSave&&window.__gibbiSave()}catch(e){}}
 async function chk(){try{const r=await fetch('../version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
 if(j.v&&j.v!==B&&sessionStorage.getItem('gibbiReloaded')!==j.v){sessionStorage.setItem('gibbiReloaded',j.v);keep();location.reload()}}catch(e){}}
