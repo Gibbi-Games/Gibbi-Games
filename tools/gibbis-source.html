@@ -82,8 +82,16 @@ svg{display:block}
 .note{margin:0;font-size:15px;font-weight:600;text-align:center;max-width:36ch}
 
 /* ---------- Hatch ---------- */
-#hatch{background:linear-gradient(#A9DCF2 0 62%, #8CC07A 62%)}
-.nest-bowl{position:absolute;left:50%;top:66%;width:min(70vw,320px);height:min(18vw,84px);transform:translate(-50%,-50%);border-radius:50%;background:repeating-linear-gradient(20deg,#B9844A 0 6px,#9C6A36 6px 9px,#D2A162 9px 14px);box-shadow:inset 0 -10px 0 rgba(18,20,23,.25)}
+#hatch{background:radial-gradient(circle at 50% 22%,rgba(254,254,246,.9) 0 6%,rgba(244,212,76,.55) 6.5% 10%,transparent 26%),linear-gradient(#BBEEEE 0%,#9BDAF7 62%)}
+.hatch-bg{position:absolute;inset:0;pointer-events:none}
+.hatch-bg svg{position:absolute;left:0;bottom:0;width:100%;height:46%}
+.hatch-rays{position:absolute;left:50%;top:22%;width:min(110vw,820px);aspect-ratio:1;transform:translate(-50%,-50%);background:repeating-conic-gradient(rgba(254,254,246,.28) 0 7deg,transparent 7deg 20deg);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 20%,transparent 66%);mask:radial-gradient(circle,#000 20%,transparent 66%);animation:spin 60s linear infinite}
+.hcloud{position:absolute;width:120px;height:40px;background:#FEFEF6;border-radius:40px;opacity:.9;animation:drift 40s linear infinite}
+.hcloud::before{content:"";position:absolute;left:24px;top:-22px;width:56px;height:56px;border-radius:50%;background:inherit}
+@keyframes drift{from{transform:translateX(-160px)}to{transform:translateX(110vw)}}
+.egg-btn{filter:drop-shadow(0 0 0 rgba(244,212,76,0));animation:eggglow 1.8s ease-in-out infinite}
+@keyframes eggglow{50%{filter:drop-shadow(0 0 22px rgba(244,212,76,.95))}}
+.nest-bowl{position:absolute;left:50%;top:66%;width:min(70vw,320px);height:min(18vw,84px);transform:translate(-50%,-50%);border-radius:50%;border:4px solid #121417;background:repeating-linear-gradient(20deg,#B9844A 0 6px,#9C6A36 6px 9px,#D2A162 9px 14px);box-shadow:inset 0 -10px 0 rgba(18,20,23,.25)}
 .egg-btn{position:absolute;left:50%;top:66%;width:min(40vw,190px);aspect-ratio:120/150;transform:translate(-50%,-92%);border:0;background:none;padding:0;transform-origin:50% 100%}
 .egg-btn.tick{animation:tick .28s}
 @keyframes tick{0%,100%{transform:translate(-50%,-92%) rotate(0)}30%{transform:translate(-50%,-94%) rotate(-9deg)}65%{transform:translate(-50%,-92%) rotate(8deg)}}
@@ -135,7 +143,11 @@ svg{display:block}
 #room.is-night .night{opacity:1}
 #room.is-night .sky{background:linear-gradient(#22285A,#3B3F7A)}
 #room.is-night .sun{background:#FEFEF6;box-shadow:-10px -4px 0 0 #2E3368 inset}
-#room.is-bath .wall{filter:hue-rotate(-30deg) brightness(1.08)}
+#room.is-bath #lFore::before{content:"";position:absolute;left:0;right:0;bottom:0;height:min(30vh,280px);background:radial-gradient(circle at 50% 100%,#fff 0 30px,transparent 31px) 0 0/64px 62px repeat-x,radial-gradient(circle at 50% 100%,#EAF8FF 0 40px,transparent 41px) 30px 8px/92px 80px repeat-x,linear-gradient(transparent 60px,#fff 60px);animation:foamin .5s ease-out,foam 3s ease-in-out infinite alternate;opacity:.92;pointer-events:none}
+@keyframes foamin{from{transform:translateY(100%)}}
+@keyframes foam{to{background-position:20px 0,60px 8px,0 0}}
+#room.is-bath .pet{z-index:4}
+#room.is-bath #lFore{z-index:3}
 
 .pet{position:absolute;left:0;touch-action:none;cursor:grab;z-index:3}
 .pet.held{cursor:grabbing}
@@ -363,6 +375,11 @@ svg{display:block}
 .toggle[aria-pressed="true"] i{background:var(--mint)}
 .toggle[aria-pressed="true"] i::after{transform:translateX(22px)}
 .secrets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fold summary{list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary span{font-size:15px;background:rgba(18,20,23,.08);border-radius:999px;padding:4px 12px}
+.fold[open] summary span{display:none}
+.fold .secrets{margin-top:8px}
 .secret{background:#F5E5C4;border-radius:14px;padding:10px 12px;font-size:15px;min-width:0}
 .secret.found{background:var(--mint)}
 .secret small{display:block;font-weight:600;font-size:12px;opacity:.8;margin-top:2px}
@@ -426,11 +443,17 @@ svg{display:block}
 /* ---------- Arcade ---------- */
 #arcade{background:var(--th-arcade)}
 #arcade .nest-title{color:var(--th-arcade-ink)}#shop .nest-title{color:var(--th-shop-ink)}
-.arcade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:14px;max-width:900px;margin:0 auto}
+.arcade-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:900px;margin:0 auto}
+@media (min-width:700px){.arcade-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+.gprize{display:flex;align-items:center;gap:6px;margin-top:4px;background:rgba(18,20,23,.06);border-radius:14px;padding:4px 10px 4px 4px;max-width:100%}
+.gprize .pv{width:40px;height:40px;flex:none;border-radius:10px;overflow:hidden;background:#fff}
+.gprize .pv>*{width:100%!important;height:100%!important;aspect-ratio:auto!important;border-radius:0!important}
+.gprize .pv svg{width:100%;height:100%}
+.gprize small{font-size:13px;line-height:1.15;text-align:left}
 .gcard{border:0;border-radius:26px;background:var(--paper);box-shadow:0 7px 0 rgba(20,10,50,.5);padding:16px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-width:0}
 .gcard:active{transform:translateY(5px);box-shadow:0 2px 0 rgba(20,10,50,.5)}
-.gemo{font-size:clamp(48px,12vw,68px);line-height:1.1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
-.gcard b{font-size:24px;font-weight:900}
+.gemo{font-size:clamp(40px,11vw,64px);line-height:1.1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.gcard b{font-size:clamp(18px,5vw,24px);font-weight:900;line-height:1.05}
 .gcard small{font-size:15px;font-weight:700;opacity:.75}
 .gcard .ggoal{font-size:13px;opacity:.7}
 .gprog{width:90%;height:10px;border-radius:999px;background:rgba(18,20,23,.12);overflow:hidden;margin-top:4px}
@@ -481,7 +504,9 @@ svg{display:block}
 .shop-wrap>*{flex:none;max-width:100%}
 .chip2{border:2px solid rgba(18,20,23,.25);background:rgba(255,244,222,.5);border-radius:999px;padding:7px 14px;font-size:16px;white-space:nowrap;flex:none}
 .chip2[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.shop-stage{height:clamp(150px,26vh,240px);display:grid;place-items:center;background:radial-gradient(ellipse at 50% 90%,rgba(18,20,23,.18) 0 30%,transparent 31%),rgba(255,244,222,.45);border-radius:28px}
+.cdiv{flex:none;width:2px;margin:4px 4px;background:rgba(18,20,23,.2);border-radius:2px}
+.skinds .chip2.sty[aria-pressed="true"]{background:var(--sun);border-color:var(--ink)}
+.shop-stage{grid-template-rows:100%;overflow:hidden;width:min(100%,520px);height:clamp(120px,19vh,200px);display:grid;place-items:center;background:radial-gradient(ellipse at 50% 90%,rgba(18,20,23,.18) 0 30%,transparent 31%),rgba(255,244,222,.45);border-radius:28px}
 .stage-pet{height:100%;aspect-ratio:1}
 .stage-pet svg{width:100%;height:100%;overflow:visible}
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,150px),1fr));gap:10px}
@@ -718,6 +743,13 @@ svg{display:block}
 .shop-btn:active,.icon-btn:active{transform:translateY(3px)}
 #room.decorating #roomHud{visibility:hidden}
 
+
+.shelf2{width:100%;height:100%;position:relative;display:flex;align-items:flex-end;justify-content:space-around;padding:0 6%}
+.shelf2 span{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.62em;line-height:1;margin-bottom:.34em}
+.shelf2 i{position:absolute;left:0;right:0;bottom:0;height:22%;background:#D9A066;border:.04em solid #121417;border-radius:.08em;box-shadow:0 .08em 0 rgba(18,20,23,.2)}
+.bedprev{width:80%;aspect-ratio:2.4}
+.iswatch.bedsw{background:#E7EDE7}
+.deco-prev{display:grid;place-items:center}
 /* ---------- Color themes (picked in Grown-up stuff) ---------- */
 :root,:root[data-theme=bee]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.55) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#1BBEEE 0%, #6FD3F2 55%, #BBEEEE 100%);--th-title-ink:#121417;--th-spark:#F4D44C;--th-shop:linear-gradient(#193B95,#2CA9D3);--th-shop-ink:#FEFEF6;--th-nest:linear-gradient(#BBEEEE,#9BDAF7);--th-nest-ink:#121417;--th-arcade:linear-gradient(#2CA9D3,#1BBEEE);--th-arcade-ink:#121417}
 :root[data-theme=honey]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.6) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#F4D44C 0%, #F8E58C 55%, #FEFEF6 100%);--th-title-ink:#121417;--th-spark:#1BBEEE;--th-shop:linear-gradient(#E7C146,#F4D44C);--th-shop-ink:#121417;--th-nest:linear-gradient(#FEFEF6,#F8E58C);--th-nest-ink:#121417;--th-arcade:linear-gradient(#4A2410,#7B3F1E);--th-arcade-ink:#FEFEF6}
@@ -748,6 +780,7 @@ input,textarea,select{font-size:max(16px,1em)}
   </section>
 
   <section class="screen" id="hatch" hidden>
+    <div class="hatch-bg"><div class="hatch-rays"></div><div class="hcloud" style="top:12%;animation-delay:-8s"></div><div class="hcloud" style="top:26%;animation-delay:-26s;scale:.7"></div><svg viewBox="0 0 400 200" preserveAspectRatio="none"><path d="M-10 90 Q90 30 200 80 T410 60 V210 H-10Z" fill="#8CC07A" stroke="#121417" stroke-width="3"/><path d="M-10 130 Q120 80 250 120 T410 110 V210 H-10Z" fill="#6DBA5A" stroke="#121417" stroke-width="3"/></svg></div>
     <div class="nest-bowl"></div>
     <button class="egg-btn" id="eggBtn" aria-label="Tap the egg to hatch it"></button>
     <div class="tap-ring" id="tapRing"></div>
@@ -775,7 +808,7 @@ input,textarea,select{font-size:max(16px,1em)}
         <button class="shop-btn" id="coinBtn" aria-label="Shop"><span class="sb-ic" id="shopIc"></span><span class="cc"><span class="cicon"></span><span class="coin-count">0</span></span></button>
         <div class="hud-row">
           <button class="icon-btn" id="decoBtn" aria-label="Decorate your room"></button>
-          <button class="icon-btn egg-meter" id="nestBtn" aria-label="Nest: all your creatures"><span></span></button>
+          <button class="icon-btn egg-meter" id="nestBtn" aria-label="Nest: all your Gibbis"><span></span></button>
           <button class="icon-btn" id="gearBtn" aria-label="Grown-up settings"></button>
         </div>
       </div>
@@ -1549,7 +1582,7 @@ function renderTitle(replacing=false){applyTheme();
     wrap.classList.remove('back');egg.classList.remove('has-pet');egg.onclick=null;egg.innerHTML=eggSVG(p?genesOf(p).h:200);
     if(replacing){
       box.innerHTML=`<p class="note big" id="overNote"></p><div class="confirm wide"><button class="no" id="keepBtn">Keep my creatures</button><button class="yes" id="newBtn">Start over</button></div>`;
-      $('#overNote').textContent=`Starting over clears all ${S.pets.length} creature${S.pets.length===1?'':'s'}, coins and items. This can't be undone.`;
+      $('#overNote').textContent=`Starting over clears all ${S.pets.length} Gibbi${S.pets.length===1?'':'s'}, coins and items. This can't be undone.`;
       $('#keepBtn').onclick=()=>{SFX.pop();renderTitle()};$('#newBtn').onclick=()=>{audioInit();SFX.pop();newGame()};
     }else{
       const loading=CLOUD.state==='checking';
@@ -1604,7 +1637,7 @@ function showNamer(){
   const row=n.querySelector('.names');
   names.forEach(nm=>{const b=document.createElement('button');b.className='name-b';b.textContent=nm;b.onclick=()=>chooseName(nm);row.appendChild(b)});
   $('#typeBtn').onclick=()=>{
-    n.innerHTML=`<h2>Type a name</h2><form class="type-row" id="nameForm"><input id="nameInput" maxlength="16" autocomplete="off" aria-label="Pet name"><button type="submit">OK</button></form>`;
+    n.innerHTML=`<h2>Type a name</h2><form class="type-row" id="nameForm"><input id="nameInput" maxlength="16" autocomplete="off" aria-label="Gibbi name"><button type="submit">OK</button></form>`;
     const inp=$('#nameInput');inp.focus();
     $('#nameForm').addEventListener('submit',e=>{e.preventDefault();const v=inp.value.trim();if(v)chooseName(v);else inp.focus()});
   };
@@ -3310,7 +3343,7 @@ function openSettings(confirming=false){
       <button class="toggle" data-s="music" aria-pressed="${S.settings.music}"><span>Music</span><i></i></button>
       <p class="note" style="text-align:left" id="voiceNote"></p>
       <button class="toggle" data-s="fast" aria-pressed="${!!S.settings.fast}"><span>Fast growth<small>For trying things out. Grows 10× faster.</small></span><i></i></button></div></div>
-    <div><h3>Secrets found · ${found} of ${SECRETS.length}</h3><div class="secrets">${SECRETS.map(s=>S.secrets.includes(s[0])?`<div class="secret found">${s[1]}<small>${s[2]}</small></div>`:`<div class="secret">???<small>Keep playing</small></div>`).join('')}</div></div>
+    <details class="fold"><summary><h3>Secrets found · ${found} of ${SECRETS.length}</h3><span>Show</span></summary><div class="secrets">${SECRETS.map(s=>S.secrets.includes(s[0])?`<div class="secret found">${s[1]}<small>${s[2]}</small></div>`:`<div class="secret">???<small>Keep playing</small></div>`).join('')}</div></details>
     <div><h3>High scores · ${esc(p.name)}</h3><div class="stats">${GAMES.map(g=>`<div class="pill"><span class="emo-ic" style="font-size:22px">${g.emo}</span><span>${bestOf(p,g.id)}${g.unit}</span></div>`).join('')}</div></div>
     <div><h3>Best school streak</h3><div class="stats"><div class="pill">${FLAME}<span>${S.bestStreak||0} in a row</span></div></div></div>
     ${familyHTML()}
@@ -3318,7 +3351,7 @@ function openSettings(confirming=false){
   </div>`;
   $('#voiceNote').textContent=`Voice: ${VOICE?VOICE.name:'device default'}. On iPad or iPhone, download a Premium voice for a more natural sound: Settings › Accessibility › Spoken Content › Voices › English (try Ava or Zoe). The game picks it up automatically.`;
   $('#growHead').textContent=`${p.name} · Level ${p.level} of ${MAXL}`;
-  if(confirming)$('#resetNote').textContent=`Start over with a new egg? All ${S.pets.length} creature${S.pets.length===1?'':'s'} in the nest will be gone.`;
+  if(confirming)$('#resetNote').textContent=`Start over with a new egg? All ${S.pets.length} Gibbi${S.pets.length===1?'':'s'} in the nest will be gone.`;
   $('#closeSheet').onclick=closeSettings;
   sh.onclick=e=>{if(e.target===sh)closeSettings()};
   sh.querySelectorAll('.theme-b').forEach(b=>b.onclick=()=>{S.settings.theme=b.dataset.theme;applyTheme();save();SFX.pop();const y=sh.querySelector('.sheet-card').scrollTop;openSettings();sh.querySelector('.sheet-card').scrollTop=y});
@@ -3333,7 +3366,7 @@ function closeSettings(){$('#sheet').hidden=true}
 /* ================= COINS, SHOP, UNLOCKS ================= */
 const COIN_SVG=`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="#FFC83D" ${SW}/><circle cx="24" cy="24" r="12" fill="none" stroke="#E8A92C" stroke-width="3"/><path d="M24 16v16" stroke="#E8A92C" stroke-width="4" stroke-linecap="round"/></svg>`;
 I.coin=COIN_SVG;
-I.shop=`<svg viewBox="0 0 48 48"><path d="M8 18h32l-3 22H11z" fill="#F2648A" ${SW}/><path d="M17 18c0-9 14-9 14 0" fill="none" ${SW}/><path d="M18 26c4 4 8 4 12 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
+I.shop0=`<svg viewBox="0 0 48 48"><path d="M8 18h32l-3 22H11z" fill="#F2648A" ${SW}/><path d="M17 18c0-9 14-9 14 0" fill="none" ${SW}/><path d="M18 26c4 4 8 4 12 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
 I.games=`<svg viewBox="0 0 48 48"><rect x="4" y="14" width="40" height="22" rx="11" fill="#8E5BD8" ${SW}/><path d="M14 21v8M10 25h8" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><circle cx="31" cy="23" r="2.8" fill="#FFC83D"/><circle cx="36" cy="28" r="2.8" fill="#5FD0B8"/></svg>`;
 I.toys=`<svg viewBox="0 0 48 48"><rect x="7" y="20" width="34" height="22" rx="4" fill="#C7874A" ${SW}/><rect x="5" y="15" width="38" height="8" rx="3" fill="#E8735A" ${SW}/><circle cx="16" cy="11" r="6" fill="#5FD0B8" ${SW}/><path d="M28 6l4 8h-8z" fill="#FFC83D" ${SW}/></svg>`;
 
@@ -3367,7 +3400,7 @@ const ITEMS=[
  {id:'r-round',kind:'rug',name:'Coral Rug',price:0,lvl:1,def:true},{id:'r-rainbow',kind:'rug',name:'Rainbow Rug',price:50,lvl:2},{id:'r-checker',kind:'rug',name:'Checker Rug',price:70,lvl:4},{id:'r-grass',kind:'rug',name:'Grass Mat',price:60,lvl:3},{id:'r-cloud',kind:'rug',name:'Cloud Rug',price:100,lvl:6},
  {id:'f-plant',kind:'floor',name:'House Plant',price:0,lvl:1,def:true,emo:'🪴'},{id:'f-cactus',kind:'floor',name:'Cactus',price:30,lvl:1,emo:'🌵'},{id:'f-sunflower',kind:'floor',name:'Sunflower',price:40,lvl:2,emo:'🌻'},{id:'f-lamp',kind:'floor',name:'Lava Lamp',price:60,lvl:3,emo:'🏮'},{id:'f-fish',kind:'floor',name:'Fish Tank',price:80,lvl:4,emo:'🐠'},{id:'f-gumball',kind:'floor',name:'Gumball Machine',price:90,lvl:5,emo:'🍬'},{id:'f-tree',kind:'floor',name:'Little Tree',price:120,lvl:7,emo:'🌳'},{id:'f-rocket',kind:'floor',name:'Toy Rocket',price:180,lvl:9,emo:'🚀'},
  {id:'b-basket',kind:'bed',name:'Cozy Basket',price:0,lvl:1,def:true},{id:'b-cloud',kind:'bed',name:'Cloud Bed',price:100,lvl:4},{id:'b-royal',kind:'bed',name:'Royal Bed',price:220,lvl:8},
- {id:'a-shelf',kind:'art',name:'Toy Shelf',price:0,lvl:1,def:true},{id:'a-clock',kind:'art',name:'Clock',price:40,lvl:2,emo:'🕰️'},{id:'a-guitar',kind:'art',name:'Guitar',price:60,lvl:3,emo:'🎸'},{id:'a-painting',kind:'art',name:'Painting',price:70,lvl:4,emo:'🖼️'},{id:'a-trophy',kind:'art',name:'Trophy Shelf',price:100,lvl:6,emo:'🏆'},{id:'a-portrait',kind:'art',name:'Pet Portrait',price:150,lvl:6},
+ {id:'a-shelf',kind:'art',name:'Toy Shelf',price:0,lvl:1,def:true},{id:'a-clock',kind:'art',name:'Clock',price:40,lvl:2,emo:'🕰️'},{id:'a-guitar',kind:'art',name:'Guitar',price:60,lvl:3,emo:'🎸'},{id:'a-painting',kind:'art',name:'Painting',price:70,lvl:4,emo:'🖼️'},{id:'a-trophy',kind:'art',name:'Trophy Shelf',price:100,lvl:6,emo:'🏆'},{id:'a-portrait',kind:'art',name:'Gibbi Portrait',price:150,lvl:6},
  {id:'v-sunny',kind:'view',name:'Sunny Sky',price:0,lvl:1,def:true},{id:'v-beach',kind:'view',name:'Beach View',price:70,lvl:3},{id:'v-mountain',kind:'view',name:'Mountains',price:90,lvl:5},{id:'v-city',kind:'view',name:'City Lights',price:120,lvl:7},{id:'v-space',kind:'view',name:'Space View',price:200,lvl:9},
  // food (berry/chili/milk/carrot are free starters)
  {id:'cookie',kind:'food',name:'Cookie',price:15,lvl:1,emo:'🍪',path:'sweet',react:'crunch'},
@@ -3883,7 +3916,7 @@ function nextGoal(p,id){const it=gameUnlocks(id).find(x=>!owns(x.id));return it}
 function renderArcade(){
   const p=P();
   $('#arcadeGrid').innerHTML=GAMES.map(g=>{const b=bestOf(p,g.id);const goal=nextGoal(p,g.id);const prog=goal?clamp(b/goal.game[1],0,1):1;
-   return `<button class="gcard" data-g="${g.id}"><span class="gemo">${g.emo}</span><b>${g.name}</b><small>Best: ${b}${g.unit}</small>${goal?`<div class="gprog"><i style="width:${Math.round(prog*100)}%"></i></div><small class="ggoal">${goal.game[1]}${g.unit} unlocks ${esc(goal.name)}</small>`:`<small class="ggoal">All prizes won!</small>`}</button>`}).join('');
+   return `<button class="gcard" data-g="${g.id}"><span class="gemo">${g.emo}</span><b>${g.name}</b><small>Best: ${b}${g.unit}</small>${goal?`<div class="gprog"><i style="width:${Math.round(prog*100)}%"></i></div><div class="gprize"><span class="pv">${previewItemHTML(goal)}</span><small>Score ${goal.game[1]}${g.unit}<br>win ${esc(goal.name)}</small></div>`:`<small class="ggoal">All prizes won!</small>`}</button>`}).join('');
   $$('.coin-count').forEach(el=>el.textContent=S.coins||0);
 }
 $('#arcadeGrid').addEventListener('click',e=>{const c=e.target.closest('[data-g]');if(!c)return;audioInit();SFX.pop();startGame(c.dataset.g)});
@@ -4048,8 +4081,8 @@ function previewItemHTML(it,big){
   if(DECO_SPECIAL[it.id]&&it.kind!=='bed'&&it.id!=='a-shelf'){const ar=it.ar||1,hh=Math.min(64,92/ar);return `<div class="iemo dsp"><div class="deco-prev" style="width:${hh*ar}px;height:${hh}px;font-size:${hh*.92}px">${DECO_SPECIAL[it.id]()}</div></div>`}
   if(it.kind==='rug')return `<div class="iswatch rugsw" style="background:${RUGS[it.id].replace(/"/g,'&quot;')}"></div>`;
   if(it.kind==='view')return `<div class="iswatch win" data-view="${it.id}"><div class="sky"></div><div class="sun"></div>${VIEWS[it.id]||''}</div>`;
-  if(it.kind==='bed')return `<div class="iswatch bedsw"><div class="basket" data-bed="${it.id}"></div></div>`;
-  if(it.id==='a-shelf')return `<div class="iswatch shelfsw"><div class="shelf"><i></i><i></i><i></i><i></i></div></div>`;
+  if(it.kind==='bed')return `<div class="iswatch bedsw"><div class="bedprev">${bedSVG(it.id)}</div></div>`;
+  if(it.id==='a-shelf')return `<div class="iswatch shelfsw"><div class="deco-prev" style="width:90%;height:34px;font-size:30px">${DECO_SPECIAL['a-shelf']()}</div></div>`;
   if(it.id==='a-portrait')return `<div class="iemo portrait"><div>${petSVG(P(),'happy')}</div></div>`;
   if(it.id==='f-plant')return `<div class="iemo">🪴</div>`;
   return `<div class="iemo">${it.emo||''}</div>`;
@@ -4060,9 +4093,9 @@ function renderShop(){
   $('#shopTabs').innerHTML=TABS.map(t=>`<button class="stab" data-tab="${t[0]}" aria-pressed="${t[0]===SH.tab}">${t[1]}</button>`).join('');
   const kinds=tab[2];
   const sty=SH.tab==='wear'?(SH.style||'all'):'all';
-  $('#shopKinds').innerHTML=kinds.length>1?kinds.map(k=>`<button class="chip2" data-kind="${k}" aria-pressed="${sty==='all'&&k===SH.kind}">${KIND_NAME[k]}</button>`).join(''):'';
   const seasonNow=Object.keys(HOLIDAY_SEASON).find(k=>HOLIDAY_SEASON[k].includes(new Date().getMonth()));
-  $('#shopStyles').innerHTML=SH.tab==='wear'?[['all','All styles'],['cool','😎 Cool'],['goofy','🤪 Goofy'],['fun','🎉 Fun'],['holiday',seasonNow?SEASON_NAME[seasonNow]+' & more':'🎁 Holiday']].map(([k,n])=>`<button class="chip2 sty" data-style="${k}" aria-pressed="${sty===k}">${n}</button>`).join(''):'';
+  $('#shopKinds').innerHTML=(kinds.length>1?kinds.map(k=>`<button class="chip2" data-kind="${k}" aria-pressed="${sty==='all'&&k===SH.kind}">${KIND_NAME[k]}</button>`).join(''):'')+(SH.tab==='wear'?`<i class="cdiv"></i>`+[['cool','😎 Cool'],['goofy','🤪 Goofy'],['fun','🎉 Fun'],['holiday',seasonNow?SEASON_NAME[seasonNow]:'🎁 Holiday']].map(([k,n])=>`<button class="chip2 sty" data-style="${k}" aria-pressed="${sty===k}">${n}</button>`).join(''):'');
+  $('#shopStyles').innerHTML='';
   // stage
   const st=$('#shopStage');
   if(SH.tab==='wear'){const w={...(p.wear||{})};if(SH.try){const it=ITEM[SH.try];w[it.kind]=it.id}st.innerHTML=`<div class="stage-pet">${petSVG({...p,wear:w},'happy')}</div>`;st.hidden=false}
@@ -4085,12 +4118,12 @@ function renderShop(){
   $$('.coin-count').forEach(el=>el.textContent=S.coins||0);
 }
 $('#shopTabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;SFX.tap();SH.tab=b.dataset.tab;SH.kind=TABS.find(t=>t[0]===SH.tab)[2][0];SH.try=null;renderShop()});
-$('#shopKinds').addEventListener('click',e=>{const b=e.target.closest('[data-kind]');if(!b)return;SFX.tap();SH.kind=b.dataset.kind;SH.style='all';SH.try=null;renderShop()});
+$('#shopKinds').addEventListener('click',e=>{const st=e.target.closest('[data-style]');if(st){SFX.tap();SH.style=SH.style===st.dataset.style?'all':st.dataset.style;SH.try=null;renderShop();return}const b=e.target.closest('[data-kind]');if(!b)return;SFX.tap();SH.kind=b.dataset.kind;SH.style='all';SH.try=null;renderShop()});
 $('#shopStyles').addEventListener('click',e=>{const b=e.target.closest('[data-style]');if(!b)return;SFX.tap();SH.style=b.dataset.style;SH.try=null;renderShop()});
 $('#shopGrid').addEventListener('click',e=>{
   const b=e.target.closest('[data-item]');if(!b)return;audioInit();const it=ITEM[b.dataset.item];const s=itemState(it);const p=P();
   if(WEAR_KINDS.includes(it.kind)&&SH.try!==it.id&&s!=='owned'){SH.try=it.id;SFX.tap();renderShop();babble(p,'happy',2);return}
-  if(s==='locked'){SFX.boop();toast('star',`Reach level ${it.lvl} with any creature to unlock this.`);return}
+  if(s==='locked'){SFX.boop();toast('star',`Reach level ${it.lvl} with any Gibbi to unlock this.`);return}
   if(s==='game'){SFX.boop();const g=GAME[it.game[0]];toast('star',`Score ${it.game[1]}${g.unit} in ${g.name} to win this!`);return}
   if(s==='buy'){
     if((S.coins||0)<it.price){SFX.boop();anim(b,'a-shake',500);toast('coin',`You need ${it.price-(S.coins||0)} more coins.`);return}
@@ -4223,7 +4256,7 @@ function wearDraw2(id,T,W,xs,es,c){
 
 /* ================= TOY PLAY (in the room) ================= */
 const TOY_MODE={ball:'throw',duck:'throw',yarn:'throw',teddy:'throw',feather:'wand',yoyo:'wand',bubbles:'bubbles',drum:'music',trumpet:'music',blocks:'stack',book:'book',scope:'scope',globe:'globe',skate:'ride'};
-const TOY_HINT={throw:'Flick the toy! Your pet will fetch it.',wand:'Hold and wiggle. Can your pet catch it?',bubbles:'Tap to blow bubbles!',music:'Tap the toy to the beat!',stack:'Tap to stack blocks!',book:'Tap to read a word!',scope:'Tap to look at the stars!',globe:'Spin the globe!',ride:'Flick sideways to skate!'};
+const TOY_HINT={throw:'Flick the toy! Your Gibbi will fetch it.',wand:'Hold and wiggle. Can your Gibbi catch it?',bubbles:'Tap to blow bubbles!',music:'Tap the toy to the beat!',stack:'Tap to stack blocks!',book:'Tap to read a word!',scope:'Tap to look at the stars!',globe:'Spin the globe!',ride:'Flick sideways to skate!'};
 const TOY_PHYS={ball:[.74,.55],duck:[.5,.35],yarn:[.25,.82],teddy:[.12,.15]};
 const RP=()=>R.play;
 function petGeo(){const sc=petScale(P().level);return {px:petPx(),sc,h:L.size*sc*.6,w:L.size*sc*.5,floor:L.H-L.bottom}}
@@ -4702,17 +4735,18 @@ function ensureHome(){
   if(S.home&&Array.isArray(S.home.items))return S.home;
   const d=S.decor||{};
   S.home={wall:d.wall||'w-dots',flooring:'fl-wood',view:d.view||'v-sunny',fx:'fx-none',nid:10,items:[
-    {u:1,id:d.rug||'r-round',x:.5,d:.55},{u:2,id:d.bed||'b-basket',x:.8,d:.12},{u:3,id:d.art||'a-shelf',x:.76,y:.36},{u:4,id:d.floor||'f-plant',x:.07,d:.92}]};
+    {u:1,id:d.rug||'r-round',x:.5,d:.55},{u:2,id:d.bed||'b-basket',x:.8,d:.12},{u:3,id:d.art||'a-shelf',x:.7,y:.36},{u:4,id:d.floor||'f-plant',x:.07,d:.92}]};
   return S.home;
 }
 const placed=id=>ensureHome().items.filter(i=>i.id===id).length;
 
 // ---- rendering ----
+const BED_SVG={'b-basket': '<ellipse cx="120" cy="34" rx="98" ry="14" fill="#B7B2DC" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><ellipse cx="186" cy="24" rx="28" ry="12" fill="#FEFEF6" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><path d="M16 44 Q18 96 120 96 Q222 96 224 44 Z" fill="#C7874A" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><path d="M48 50v38M80 50v44M112 50v46M144 50v46M176 50v42" stroke="#9C6A36" stroke-width="7"/><rect x="8" y="36" width="224" height="16" rx="8" fill="#D9A066" stroke="#121417" stroke-width="5" stroke-linejoin="round"/>', 'b-cloud': '<path d="M34 88 a26 26 0 0 1 6 -50 a34 34 0 0 1 60 -16 a34 34 0 0 1 62 6 a28 28 0 0 1 46 26 a22 22 0 0 1 -8 34 Z" fill="#FEFEF6" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><path d="M44 72 Q120 54 198 70 L194 88 Q120 76 48 88Z" fill="#9BDAF7" stroke="#121417" stroke-width="5" stroke-linejoin="round"/>', 'b-royal': '<path d="M180 12 Q206 2 228 14 V88 H180Z" fill="#E7C146" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><rect x="12" y="58" width="216" height="30" rx="8" fill="#7B3F1E" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><rect x="16" y="40" width="186" height="26" rx="12" fill="#4E3F9E" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><path d="M24 54h170" stroke="#E7C146" stroke-width="5"/><ellipse cx="178" cy="40" rx="24" ry="11" fill="#FEFEF6" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><path d="M20 88v8M220 88v8" stroke="#121417" stroke-width="7" stroke-linecap="round"/>', 'b-leaf': '<path d="M8 66 Q64 4 232 46 Q172 104 8 66Z" fill="#6DBA5A" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><path d="M22 64 Q120 46 222 48" stroke="#3D6B2F" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="170" cy="46" rx="26" ry="11" fill="#E7EDE7" stroke="#121417" stroke-width="5" stroke-linejoin="round"/>', 'b-moon': '<rect x="10" y="44" width="220" height="46" rx="18" fill="#193B95" stroke="#121417" stroke-width="5" stroke-linejoin="round"/><g fill="#F4D44C"><circle cx="40" cy="62" r="4"/><circle cx="78" cy="74" r="3"/><circle cx="112" cy="60" r="4"/><circle cx="148" cy="76" r="3"/><circle cx="60" cy="80" r="2.5"/></g><path d="M196 18 a26 26 0 1 0 22 40 a20 20 0 1 1 -22 -40z" fill="#F4D44C" stroke="#121417" stroke-width="5" stroke-linejoin="round"/>'};
+const bedSVG=id=>`<svg viewBox="0 0 240 100" style="width:100%;height:100%;overflow:visible">${BED_SVG[id]||''}</svg>`;
 const DECO_SPECIAL={
- 'a-shelf':()=>`<div class="shelf"><i></i><i></i><i></i><i></i></div>`,
+ 'a-shelf':()=>`<div class="shelf2"><span>📚</span><span>🧸</span><span>🪴</span><i></i></div>`,
  'a-portrait':()=>`<div class="portrait-in">${petSVG(P(),'happy')}</div>`,
- 'b-basket':()=>`<div class="basket" data-bed="b-basket"></div>`,'b-cloud':()=>`<div class="basket" data-bed="b-cloud"></div>`,'b-royal':()=>`<div class="basket" data-bed="b-royal"></div>`,
- 'b-leaf':()=>`<div class="basket" data-bed="b-leaf"></div>`,'b-moon':()=>`<div class="basket" data-bed="b-moon"></div>`,
+ 'b-basket':()=>bedSVG('b-basket'),'b-cloud':()=>bedSVG('b-cloud'),'b-royal':()=>bedSVG('b-royal'),'b-leaf':()=>bedSVG('b-leaf'),'b-moon':()=>bedSVG('b-moon'),
  'f-lamp':()=>`<div class="lava"><i></i><i></i><i></i></div>`,
  'f-fish':()=>`<div class="tank"><span>🐠</span><span>🐟</span><i></i></div>`,
  'f-gumball':()=>`<div class="gumball"><b></b></div>`,
@@ -4766,7 +4800,7 @@ function layoutHome(){
 
 // ---- decorate mode ----
 const DECO={on:false,cat:'furn',sel:null,drag:null,collapsed:false};
-const DECO_CATS=[['furn','Furniture'],['wallitem','Wall'],['light','Lights'],['rug','Rugs'],['bed','Beds'],['wall','Wallpaper'],['flooring','Floor'],['view','Window'],['fx','Effects'],['theme','Room Sets']];
+const DECO_CATS=[['furn','Furniture'],['wallitem','Wall'],['light','Lights'],['rug','Rugs'],['bed','Beds'],['wall','Wallpaper'],['flooring','Floor'],['view','Window'],['fx','Effects'],['theme','Room Sets'],['colors','App Colors']];
 function enterDecorate(cat,placeId){
   if(scene!=='room')enterRoom();
   if(R.state==='sleep'||R.state==='tobed')wake(true);if(R.state==='bath')endBath(false);exitPlay(true);closeTray();
@@ -4783,10 +4817,11 @@ function renderDecoPanel(){
   const p=$('#decoPanel');const h=ensureHome();const cat=DECO.cat;
   const owned=ITEMS.filter(x=>x.kind===cat&&owns(x.id));
   let tiles='';
-  if(cat==='theme')tiles=owned.map(it=>`<button class="dtile" data-theme="${it.id}">${previewItemHTML(it)}<b>${esc(it.name)}</b></button>`).join('');
+  if(cat==='colors')tiles=Object.entries(THEMES).map(([k,[n,c]])=>`<button class="dtile${(S.settings.theme||'bee')===k?' on':''}" data-appc="${k}"><div class="iswatch" style="background:${c}"></div><b>${n}</b></button>`).join('');
+  else if(cat==='theme')tiles=owned.map(it=>`<button class="dtile" data-theme="${it.id}">${previewItemHTML(it)}<b>${esc(it.name)}</b></button>`).join('');
   else if(SURF_KINDS.includes(cat))tiles=owned.map(it=>`<button class="dtile${h[SURF_KEY[cat]]===it.id?' on':''}" data-surf="${it.id}">${previewItemHTML(it)}<b>${esc(it.name)}</b></button>`).join('');
   else tiles=owned.map(it=>{const n=placed(it.id);return `<button class="dtile" data-place="${it.id}">${previewItemHTML(it)}<b>${esc(it.name)}</b>${n?`<i class="dn">${n}</i>`:''}</button>`}).join('');
-  tiles+=`<button class="dtile more" data-more="${cat}"><span class="more-ic">${I.store}</span><b>Get more</b></button>`;
+  if(cat!=='colors')tiles+=`<button class="dtile more" data-more="${cat}"><span class="more-ic">${I.store}</span><b>Get more</b></button>`;
   p.innerHTML=`<div class="dp-head"><button class="dp-fold" id="dpFold" aria-label="${DECO.collapsed?'Show':'Hide'} decorating tray">${DECO.collapsed?'▼':'▲'}</button><div class="dp-cats">${DECO_CATS.map(([k,n])=>`<button class="chip2" data-cat="${k}" aria-pressed="${k===cat}">${n}</button>`).join('')}</div><button class="dp-done" id="dpDone">Done</button></div>
   <div class="dp-tiles"${DECO.collapsed?' hidden':''}>${tiles}</div>
   ${cat!=='theme'&&!SURF_KINDS.includes(cat)?`<p class="dp-hint"${DECO.collapsed?' hidden':''}>Tap to add. Drag things around. ${h.items.length}/${DECO_MAX} in your room.</p>`:''}`;
@@ -4801,6 +4836,7 @@ $('#decoPanel').addEventListener('click',e=>{
   const pl=t.closest('[data-place]');if(pl){addDeco(pl.dataset.place);return}
   const sf=t.closest('[data-surf]');if(sf){const it=ITEM[sf.dataset.surf];ensureHome()[SURF_KEY[it.kind]]=it.id;SFX.chime();renderHome();renderDecoPanel();save();return}
   const th=t.closest('[data-theme]');if(th){askTheme(th.dataset.theme);return}
+  const ac=t.closest('[data-appc]');if(ac){S.settings.theme=ac.dataset.appc;applyTheme();SFX.pop();save();renderDecoPanel();return}
 });
 function addDeco(id){
   const h=ensureHome();const it=ITEM[id];if(!it)return;
@@ -4873,6 +4909,7 @@ function bedTarget(){
   return clamp((b.x*L.W-L.minX)/(L.maxX-L.minX),0,1);
 }
 
+I.shop=I.store;
 function start(data){
   S=normalize(migrate(data&&data.S)||migrate(load()));
   if(data&&data.S)CLOUD.state=data.cloud||'checking';
