@@ -30,7 +30,7 @@ ver = f"v{int(time.time())}"
 updater = """<script>
 /* Auto-update: home-screen apps resume instead of reloading, so check for a newer build when the app comes back. */
 (function(){const B='%s';
-function keep(){try{typeof save==='function'&&save()}catch(e){}}
+function keep(){try{window.__gibbiSave&&window.__gibbiSave()}catch(e){}}
 async function chk(){try{const r=await fetch('../version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
 if(j.v&&j.v!==B&&sessionStorage.getItem('gibbiReloaded')!==j.v){sessionStorage.setItem('gibbiReloaded',j.v);keep();location.reload()}}catch(e){}}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk();else keep()});
