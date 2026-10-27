@@ -215,7 +215,7 @@ svg{display:block}
 .tray{position:absolute;left:0;right:0;top:84px;display:flex;justify-content:center;z-index:9;pointer-events:none}
 .tray-in{display:flex;gap:10px;background:var(--paper);padding:10px 14px;border-radius:28px;box-shadow:0 6px 0 rgba(18,20,23,.35);pointer-events:auto;animation:trayup .25s ease-out;flex-wrap:wrap;justify-content:center}
 @keyframes trayup{from{transform:translateY(-30px);opacity:0}}
-.food{width:clamp(56px,15vw,70px);aspect-ratio:1;border-radius:20px;border:0;background:#F5E5C4;display:grid;place-items:center;touch-action:none;padding:0}
+.food{width:clamp(56px,15vw,70px);aspect-ratio:1;border-radius:20px;border:0;background:#E7EDE7;display:grid;place-items:center;touch-action:none;padding:0}
 .food svg{width:78%;height:78%;pointer-events:none}
 .food.meds{background:#CFEFE6;animation:nag 1s infinite}
 .ghost{position:absolute;width:62px;height:62px;margin:-31px 0 0 -31px;z-index:20;pointer-events:none}
@@ -520,7 +520,7 @@ svg{display:block}
 .icard b{font-size:16px;line-height:1.1;text-wrap:balance}
 .ipet,.iemo,.iswatch{width:100%;aspect-ratio:1.3;display:grid;place-items:center;border-radius:14px;overflow:hidden;position:relative}
 .ipet svg{width:88%;height:auto;aspect-ratio:1;overflow:visible}
-.iemo{font-size:clamp(46px,12vw,64px);font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;background:#F5E5C4}
+.iemo{font-size:clamp(46px,12vw,64px);font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;background:#E7EDE7}
 .iemo.portrait div{width:62%;aspect-ratio:4/5;background:#FEFEF6;border:6px solid #E8A92C;display:grid;place-items:center;overflow:hidden}
 .iemo.portrait svg{width:110%;height:110%}
 .iswatch{border:3px solid rgba(18,20,23,.15)}
@@ -856,6 +856,30 @@ svg{display:block}
 #room.decorating .visitor{opacity:.4;pointer-events:none}
 .photo-card img{-webkit-touch-callout:default;-webkit-user-select:auto;user-select:auto}
 
+
+/* ---------- drawn art sizing ---------- */
+.deco-i .di>svg.art{width:100%;height:100%;display:block}
+.iemo>svg.art{width:66%;height:80%}
+.iemo{font-size:0}
+.food>svg.art{width:74%;height:74%}
+.ghost>svg.art{width:100%;height:100%}
+.play-toy>svg.art,.room-toy>svg.art{width:100%;height:100%}
+.p>svg.art{width:100%;height:100%}
+.gemo{display:grid;place-items:center}
+.gemo>svg.art{width:clamp(48px,14vw,72px);height:clamp(40px,12vw,60px)}
+.gemo.sm>svg.art{width:44px;height:36px}
+.pill-art>svg.art{width:26px;height:22px;display:block}
+.mface>svg.art{width:72%;height:72%}
+.rt-emo>svg.art{width:36px;height:30px;display:block}
+.sh-k span>svg.art{width:38px;height:30px;display:block}
+.send-art>svg.art{width:64px;height:52px}
+.tem>span{width:28%;display:grid;place-items:center}.tem svg.art{width:100%;height:34px}
+.shelf2 span{display:block;width:26%;height:72%;font-size:0}.shelf2 span>svg.art{width:100%;height:100%}
+.vb.seafish>svg.art{width:30px;height:22px}.vb.lolly>svg.art{width:26px;height:42px}
+.fxl>svg.art{width:calc(26px*var(--z));height:calc(26px*var(--z));display:block}
+.numpop{font-family:var(--title);font-weight:400;font-size:30px;color:#FEFEF6;-webkit-text-stroke:2px #121417;paint-order:stroke fill;display:grid;place-items:center;width:100%;height:100%}
+.thought>svg.art{width:40px;height:40px}
+
 /* ---------- Color themes (picked in Grown-up stuff) ---------- */
 :root,:root[data-theme=bee]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.55) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#1BBEEE 0%, #6FD3F2 55%, #BBEEEE 100%);--th-title-ink:#121417;--th-spark:#F4D44C;--th-shop:linear-gradient(#193B95,#2CA9D3);--th-shop-ink:#FEFEF6;--th-nest:linear-gradient(#BBEEEE,#9BDAF7);--th-nest-ink:#121417;--th-arcade:linear-gradient(#2CA9D3,#1BBEEE);--th-arcade-ink:#121417}
 :root[data-theme=honey]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.6) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#F4D44C 0%, #F8E58C 55%, #FEFEF6 100%);--th-title-ink:#121417;--th-spark:#1BBEEE;--th-shop:linear-gradient(#E7C146,#F4D44C);--th-shop-ink:#121417;--th-nest:linear-gradient(#FEFEF6,#F8E58C);--th-nest-ink:#121417;--th-arcade:linear-gradient(#4A2410,#7B3F1E);--th-arcade-ink:#FEFEF6}
@@ -1032,7 +1056,7 @@ async function cloudFlush(force){
   CLOUD.busy=false;
 }
 function setSaveState(st){CLOUD.state=st;const el=$('#saveNote');if(el)el.textContent=saveText()}
-function saveText(){return CLOUD.state==='cloud'?'☁️ Progress saves to your Claude account':CLOUD.state==='checking'?'Loading your Gibbis…':'Your Gibbis save on this device'}
+function saveText(){return CLOUD.state==='cloud'?'Progress saves to your Claude account':CLOUD.state==='checking'?'Loading your Gibbis…':'Your Gibbis save on this device'}
 function normalize(s){
   if(!s)return null;
   s.mode='survival';
@@ -1342,7 +1366,7 @@ function petSVG(p,expr){
   if(slot.neck==='history') neck=`<path d="M${100-W*.75} ${T+44} L${100+W*.7} 182" stroke="#7A4E2A" stroke-width="8"/>`;
   const foot=(has('pattern')&&g.pattern==='socks')?c.accDark:c.deep;
   const fr=st===0?15:20;
-  const body=`<defs><clipPath id="${cid}"><path d="${bodyPath}"/></clipPath></defs><path d="${bodyPath}" fill="${c.body}"/><g clip-path="url(#${cid})">${pat}<ellipse cx="100" cy="152" rx="${W*.6}" ry="30" fill="${c.belly}"/>${neck}${wear.body?wearDraw2(wear.body,T,W,xsE,esE,c):''}</g><ellipse cx="${100-W*.43}" cy="184" rx="${fr}" ry="${fr*.5}" fill="${foot}"/><ellipse cx="${100+W*.43}" cy="184" rx="${fr}" ry="${fr*.5}" fill="${foot}"/>`;
+  const body=`<defs><clipPath id="${cid}"><path d="${bodyPath}"/></clipPath></defs><path d="${bodyPath}" fill="${c.body}" stroke="#121417" stroke-width="4"/><g clip-path="url(#${cid})">${pat}<ellipse cx="100" cy="152" rx="${W*.6}" ry="30" fill="${c.belly}"/>${neck}${wear.body?wearDraw2(wear.body,T,W,xsE,esE,c):''}</g><ellipse cx="${100-W*.43}" cy="184" rx="${fr}" ry="${fr*.5}" fill="${foot}" stroke="#121417" stroke-width="4"/><ellipse cx="${100+W*.43}" cy="184" rx="${fr}" ry="${fr*.5}" fill="${foot}" stroke="#121417" stroke-width="4"/>`;
   if(slot.neck==='history') deco+=`<rect x="${100+W*.42}" y="158" width="28" height="22" rx="5" fill="#A0703F" stroke="${c.dark}" stroke-width="2.5"/><path d="M${100+W*.42} 166 h28" stroke="${c.dark}" stroke-width="2"/>`;
   if(has('ears')&&g.ears==='floppy') front+=mirror(`<ellipse cx="${X(.77)}" cy="${t+42}" rx="17" ry="34" transform="rotate(18 ${X(.77)} ${t+42})" fill="${c.accDark}"/>`);
   if(ex.includes('gem')) front+=`<path d="M100 ${T+10} l9 11 -9 11 -9 -11z" fill="${c.acc}" stroke="#fff" stroke-width="2.5"/>`;
@@ -1412,7 +1436,8 @@ function petSVG(p,expr){
   if(wear.face)wf=wearDraw(wear.face,T,W,xs,s,c);
   if(wear.hat)wh=wearDraw(wear.hat,T,W,xs,s,c);
   if(wear.back&&!WEAR_BACK.has(wear.back))wn=wearDraw(wear.back,T,W,xs,s,c)+wn;
-  return `<svg viewBox="-20 -30 240 240" aria-hidden="true">${aura}${back}${behind}${body}${deco}${front}${wn}${cheeks}${mouth}${eyes}${over}${wf}${hats}${wh}${orbit}</svg>`;
+  const shine=`<path d="M${100-W*.62} ${T+40} Q${100-W*.5} ${T+12} ${100-W*.12} ${T+6}" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/>`;
+  return `<svg viewBox="-20 -30 240 240" aria-hidden="true"><defs><filter id="gink" x="-25%" y="-25%" width="150%" height="150%"><feMorphology in="SourceAlpha" operator="dilate" radius="2.6" result="d"/><feFlood flood-color="#121417"/><feComposite in2="d" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${aura}<g filter="url(#gink)">${back}${behind}${body}${deco}${front}${wn}</g>${shine}${cheeks}${mouth}${eyes}${over}${wf}${hats}${wh}${orbit}</svg>`;
 }
 
 function eggSVG(hue,crack=0){
@@ -3471,7 +3496,7 @@ function openSettings(confirming=false){
       <p class="note" style="text-align:left" id="voiceNote"></p>
       <button class="toggle" data-s="fast" aria-pressed="${!!S.settings.fast}"><span>Fast growth<small>For trying things out. Grows 10× faster.</small></span><i></i></button></div></div>
     <details class="fold"><summary><h3>Secrets found · ${found} of ${SECRETS.length}</h3><span>Show</span></summary><div class="secrets">${SECRETS.map(s=>S.secrets.includes(s[0])?`<div class="secret found">${s[1]}<small>${s[2]}</small></div>`:`<div class="secret">???<small>Keep playing</small></div>`).join('')}</div></details>
-    <div><h3>High scores · ${esc(p.name)}</h3><div class="stats">${GAMES.map(g=>`<div class="pill"><span class="emo-ic" style="font-size:22px">${g.emo}</span><span>${bestOf(p,g.id)}${g.unit}</span></div>`).join('')}</div></div>
+    <div><h3>High scores · ${esc(p.name)}</h3><div class="stats">${GAMES.map(g=>`<div class="pill"><span class="pill-art">${gIcon(g.id)}</span><span>${bestOf(p,g.id)}${g.unit}</span></div>`).join('')}</div></div>
     <div><h3>Best school streak</h3><div class="stats"><div class="pill">${FLAME}<span>${S.bestStreak||0} in a row</span></div></div></div>
     ${familyHTML()}
     <div id="resetBox">${confirming?`<p class="note" style="text-align:left;margin-bottom:8px" id="resetNote"></p><div class="confirm"><button class="no" id="noReset">Keep</button><button class="yes" id="yesReset">Start over</button></div>`:`<button class="danger" id="askReset" style="width:100%">Start over</button>`}</div>
@@ -3814,7 +3839,7 @@ const BASH={
   ctx.save();ctx.translate(this.ox,0);
   for(const bl of this.blocks){if(bl.hp<=0)continue;ctx.fillStyle=bl.hp>1?lerpC(bl.col.slice(1),'121417',.22*(bl.hp-1)):bl.col;ctx.strokeStyle='#121417';ctx.lineWidth=2.5*u;rrect(ctx,bl.x,bl.y,bl.w,bl.h,7*u);ctx.fill();ctx.stroke();ctx.fillStyle='rgba(255,255,255,.4)';rrect(ctx,bl.x+5*u,bl.y+4*u,bl.w*.45,5*u,3*u);ctx.fill();if(bl.hp>1){ctx.fillStyle='#fff';ctx.font=`900 ${13*u}px Outfit,sans-serif`;ctx.textAlign='center';ctx.fillText(bl.hp,bl.x+bl.w/2,bl.y+bl.h*.72)}}
   const PU={multi:['#193B95','3'],wide:['#3D6B2F','↔'],fire:['#E8735A','🔥'],life:['#E8735A','♥']};
-  for(const pu of this.pups){const [c,l]=PU[pu.t];ctx.fillStyle=c;ctx.strokeStyle='#121417';ctx.lineWidth=2.5*u;rrect(ctx,pu.x-18*u,pu.y-11*u,36*u,22*u,11*u);ctx.fill();ctx.stroke();ctx.fillStyle='#fff';ctx.font=`900 ${15*u}px Outfit,sans-serif`;ctx.textAlign='center';ctx.fillText(l,pu.x,pu.y+5.5*u)}
+  for(const pu of this.pups){const [c,l]=PU[pu.t];ctx.fillStyle=c;ctx.strokeStyle='#121417';ctx.lineWidth=2.5*u;rrect(ctx,pu.x-18*u,pu.y-11*u,36*u,22*u,11*u);ctx.fill();ctx.stroke();ctx.fillStyle='#fff';ctx.font=`900 ${15*u}px Outfit,sans-serif`;ctx.textAlign='center';if(pu.t==='fire'){const im=artImg('i-fire',64);if(im.complete)ctx.drawImage(im,pu.x-8*u,pu.y-10*u,16*u,20*u)}else ctx.fillText(l,pu.x,pu.y+5.5*u)}
   for(const c of this.drops)drawCoin(ctx,c.x,c.y,10*u,G.t);
   // pet holding the paddle
   drawPet(ctx,this.padX,this.petFoot,104*u,{expr:this.bop>0?'giggle':'happy',sy:1-(this.bop||0)*.12});
@@ -3880,8 +3905,8 @@ const DROP={
   if(t>=6)floatText(x,y-this.R(t),`+${FRUIT_PTS[t]}`,'#121417');
  },
  drawFruit(ctx,x,y,t,al=1){
-  const r=this.R(t);ctx.globalAlpha=al;ctx.fillStyle=FRUIT_COL[t];ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.strokeStyle='rgba(18,20,23,.55)';ctx.lineWidth=2;ctx.stroke();
-  ctx.font=`${r*1.45}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(FRUIT[t],x,y+r*.06);ctx.textBaseline='alphabetic';ctx.globalAlpha=1;
+  const r=this.R(t);ctx.globalAlpha=al;
+  {const im=artImg(FRUIT_ART[t],Math.min(256,Math.max(48,Math.round(r*2.4*(GM.dpr||1)/16)*16)));if(im&&im.complete&&im.naturalWidth){const d=r*2/.86;ctx.drawImage(im,x-d/2,y-d/2-r*.04,d,d)}}ctx.globalAlpha=1;
  },
  draw(G,ctx,dt){
   const u=this.u;
@@ -4017,10 +4042,10 @@ const MEM={
  init(G){this.round=0;this.next()},
  next(){
   const pairs=MEM_ROUNDS[Math.min(this.round,MEM_ROUNDS.length-1)];this.pairs=pairs;this.found=0;this.miss=0;this.open=[];this.lock=false;
-  const em=shuffle(MEM_EMO).slice(0,pairs);const cards=shuffle([...em,...em]);
+  const em=shuffle(MEM_ART).slice(0,pairs);const cards=shuffle([...em,...em]);
   const grid=$('#memGrid');const cols=pairs<=2?2:pairs<=3?3:pairs<=4?4:pairs<=6?4:pairs<=8?4:pairs<=10?5:6;
   grid.style.setProperty('--cols',cols);grid.style.setProperty('--rows',Math.ceil(cards.length/cols));
-  grid.innerHTML=cards.map((e,i)=>`<button class="mcard" data-i="${i}" data-e="${e}" aria-label="Card ${i+1}"><span class="mback"></span><span class="mface">${e}</span></button>`).join('');
+  grid.innerHTML=cards.map((e,i)=>`<button class="mcard" data-i="${i}" data-e="${e}" aria-label="Card ${i+1}"><span class="mback"></span><span class="mface">${artSVG(e)}</span></button>`).join('');
   this.round++;floatTextDom(`Round ${this.round}`);
  },
  flip(el){
@@ -4047,7 +4072,7 @@ function renderArcade(){
   const p=P();
   $('#arcadeGrid').innerHTML=GAMES.map(g=>{const b=bestOf(p,g.id);const goal=nextGoal(p,g.id);const prog=goal?clamp(b/goal.game[1],0,1):1;
    const ch=(S.challenges||{})[g.id];
-   return `<button class="gcard" data-g="${g.id}">${ch?`<i class="chal${ch.won?' won':''}">${ch.won?`Beat ${esc(ch.name)}!`:`Beat ${esc(ch.name)}'s ${ch.score}${g.unit}`}</i>`:''}<span class="gemo">${g.emo}</span><b>${g.name}</b><small>Best: ${b}${g.unit}</small>${goal?`<div class="gprog"><i style="width:${Math.round(prog*100)}%"></i></div><div class="gprize"><span class="pv">${previewItemHTML(goal)}</span><small>Score ${goal.game[1]}${g.unit}<br>win ${esc(goal.name)}</small></div>`:`<small class="ggoal">All prizes won!</small>`}</button>`}).join('');
+   return `<button class="gcard" data-g="${g.id}">${ch?`<i class="chal${ch.won?' won':''}">${ch.won?`Beat ${esc(ch.name)}!`:`Beat ${esc(ch.name)}'s ${ch.score}${g.unit}`}</i>`:''}<span class="gemo">${gIcon(g.id)}</span><b>${g.name}</b><small>Best: ${b}${g.unit}</small>${goal?`<div class="gprog"><i style="width:${Math.round(prog*100)}%"></i></div><div class="gprize"><span class="pv">${previewItemHTML(goal)}</span><small>Score ${goal.game[1]}${g.unit}<br>win ${esc(goal.name)}</small></div>`:`<small class="ggoal">All prizes won!</small>`}</button>`}).join('');
   $$('.coin-count').forEach(el=>el.textContent=S.coins||0);
 }
 $('#arcadeGrid').addEventListener('click',e=>{const c=e.target.closest('[data-g]');if(!c)return;audioInit();SFX.pop();startGame(c.dataset.g)});
@@ -4063,7 +4088,7 @@ function startGame(id){
   $('#gameOver').hidden=true;
   const isMem=id==='memory';$('#gc').hidden=isMem;$('#memGrid').hidden=!isMem;$('#game').classList.toggle('mem',isMem);
   GM.resize();GM.cur.init(GM);
-  const rd=$('#gameReady');rd.hidden=false;rd.innerHTML=`<div class="rcard"><span class="gemo">${g.emo}</span><b>${g.name}</b><p></p>${g.keys?`<small>Keyboard: ${g.keys}</small>`:''}<span class="go">Tap to start</span></div>`;rd.querySelector('p').textContent=g.how;
+  const rd=$('#gameReady');rd.hidden=false;rd.innerHTML=`<div class="rcard"><span class="gemo">${gIcon(g.id)}</span><b>${g.name}</b><p></p>${g.keys?`<small>Keyboard: ${g.keys}</small>`:''}<span class="go">Tap to start</span></div>`;rd.querySelector('p').textContent=g.how;
   say(g.how);updGHud();
   ['happy','ok','giggle','dizzy'].forEach(petImg);
 }
@@ -4087,7 +4112,7 @@ function gameOver(quit){
    <span class="ocoins">${COIN_SVG}+${earned} coins</span>
    ${GM.newUnlocks.map(u=>`<span class="ounlock">Unlocked: ${esc(ITEM[u].name)}! Wear it from the shop.</span>`).join('')}
    ${goal?`<div class="gprog"><i style="width:${Math.round(clamp(Math.max(prev,GM.score)/goal.game[1],0,1)*100)}%"></i></div><small>Score ${goal.game[1]}${g.unit} to win ${esc(goal.name)}</small>`:''}
-   <div class="obtns"><button class="obtn alt" id="oArcade">Games</button><button class="obtn" id="oAgain">Play again</button></div>${Math.max(prev,GM.score)>0?`<button class="link-btn" id="oChal">🏆 Challenge a friend</button>`:''}</div>`;
+   <div class="obtns"><button class="obtn alt" id="oArcade">Games</button><button class="obtn" id="oAgain">Play again</button></div>${Math.max(prev,GM.score)>0?`<button class="link-btn" id="oChal">Challenge a friend</button>`:''}</div>`;
   $('#oAgain').onclick=()=>{SFX.pop();startGame(id)};if($('#oChal'))$('#oChal').onclick=()=>{SFX.pop();openShare({kind:'challenge',game:id})};$('#oArcade').onclick=()=>{SFX.pop();enterArcade()};
   if(isBest&&GM.score>0){SFX.chime();sparkles(GM.W/2,GM.H*.35,20);say(`New best! ${GM.score}${g.unit==='m'?' meters':''}!`)}
   else if(!quit)say(pick(['Nice try!','Good game!','So close!','Play again?']));
@@ -4128,21 +4153,21 @@ window.addEventListener('keydown',e=>{if(scene!=='game')return;const k=KEYMAP[e.
 window.addEventListener('keyup',e=>{const k=KEYMAP[e.key];if(k)GM.keys[k]=false});
 
 /* ================= ROOM EXTRAS: foods, toys, greeting ================= */
-const iconOf=id=>I[id]||(ITEM[id]&&ITEM[id].emo?`<span class="emo-ic">${ITEM[id].emo}</span>`:'');
+const iconOf=id=>ART[id]?artSVG(id):I[id]||(ITEM[id]&&ITEM[id].emo?`<span class="emo-ic">${ITEM[id].emo}</span>`:'');
 const ownedFoods=()=>[...FOODS,...ITEMS.filter(x=>x.kind==='food'&&owns(x.id)).map(x=>x.id)];
 const ownedToys=()=>ITEMS.filter(x=>x.kind==='toy'&&owns(x.id)).map(x=>x.id);
 function foodPath(f){return FOOD_PATH[f]||(ITEM[f]&&ITEM[f].path)||'sweet'}
-function popParticles(x,y,emo,n,spread=140){for(let i=0;i<n;i++)spawn(`<span class="emo-ic">${emo}</span>`,x,y,'burst',900,{dx:rand(-spread,spread),dy:rand(-spread,-20),size:rand(18,30)})}
+function popParticles(x,y,emo,n,spread=140){for(let i=0;i<n;i++)spawn(ART[emo]?artSVG(emo):`<span class="emo-ic">${emo}</span>`,x,y,'burst',900,{dx:rand(-spread,spread),dy:rand(-spread,-20),size:rand(18,30)})}
 function foodReact(food,c,m){
   const it=ITEM[food];if(!it)return false;
   switch(it.react){
     case 'crunch':temp('happy',1200);anim(petAnim,'a-bounce',550);for(let i=0;i<6;i++)spawn(`<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="#C7874A"/></svg>`,m.x,m.y,'burst',700,{dx:rand(-60,60),dy:rand(10,50),size:rand(6,10)});noise(.2,.3,2500);break;
-    case 'brainfreeze':temp('cold',1800);anim(petAnim,'a-shake',500);setTimeout(()=>anim(petAnim,'a-shake',500),550);popParticles(c.x,c.top,'❄️',5);sayText('Brrr!',c.x,c.top);tone(1400,.6,'sine',.08,700);break;
+    case 'brainfreeze':temp('cold',1800);anim(petAnim,'a-shake',500);setTimeout(()=>anim(petAnim,'a-shake',500),550);popParticles(c.x,c.top,'a-cloud',5);sayText('Brrr!',c.x,c.top);tone(1400,.6,'sine',.08,700);break;
     case 'sour':temp('sour',1600);anim(petAnim,'a-wiggle',500);sayText('Sour!',c.x,c.top);tone(900,.3,'square',.06,1600);break;
     case 'sticky':temp('happy',1500);sparkles(c.x,c.y,10,'#E8A92C');sayText('Yum!',c.x,c.top);SFX.purr();break;
-    case 'pop':temp('giggle',2000);for(let i=0;i<4;i++)setTimeout(()=>{anim(petAnim,'a-jump',600);tone(800+i*200,.06,'square',.1);popParticles(c.x,c.top+20,'🍿',2,90)},i*420);break;
+    case 'pop':temp('giggle',2000);for(let i=0;i<4;i++)setTimeout(()=>{anim(petAnim,'a-jump',600);tone(800+i*200,.06,'square',.1);popParticles(c.x,c.top+20,'popcorn',2,90)},i*420);break;
     case 'seeds':temp('giggle',1600);for(let i=0;i<6;i++)setTimeout(()=>{spawn(`<svg viewBox="0 0 10 14"><ellipse cx="5" cy="7" rx="3.5" ry="6" fill="#121417"/></svg>`,m.x,m.y,'burst',800,{dx:R.dir*rand(90,180),dy:rand(-60,-10),size:12});tone(1200,.04,'sine',.1)},i*160);break;
-    case 'party':temp('happy',3000);anim(petAnim,'a-spin',1000);SFX.chime();popParticles(c.x,c.top,'🎉',6,180);hearts(c.x,c.top,6);sayText('Party!',c.x,c.top);break;
+    case 'party':temp('happy',3000);anim(petAnim,'a-spin',1000);SFX.chime();popParticles(c.x,c.top,'a-star',6,180);hearts(c.x,c.top,6);sayText('Party!',c.x,c.top);break;
     default:temp('happy',1200);anim(petAnim,'a-bounce',550);hearts(c.x,c.top+20,3);SFX.pop();
   }
   return true;
@@ -4172,7 +4197,7 @@ function playToy(){
   switch(it.play){
     case 'squeak':for(let i=0;i<3;i++)setTimeout(()=>{toyAnim('t-squish',300);SFX.squeak();temp('giggle',600)},i*700);break;
     case 'roll':toyAnim('t-roll',2400);anim(petAnim,'a-roll',1600);temp('giggle',2400);SFX.giggle();break;
-    case 'stack':for(let i=0;i<3;i++)setTimeout(()=>{spawn(`<span class="emo-ic">${['1️⃣','2️⃣','3️⃣'][i]}</span>`,c.x+R.dir*50,c.top+20,'float',1300,{size:36});tone(523*Math.pow(1.26,i),.2,'triangle',.18)},i*600);temp('happy',2400);break;
+    case 'stack':for(let i=0;i<3;i++)setTimeout(()=>{spawn(`<b class="numpop">${i+1}</b>`,c.x+R.dir*50,c.top+20,'float',1300,{size:40});tone(523*Math.pow(1.26,i),.2,'triangle',.18)},i*600);temp('happy',2400);break;
     case 'yoyo':toyAnim('t-yoyo',2400);temp('happy',2400);anim(petAnim,'a-bounce',550);break;
     case 'drum':for(let i=0;i<6;i++)setTimeout(()=>{noise(.08,.5,180+i%2*120,0,2);toyAnim('t-squish',200);anim(petAnim,'a-bounce',300)},i*330);temp('giggle',2200);break;
     case 'cuddle':temp('sleep',2600);hearts(c.x,c.top,5);SFX.purr();toyAnim('t-squish',400);break;
@@ -4207,8 +4232,8 @@ function previewItemHTML(it,big){
   if(it.kind==='wall')return `<div class="iswatch" style="background:${WALLS[it.id].replace(/"/g,'&quot;')}"></div>`;
   if(it.kind==='flooring')return `<div class="iswatch" style="background:${FLOORS[it.id].replace(/"/g,'&quot;')}"></div>`;
   if(it.kind==='fx'){const d=FX_DEF[it.id];return `<div class="iswatch fxsw" style="background:linear-gradient(#2CA9D3,#193B95)">${d?[[18,22],[60,14],[36,52],[78,58],[12,70],[52,80]].map(([x,y],k)=>`<i class="${d.cls}" style="left:${x}%;top:${y}%;--z:.8;--h:${k*60}">${d.ch||''}</i>`).join(''):'<b style="color:#FEFEF6;font-size:18px">Off</b>'}</div>`}
-  if(it.kind==='place'){const st=ROOM_START[it.room];const em=st.items.map(i=>ITEM[i[0]]&&ITEM[i[0]].emo).filter(Boolean).slice(0,3);return `<div class="iswatch themesw" style="background:${WALLS[st.wall].replace(/"/g,'&quot;')}"><div class="tfl" style="background:${FLOORS[st.flooring].replace(/"/g,'&quot;')}"></div><div class="tem">${em.map(e=>`<span>${e}</span>`).join('')}</div></div>`}
-  if(it.kind==='theme'){const t=it.set;const em=t.items.map(i=>ITEM[i[0]]&&ITEM[i[0]].emo).filter(Boolean).slice(0,3);return `<div class="iswatch themesw" style="background:${WALLS[t.wall].replace(/"/g,'&quot;')}"><div class="tfl" style="background:${FLOORS[t.flooring].replace(/"/g,'&quot;')}"></div><div class="tem">${em.map(e=>`<span>${e}</span>`).join('')}</div></div>`}
+  if(it.kind==='place'){const st=ROOM_START[it.room];const em=st.items.map(i=>i[0]).filter(id=>ART[id]).slice(0,3).map(id=>artSVG(id));return `<div class="iswatch themesw" style="background:${WALLS[st.wall].replace(/"/g,'&quot;')}"><div class="tfl" style="background:${FLOORS[st.flooring].replace(/"/g,'&quot;')}"></div><div class="tem">${em.map(e=>`<span>${e}</span>`).join('')}</div></div>`}
+  if(it.kind==='theme'){const t=it.set;const em=t.items.map(i=>i[0]).filter(id=>ART[id]).slice(0,3).map(id=>artSVG(id));return `<div class="iswatch themesw" style="background:${WALLS[t.wall].replace(/"/g,'&quot;')}"><div class="tfl" style="background:${FLOORS[t.flooring].replace(/"/g,'&quot;')}"></div><div class="tem">${em.map(e=>`<span>${e}</span>`).join('')}</div></div>`}
   if(it.kind==='rug')return `<div class="iswatch rugsw${it.hex?' hexsw':''}" style="background:${RUGS[it.id].replace(/"/g,'&quot;')}"></div>`;
   if(DECO_SPECIAL[it.id]&&it.kind!=='bed'&&it.id!=='a-shelf'){const ar=it.ar||1,hh=Math.min(64,92/ar);return `<div class="iemo dsp"><div class="deco-prev" style="width:${hh*ar}px;height:${hh}px;font-size:${hh*.92}px">${DECO_SPECIAL[it.id]()}</div></div>`}
   if(it.kind==='rug')return `<div class="iswatch rugsw" style="background:${RUGS[it.id].replace(/"/g,'&quot;')}"></div>`;
@@ -4216,8 +4241,7 @@ function previewItemHTML(it,big){
   if(it.kind==='bed')return `<div class="iswatch bedsw"><div class="bedprev">${bedSVG(it.id)}</div></div>`;
   if(it.id==='a-shelf')return `<div class="iswatch shelfsw"><div class="deco-prev" style="width:90%;height:34px;font-size:30px">${DECO_SPECIAL['a-shelf']()}</div></div>`;
   if(it.id==='a-portrait')return `<div class="iemo portrait"><div>${petSVG(P(),'happy')}</div></div>`;
-  if(it.id==='f-plant')return `<div class="iemo">🪴</div>`;
-  return `<div class="iemo">${it.emo||''}</div>`;
+  return `<div class="iemo">${ART[it.id]?artSVG(it.id):(it.emo||'')}</div>`;
 }
 const TABS=[['wear','Wear',['hat','face','neck','back','body']],['room','Room',['furn','wallitem','light','rug','bed','wall','flooring','view','fx','theme','place']],['food','Food',['food']],['toy','Toys',['toy']]];
 function renderShop(){
@@ -4226,7 +4250,7 @@ function renderShop(){
   const kinds=tab[2];
   const sty=SH.tab==='wear'?(SH.style||'all'):'all';
   const seasonNow=Object.keys(HOLIDAY_SEASON).find(k=>HOLIDAY_SEASON[k].includes(new Date().getMonth()));
-  $('#shopKinds').innerHTML=(kinds.length>1?kinds.map(k=>`<button class="chip2" data-kind="${k}" aria-pressed="${sty==='all'&&k===SH.kind}">${KIND_NAME[k]}</button>`).join(''):'')+(SH.tab==='wear'?`<i class="cdiv"></i>`+[['cool','😎 Cool'],['goofy','🤪 Goofy'],['fun','🎉 Fun'],['holiday',seasonNow?SEASON_NAME[seasonNow]:'🎁 Holiday']].map(([k,n])=>`<button class="chip2 sty" data-style="${k}" aria-pressed="${sty===k}">${n}</button>`).join(''):'');
+  $('#shopKinds').innerHTML=(kinds.length>1?kinds.map(k=>`<button class="chip2" data-kind="${k}" aria-pressed="${sty==='all'&&k===SH.kind}">${KIND_NAME[k]}</button>`).join(''):'')+(SH.tab==='wear'?`<i class="cdiv"></i>`+[['cool','Cool'],['goofy','Goofy'],['fun','Fun'],['holiday',seasonNow?SEASON_NAME[seasonNow]:'Holiday']].map(([k,n])=>`<button class="chip2 sty" data-style="${k}" aria-pressed="${sty===k}">${n}</button>`).join(''):'');
   $('#shopStyles').innerHTML='';
   // stage
   const st=$('#shopStage');
@@ -4276,7 +4300,7 @@ $('#shopHome').onclick=()=>{audioInit();SFX.pop();enterRoom()};
 $$('.cicon').forEach(e=>e.innerHTML=COIN_SVG);
 /* ================= MORE WEARABLES ================= */
 const HOLIDAY_SEASON={halloween:[9],xmas:[11],newyear:[11,0],valentine:[1],stpat:[2],easter:[2,3],july4:[6],thanks:[10]};
-const SEASON_NAME={halloween:'🎃 Halloween',xmas:'🎄 Christmas',newyear:'🎆 New Year',valentine:'💘 Valentine’s',stpat:'🍀 St. Patrick’s',easter:'🐣 Easter',july4:'🎆 Fourth of July',thanks:'🦃 Thanksgiving'};
+const SEASON_NAME={halloween:'Halloween',xmas:'Christmas',newyear:'New Year',valentine:'Valentine’s',stpat:'St. Patrick’s',easter:'Easter',july4:'Fourth of July',thanks:'Thanksgiving'};
 const inSeason=it=>!!(it.season&&HOLIDAY_SEASON[it.season].includes(new Date().getMonth()));
 const MORE_WEAR=[
  // hats: cool
@@ -4658,8 +4682,8 @@ const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||
 const isIOS=()=>/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 function installHTML(){
   if(!ON_SITE||isStandalone())return '';
-  if(deferredInstall)return `<button class="install-b" id="installBtn">📲 Install Gibbis</button>`;
-  if(isIOS())return `<button class="install-b" id="installBtn">📲 Add Gibbis to your Home Screen</button>`;
+  if(deferredInstall)return `<button class="install-b" id="installBtn">Install Gibbis</button>`;
+  if(isIOS())return `<button class="install-b" id="installBtn">Add Gibbis to your Home Screen</button>`;
   return '';
 }
 function wireInstall(){
@@ -4725,6 +4749,229 @@ function migrate(s){
   }
   return null;
 }
+
+/* ================= ART: one illustrated style for everything ================= */
+// Thick ink outline (fixed pixel weight at any size), soft top-to-bottom gradient fills, one white shine,
+// pink streaks on glass, and patterns (plaid, stripes, marble) — after Elijah's Illustrator pieces.
+const K='#121417';
+const ART={};
+const GR={W:['#E2AE72','#B57641'],Wd:['#9C6534','#7B4B24'],T:['#3A9C95','#17605A'],Td:['#257A74','#114843'],Wh:['#FFFFFF','#D6DADB'],Gl:['#BFE0F0','#85B3D0'],
+ H:['#F9E58A','#E7BE3A'],R:['#F29A82','#D35F48'],Po:['#EE946C','#C25D3A'],L:['#9AD45C','#4E8F2F'],S:['#7480B0','#47507E'],B:['#D9A066','#A86B36'],C:['#6ED8F7','#1B9FD0'],
+ La:['#D6D2EF','#A49ED2'],Be:['#9C7BD8','#5E3FA0'],O:['#FFB15C','#E8782E'],Co:['#EBC285','#C98F4D'],Pk:['#F7B9C9','#E58AA6'],G:['#C9CED5','#8E959E'],Go:['#FFE07A','#E0A92A'],
+ Oc:['#4A6FD0','#193B95'],Gn:['#5FA36A','#2F5D33'],Rd:['#F0645A','#B8322A'],Y:['#FFF07A','#F4C430'],Sk:['#D9F3FC','#9BDAF7'],Cr:['#FFFDF2','#EFE2C2'],Mi:['#D2F5E8','#86D3B8'],Bk:['#4A505C','#1E2229']};
+const ART_DEFS=Object.entries(GR).map(([k,[a,b]])=>`<linearGradient id="a${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`).join('')+
+ `<pattern id="aPl" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#1BBEEE"/><path d="M6 0v12M0 6h12" stroke="#FEFEF6" stroke-width="2.6"/><path d="M2 0v12M0 2h12" stroke="${K}" stroke-width=".8"/></pattern>`+
+ `<pattern id="aPr" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#E8735A"/><path d="M6 0v12M0 6h12" stroke="#F4D44C" stroke-width="2.6"/><path d="M2 0v12M0 2h12" stroke="${K}" stroke-width=".8"/></pattern>`+
+ `<pattern id="aSt" width="14" height="10" patternUnits="userSpaceOnUse"><rect width="7" height="10" fill="#FEFEF6"/><rect x="7" width="7" height="10" fill="#7480B0"/></pattern>`+
+ `<pattern id="aHs" width="14" height="10" patternUnits="userSpaceOnUse"><rect width="7" height="10" fill="#F4D44C"/><rect x="7" width="7" height="10" fill="#E8735A"/></pattern>`+
+ `<pattern id="aRs" width="12" height="10" patternUnits="userSpaceOnUse"><rect width="6" height="10" fill="#FEFEF6"/><rect x="6" width="6" height="10" fill="#E8584A"/></pattern>`+
+ `<pattern id="aDt" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#F7A8BE"/><circle cx="3" cy="3" r="1.8" fill="#FEFEF6"/><circle cx="9" cy="9" r="1.8" fill="#FEFEF6"/></pattern>`+
+ `<pattern id="aMb" width="60" height="46" patternUnits="userSpaceOnUse"><rect width="60" height="46" fill="#45B4F0"/><g fill="none" stroke="${K}" stroke-width="1" stroke-linecap="round"><path d="M-2 8c7-5 12 4 19-1s9-8 16-3 11 5 17 0 9-4 13 0"/><path d="M-2 20c8-4 11 5 17 1s7-9 15-5 8 8 15 4 11-5 19-1"/><path d="M4 31c5-7 13-1 16 3s11 4 15-1 9-7 17-3"/><path d="M-1 41c7-3 9 3 16 0s12-7 19-3 8 5 16 1"/></g><g fill="${K}"><circle cx="8" cy="15" r=".8"/><circle cx="30" cy="5" r=".7"/><circle cx="39" cy="17" r=".8"/><circle cx="53" cy="32" r=".7"/><circle cx="14" cy="36" r=".8"/><circle cx="34" cy="38" r=".7"/></g></pattern>`;
+// drawing helpers live in AH so their short names never clash with the game's own
+const AH=(()=>{
+// building blocks (outline group strokes stay the same pixel weight at every size)
+const o=s=>`<g class="o" stroke="${K}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">${s}</g>`;
+const g=n=>`url(#a${n})`;
+const R=(x,y,w,h,r,f)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${f}"/>`;
+const C=(x,y,r,f)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}"/>`;
+const E=(x,y,rx,ry,f)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${f}"/>`;
+const P=(d,f='none')=>`<path d="${d}" fill="${f}"/>`;
+const Ln=(d,w=1.6,c=K)=>`<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const SH=(d,w=3)=>`<path d="${d}" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="${w}" stroke-linecap="round"/>`;
+const GLS=d=>`<path d="${d}" fill="none" stroke="#E2A5DA" stroke-width="2.4" stroke-linecap="round"/>`;
+const EY=(x1,x2,y,r=2.6)=>`${C(x1,y,r,K)}${C(x2,y,r,K)}${C(x1+r*.35,y-r*.35,r*.35,'#fff')}${C(x2+r*.35,y-r*.35,r*.35,'#fff')}`;
+const SMILE=(x,y,w=8)=>Ln(`M${x-w/2} ${y}q${w/2} ${w*.55} ${w} 0`,1.8);
+const art=(w,h,s)=>({w,h,s});
+return {o,g,R,C,E,P,Ln,SH,GLS,EY,SMILE,art};
+})();
+const ART_CSS='.art{overflow:visible}.art .o>*,.art .o *{vector-effect:non-scaling-stroke}';
+function artSVG(id,cls=''){const a=ART[id];if(!a)return '';return `<svg class="art ${cls}" viewBox="0 0 ${a.w} ${a.h}" aria-hidden="true">${a.s}</svg>`}
+const ART_IMG={};
+function artImg(id,px=128){
+  const k=id+'@'+px;if(ART_IMG[k])return ART_IMG[k];const a=ART[id];if(!a)return null;
+  const sc=px/Math.max(a.w,a.h);const W=Math.round(a.w*sc),H=Math.round(a.h*sc);
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${a.w} ${a.h}"><style>${ART_CSS}</style><defs>${ART_DEFS}</defs><g class="art">${a.s}</g></svg>`;
+  const img=new Image();img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);ART_IMG[k]=img;return img;
+}
+(function(){const d=document.createElement('div');d.style.cssText='position:absolute;width:0;height:0;overflow:hidden';d.setAttribute('aria-hidden','true');
+  d.innerHTML=`<svg width="0" height="0"><defs>${ART_DEFS}</defs></svg>`;document.body.appendChild(d);
+  const st=document.createElement('style');st.textContent=ART_CSS;document.head.appendChild(st)})();
+
+/* ---------- art: furniture & floor things ---------- */
+(()=>{const {o,g,R,C,E,P,Ln,SH,GLS,EY,SMILE,art}=AH;const K='#121417',W='#FEFEF6';
+const A=(id,w,h,s)=>{ART[id]=art(w,h,s)};
+A('f-couch',200,150,o(R(28,18,144,74,24,g('T'))+R(40,78,62,34,12,g('Td'))+R(98,78,62,34,12,g('Td'))+R(20,106,160,28,10,g('Td'))+R(8,58,40,76,18,g('T'))+R(152,58,40,76,18,g('T'))+P('M34 134v10M166 134v10'))+SH('M44 32q56-12 112 0M16 70q3-6 12-6M160 70q3-6 12-6'));
+A('f-chair',160,150,o(R(26,10,108,86,26,g('Pl'))+R(34,84,92,30,12,g('Pl'))+R(18,108,124,26,10,g('S'))+R(8,60,34,74,16,g('Pl'))+R(118,60,34,74,16,g('Pl'))+P('M30 134v10M130 134v10'))+SH('M40 24q40-10 80 0'));
+A('f-books',100,80,o(R(10,54,80,20,3,g('R'))+R(18,34,70,20,3,g('C'))+R(8,14,76,20,3,g('H')))+o(P('M78 58v12M78 38v12M70 18v12','none'))+SH('M16 58h40M24 38h34M14 18h36',2.4));
+A('f-basket',120,96,o(P('M10 40h100l-10 52H20z',g('W'))+C(38,30,16,g('R'))+C(70,26,14,g('C'))+R(84,14,14,30,3,g('H'))+R(6,34,108,12,6,g('Wd')))+Ln('M30 50v38M50 50v40M70 50v40M90 50v38',2.4,'#8E5A30')+SH('M28 22a10 10 0 0 1 10-6M64 18a8 8 0 0 1 8-5'));
+A('f-rock',100,70,o(P('M10 62c-6-22 8-44 34-50c22-4 46 4 52 26c4 16-4 26-14 26H18z',g('G')))+EY(38,62,34,4.5)+SMILE(50,44,10)+SH('M24 30q8-12 22-14'));
+A('f-radio',130,100,o(P('M30 26L54 6','none')+R(8,26,114,70,14,g('R'))+C(42,60,22,g('Cr'))+R(76,42,36,16,4,g('Sk'))+C(84,76,6,g('H'))+C(104,76,6,g('H')))+Ln('M30 52h24M28 60h28M30 68h24',1.8)+Ln('M84 48v6M92 46v10M100 48v6',1.4)+C(54,6,3,K)+SH('M18 34q8-6 20-6'));
+A('f-teddy',76,104,o(C(14,14,11,g('B'))+C(58,14,11,g('B'))+E(36,72,28,26,g('B'))+C(36,34,25,g('B'))+E(36,42,11,8,'#F3D9A4')+E(12,92,11,8,g('B'))+E(60,92,11,8,g('B')))+C(27,30,3.5,K)+C(45,30,3.5,K)+E(36,39,4,3,K)+C(14,14,5,'#F3D9A4')+C(58,14,5,'#F3D9A4')+Ln('M22 56q14 10 28 0',5,'#1BBEEE')+SH('M20 20q6-8 14-8'));
+A('f-mushroom',100,100,o(R(38,48,24,48,8,g('Cr'))+P('M6 54C6 24 26 8 50 8s44 16 44 46z',g('Rd')))+C(30,30,6,W)+C(56,22,7,W)+C(76,40,6,W)+C(46,44,4,W)+SH('M18 36q8-18 26-22'));
+A('f-lolly',80,130,o(R(36,58,8,70,3,g('Wh'))+C(40,40,36,g('Pk')))+`<path d="M40 40m-6 0a6 6 0 1 1 12 0a12 12 0 1 1-24 0a18 18 0 1 1 36 0a24 24 0 1 1-48 0" fill="none" stroke="#FEFEF6" stroke-width="5" stroke-linecap="round"/>`+o(C(40,40,36,'none'))+SH('M16 24q8-12 22-14'));
+A('f-donut',110,70,o(E(55,40,50,28,g('Co'))+P('M8 34c4-16 24-26 47-26s43 10 47 26c-4 4-8 2-12 6s-6 8-12 4-12 2-16 6-14-2-20 2-14 0-20-4-10 0-14-6z',g('Pk'))+E(55,32,14,7,'#C98F4D'))+Ln('M26 22l4 3M44 14l2 4M74 16l-3 3M86 26l-4 2M32 34l4-1M78 34l3 2',2.6,'#1BBEEE')+Ln('M36 16l3-2M64 12l3 2M92 32l3 1',2.6,'#F4D44C')+SH('M18 28q10-12 24-14'));
+A('f-balloons',100,140,Ln('M30 64Q40 100 50 138M70 58Q60 100 50 138M50 52v86',1.6)+o(E(30,40,20,24,g('H'))+E(70,36,20,24,g('C'))+E(50,26,20,24,g('R'))+P('M27 63l3 4 3-4zM67 59l3 4 3-4zM47 49l3 4 3-4z',K))+SH('M22 28q2-8 8-10M62 24q2-8 8-10M42 14q2-8 8-10'));
+A('f-log',120,70,o(R(8,18,96,44,20,g('W'))+E(102,40,14,22,g('Co')))+`<ellipse cx="102" cy="40" rx="8" ry="13" fill="none" stroke="#9C6534" stroke-width="1.6"/><ellipse cx="102" cy="40" rx="3" ry="5" fill="none" stroke="#9C6534" stroke-width="1.6"/>`+Ln('M22 30h30M40 48h36',1.6,'#8E5A30')+SH('M18 26h50'));
+A('f-tv',160,170,o(P('M64 30L40 6M96 30L122 8')+R(10,28,140,108,20,g('W'))+R(24,42,90,80,16,g('Gl'))+C(133,60,8,g('H'))+C(133,86,8,g('R'))+P('M32 136l-8 24M128 136l8 24'))+C(40,6,5,K)+C(122,8,5,K)+Ln('M124 108h18M124 117h18',2)+GLS('M38 102l24-42M52 110l18-30')+SH('M22 40q10-8 24-8'));
+A('f-arcade',100,110,o(P('M50 54L44 18','none')+C(44,16,12,g('Rd'))+P('M8 56h84l-6 50H14z',g('S'))+R(4,48,92,14,6,g('Oc'))+C(70,80,7,g('H'))+C(84,70,6,g('C')))+SH('M38 10a7 7 0 0 1 8-4M12 54h40'));
+A('f-drums',140,120,o(P('M100 36l34-12','none')+E(116,24,22,6,g('Go'))+P('M116 30v80','none')+R(80,58,46,36,10,g('C'))+E(103,58,23,7,g('Wh'))+R(12,40,80,70,14,g('Rd'))+E(52,75,26,26,g('Wh'))+C(52,75,10,g('Rd')))+Ln('M20 46l18 56M84 46l-18 56',1.8,'#FEFEF6')+SH('M20 50q4-6 12-6'));
+A('f-vase',90,140,o(P('M28 60C10 84 14 124 30 136h30C76 124 80 84 62 60z',g('C'))+R(30,52,30,12,4,g('Oc')))+Ln('M20 96h50M18 110h54',3,'#F4D44C')+Ln('M45 52C40 34 30 22 22 14M45 52C48 30 56 18 64 10M45 52V20',2,'#4E8F2F')+o(C(22,14,8,g('Pk'))+C(64,10,8,g('H'))+C(45,18,8,g('R')))+SH('M26 78q-4 20 2 40'));
+A('f-light',70,170,o(R(31,72,8,96,3,g('S'))+R(10,6,50,86,14,g('Bk'))+C(35,24,11,'#F0645A')+C(35,49,11,'#F9D84A')+C(35,74,11,'#8BD35A')+E(35,166,20,5,g('S')))+SH('M28 20a6 6 0 0 1 6-5M28 45a6 6 0 0 1 6-5M28 70a6 6 0 0 1 6-5',2.2));
+A('f-mailbox',90,130,o(R(40,60,10,68,3,g('W'))+P('M8 62V30a22 22 0 0 1 44 0v32z',g('Oc'))+P('M52 30a22 22 0 0 0-44 0',g('C'))+P('M60 30v-18h18v10h-12','none')+R(58,10,20,12,2,g('Rd'))+R(14,40,26,6,3,W))+SH('M16 24q6-10 16-12'));
+A('f-octopus',110,100,o(P('M22 70c-10 8-14 20-6 26M38 74c-4 10-2 20 6 22M72 74c4 10 2 20-6 22M88 70c10 8 14 20 6 26',`none`)+P('M14 66C10 30 30 8 55 8s45 22 41 58c-6 10-76 10-82 0z',g('Be')))+Ln('M22 70c-10 8-14 20-6 26M38 74c-4 10-2 20 6 22M72 74c4 10 2 20-6 22M88 70c10 8 14 20 6 26',7,'#7B5CC4')+EY(42,68,46,4.5)+SMILE(55,58,10)+E(32,58,6,3.5,'#F38BA4')+E(78,58,6,3.5,'#F38BA4')+SH('M28 26q10-12 26-14'));
+A('f-honey',100,100,o(P('M18 40C10 60 12 86 26 94h48C88 86 90 60 82 40z',g('Go'))+R(14,30,72,14,6,g('H'))+P('M24 30c0-10 12-16 26-16s26 6 26 16',g('W')))+P('M30 44c0 10 6 12 6 4s4-6 6 2 6 6 6-2 6-8 8 0','#E0A92A')+o(P('M68 14l18-12','none')+C(86,4,4,g('W')))+SH('M24 56q-2 16 6 28'));
+A('f-bee',110,90,o(E(34,30,16,12,g('Sk'))+E(70,26,16,12,g('Sk'))+E(55,56,40,30,g('Y')))+P('M38 30c-6 16-6 36 2 52h10c-8-16-8-36-2-52zM66 28c-6 18-6 38 2 56h10c-8-18-8-38-2-56z',K)+o(E(55,56,40,30,'none'))+EY(26,40,52,3.5)+SH('M26 40q6-10 18-12'));
+A('f-computer',130,120,o(R(10,8,110,78,10,g('Cr'))+R(22,18,86,56,6,g('Oc'))+R(50,86,30,12,2,g('Cr'))+R(18,98,94,16,5,g('Cr')))+Ln('M30 30h30M30 40h44M30 50h22',3,'#6ED8F7')+Ln('M28 104h74M28 110h74',1.4)+GLS('M88 62l14-24')+SH('M16 14h40'));
+A('f-dino',130,110,o(P('M14 100c-4-30 10-52 40-56l10-26c4-12 18-14 26-6 8 8 6 22-6 26l-8 4c6 10 10 22 8 34l30 10c-14 10-30 12-44 6v8z',g('L'))+P('M36 100v8h14v-8M70 100v8h14v-8','none'))+P('M40 46l6-10 6 10M54 40l5-10 5 10M66 52l7-8 3 10',g('H'))+o(P('M40 46l6-10 6 10M54 40l5-10 5 10M66 52l7-8 3 10','none'))+C(84,18,3.2,K)+Ln('M90 28q6 2 8 0',1.8)+SH('M28 70q4-14 18-20'));
+A('f-palm',130,190,o(P('M58 188c4-50 2-100 8-140h10c-4 40 0 90-2 140z',g('W'))+P('M70 50C50 30 22 32 6 48c22-4 42 0 64 2zM70 50C88 26 116 24 128 40c-22-2-40 2-58 10zM70 50C60 22 66 6 80 2c-4 16-6 30-10 48zM70 50C46 50 26 66 22 88c14-16 30-28 48-38zM70 50c22 2 40 18 46 40-14-16-30-28-46-40z',g('L'))+C(64,56,7,g('Wd'))+C(76,58,7,g('Wd')))+Ln('M60 80h14M60 110h14M60 140h14M60 168h14',1.6,'#8E5A30'));
+A('f-coral',110,120,o(P('M50 118c-2-30-14-42-26-56-6-8 0-16 8-10 10 8 16 20 18 30 0-20-4-36 0-52 2-10 14-10 14 0 0 16-2 32 2 46 4-14 12-26 22-30 10-4 14 6 8 12-10 10-18 26-18 60z',g('Pk')))+C(30,52,4,'#FEFEF6')+C(58,22,4,'#FEFEF6')+C(84,46,4,'#FEFEF6')+SH('M54 30v24'));
+A('f-whale',130,90,o(P('M10 52c0-24 24-40 56-40 32 0 52 16 52 38 0 12-6 22-16 26l12 14c-16 2-28-4-34-10-4 2-10 2-16 2C30 82 10 72 10 52z',g('Oc'))+P('M20 60c10 14 30 20 52 18',g('Sk')))+P('M60 8c-2-8 2-10 4-4 2-6 6-6 4 2','none')+o(P('M58 12c-4-8 0-12 4-6 2-6 8-6 6 2','none'))+EY(40,54,46,3.4)+SH('M30 28q12-10 30-12'));
+A('f-alien',100,110,o(P('M30 30L20 6M70 30l10-24','none')+C(20,6,6,g('H'))+C(80,6,6,g('H'))+P('M8 50C8 26 28 14 50 14s42 12 42 36c0 28-20 52-42 52S8 78 8 50z',g('Mi')))+`<g transform="rotate(-15 32 54)"><ellipse cx="32" cy="54" rx="11" ry="15" fill="${K}"/></g><g transform="rotate(15 68 54)"><ellipse cx="68" cy="54" rx="11" ry="15" fill="${K}"/></g>`+C(28,48,3,'#fff')+C(64,48,3,'#fff')+SMILE(50,80,10)+SH('M22 32q10-12 24-14'));
+A('f-parrot',90,140,o(R(4,120,82,8,4,g('W'))+P('M40 120c-20-10-26-40-14-66 6-14 18-24 32-22 14 2 18 18 12 30l-6 10c8 14 6 34-10 48z',g('Rd'))+P('M44 72c-14 6-20 26-12 46 12-10 20-26 18-42z',g('C'))+P('M66 44c10 2 16 8 14 16-6-2-10-6-14-6z',g('H'))+P('M40 120l-8 16M48 120l6 16','none'))+C(56,40,3.4,K)+SH('M34 50q4-12 14-16'));
+A('f-robot',100,130,o(P('M50 24V8','none')+C(50,6,6,g('Rd'))+R(18,24,64,46,12,g('G'))+R(26,34,48,26,8,g('Bk'))+R(24,76,52,40,10,g('G'))+R(6,80,14,30,7,g('S'))+R(80,80,14,30,7,g('S'))+R(30,116,14,10,3,g('S'))+R(56,116,14,10,3,g('S'))+C(50,94,8,g('C')))+C(40,47,5,'#6ED8F7')+C(60,47,5,'#6ED8F7')+SH('M24 32q8-6 18-6'));
+A('f-piano',150,100,o(R(6,20,138,40,8,g('Bk'))+R(14,30,122,24,3,'#FEFEF6')+P('M26 60v38M124 60v38','none'))+Ln('M29 30v24M44 30v24M59 30v24M74 30v24M89 30v24M104 30v24M119 30v24',1.2)+`<g fill="${K}">${[24,39,62,77,92,114].map(x=>`<rect x="${x}" y="30" width="9" height="14" rx="1"/>`).join('')}</g>`+SH('M12 26h40',2.4));
+A('f-tub',200,160,o(P('M172 54V24a14 14 0 0 0-28 0','none')+C(40,44,14,'#fff')+C(64,34,18,'#fff')+C(92,40,15,'#fff')+C(118,32,17,'#fff')+C(142,44,12,'#fff')+P('M14 62h172v18c0 44-30 62-86 62S14 124 14 80z',g('Wh'))+R(6,54,188,16,8,g('C'))+P('M44 138l-8 16M156 138l8 16'))+Ln('M58 40a6 6 0 0 1 8-6M112 28a6 6 0 0 1 8-5',2,'#B7B2DC')+SH('M30 84q8 30 40 40',5));
+A('f-crystal',90,110,o(P('M20 104l8-22h34l8 22z',g('S'))+C(45,50,34,g('La')))+C(45,50,22,'rgba(255,255,255,.35)')+P('M58 34l3-8 3 8 8 3-8 3-3 8-3-8-8-3z','#fff')+GLS('M24 46a22 22 0 0 1 14-20')+o(C(45,50,34,'none')));
+A('f-tent',150,130,o(P('M8 126L75 8l67 118z',g('Hs'))+P('M75 8L56 126h38z',g('Bk'))+P('M75 8L54 126M75 8l21 118','none'))+Ln('M75 8V2',2.4)+o(P('M75 2l14 5-14 5z',g('R'))));
+A('f-slide',200,180,o(P('M26 176V40M60 176V40')+P('M26 72h34M26 102h34M26 132h34M26 162h34')+P('M62 40C112 40 120 148 194 158L190 178C108 168 98 66 58 62Z',g('C'))+R(18,30,50,14,5,g('H'))+P('M150 160v16'))+SH('M72 50c30 4 42 50 66 82',4));
+A('f-ufo',140,90,o(P('M42 40a28 26 0 0 1 56 0z',g('Sk'))+E(70,48,66,18,g('G'))+E(70,44,40,8,g('S')))+C(30,52,5,'#F9D84A')+C(56,58,5,'#F0645A')+C(84,58,5,'#8BD35A')+C(110,52,5,'#F9D84A')+GLS('M52 34a20 18 0 0 1 12-12')+SH('M14 48q10-10 30-12'));
+A('f-moai',90,130,o(P('M18 128c-6-40 0-80 6-104C28 10 40 4 52 6c14 2 22 12 22 30l4 92z',g('G'))+P('M24 30h48','none'))+Ln('M32 46h14M56 46h12',3)+Ln('M48 50l-6 22h12',2)+Ln('M36 88h26',3)+P('M28 30c0-8 10-12 22-12s22 4 22 12',g('Gn'))+SH('M30 60v30',2.4));
+A('f-fountain',140,150,o(E(70,128,64,18,g('G'))+R(6,110,128,20,8,g('G'))+R(62,60,16,54,4,g('G'))+E(70,62,38,10,g('G'))+R(66,24,8,40,3,g('G')))+P('M70 22c-18 0-28 18-30 38M70 22c18 0 28 18 30 38M40 64c-10 6-16 28-18 46M100 64c10 6 16 28 18 46','none')+Ln('M70 22c-18 0-28 18-30 38M70 22c18 0 28 18 30 38M40 64c-10 6-16 28-18 46M100 64c10 6 16 28 18 46',3,'#6ED8F7')+E(70,114,52,8,'#6ED8F7')+SH('M16 116h40'));
+A('f-carousel',160,170,o(P('M80 6L10 46h140z',g('Rs'))+R(8,44,144,12,6,g('H'))+P('M30 56v94M80 56v94M130 56v94','none')+E(80,156,74,12,g('C'))+E(30,108,14,9,g('H'))+E(130,98,14,9,g('Pk'))+E(80,118,14,9,g('C')))+C(80,6,5,g('Go'))+SH('M24 44l40-26',2.4));
+A('f-pumpkin',110,96,o(P('M55 18c-6-10-2-16 6-16','none')+E(30,56,24,36,g('O'))+E(80,56,24,36,g('O'))+E(55,56,26,38,g('O')))+P('M34 46l10-8 4 12zM66 50l4-12 10 8zM38 70c10 8 24 8 34 0l-6 10-6-6-5 6-6-6-5 6z',K)+SH('M24 34q4-10 12-12'));
+A('f-ghost',100,120,o(P('M12 116V50C12 22 30 6 50 6s38 16 38 44v66l-12-10-12 10-12-10-12 10-12-10z',g('Wh'))+P('M12 66c-8 0-10 8-6 12M88 66c8 0 10 8 6 12','none'))+C(36,46,6,K)+C(62,46,6,K)+C(38,44,2,'#fff')+C(64,44,2,'#fff')+E(50,66,7,9,K)+E(50,70,4,3,'#F38BA4')+E(28,58,6,3,'#F7B9C9')+E(72,58,6,3,'#F7B9C9')+SH('M24 30q8-16 24-18'));
+A('f-candybowl',110,80,o(P('M6 36h98c0 24-22 40-49 40S6 60 6 36z',g('C'))+`<g transform="rotate(-20 34 30)">${R(22,22,24,14,6,g('Rd'))}${P('M22 29l-8-6v12zM46 29l8-6v12z',g('Rd'))}</g>`+`<g transform="rotate(15 72 26)">${R(60,18,24,14,6,g('H'))}${P('M60 25l-8-6v12zM84 25l8-6v12z',g('H'))}</g>`+C(54,22,9,g('Pk')))+Ln('M30 30l8 0M66 24l8 2',1.6,'#fff')+SH('M14 44q10 18 32 22'));
+A('f-xtree',130,180,o(R(56,150,18,26,3,g('W'))+P('M65 8L22 70h20L12 112h22L4 156h122l-30-44h22L88 70h20z',g('Gn')))+C(46,96,6,g('Rd'))+C(84,82,6,g('H'))+C(62,128,6,g('C'))+C(94,134,6,g('Rd'))+C(36,140,6,g('H'))+C(70,58,5,g('C'))+o(P('M65 -2l5 10 11 1-8 8 2 11-10-5-10 5 2-11-8-8 11-1z',g('Go')))+Ln('M30 100q34-6 70-24M20 146q50-6 90-32',2,'#F7B9C9'));
+A('f-gifts',130,100,o(R(8,40,64,56,6,g('Rd'))+R(64,24,58,72,6,g('C')))+R(34,40,12,56,0,g('H'))+R(87,24,12,72,0,g('Pk'))+o(R(8,40,64,56,6,'none')+R(64,24,58,72,6,'none')+P('M40 40c-14-14-20 0 0 0c14-14 20 0 0 0zM93 24c-14-14-20 0 0 0c14-14 20 0 0 0z',g('H'))));
+A('f-snowman',100,150,o(C(50,112,36,g('Wh'))+C(50,62,26,g('Wh'))+C(50,24,18,g('Wh'))+R(30,4,40,8,3,g('Bk'))+R(36,-14,28,20,3,g('Bk'))+P('M50 26l16 4-16 4z',g('O')))+C(43,20,2.6,K)+C(57,20,2.6,K)+C(50,56,3,K)+C(50,70,3,K)+C(50,104,3,K)+Ln('M28 62l-20-14M72 62l20-14',3,'#7B4B24')+o(R(28,38,44,10,4,g('Rd')))+SH('M30 96q4-14 16-18'));
+A('f-chick',90,90,o(P('M14 62c0-24 14-44 31-44s31 20 31 44',g('Y'))+P('M8 56l10 8 8-8 8 8 8-8 8 8 8-8 8 8 8-8 8 8v24c0 8-8 12-16 12H24c-8 0-16-4-16-12z',g('Cr')))+EY(36,54,40,3)+o(P('M41 48l4 6 4-6z',g('O')))+SH('M26 30q6-10 16-12'));
+A('f-clover',90,110,o(P('M28 106l-4-32h42l-4 32z',g('Po'))+R(20,68,50,10,4,g('Po'))+C(32,34,14,g('L'))+C(58,34,14,g('L'))+C(45,18,14,g('L'))+C(45,46,14,g('L')))+Ln('M45 46v22',3,'#2F5D33')+SH('M24 28a8 8 0 0 1 8-6M52 28a8 8 0 0 1 8-6'));
+A('f-turkey',110,100,o(`${[[-60,'#E8735A'],[-30,'#F4D44C'],[0,'#E8735A'],[30,'#F4D44C'],[60,'#E8735A']].map(([a,c])=>`<ellipse cx="55" cy="22" rx="11" ry="24" fill="${c}" transform="rotate(${a} 55 50)"/>`).join('')}`+E(55,62,30,30,g('B'))+C(55,42,16,g('B'))+P('M52 46l3 6 3-6z',g('O'))+P('M60 50c4 2 4 8 0 10',g('Rd')))+EY(49,61,38,2.6)+SH('M36 60q4-10 12-12'));
+A('f-pie',110,60,o(P('M6 30h98l-10 26H16z',g('W'))+E(55,30,49,12,g('Co')))+Ln('M24 24l10 12M46 20l12 18M70 20l10 14M30 36l18-14M56 38l18-16',2.6,'#C98F4D')+o(E(55,30,49,12,'none'))+SH('M18 40h30'));
+A('f-heartbox',100,140,Ln('M30 64L50 138M70 58L50 138M50 54v84',1.6)+o(P('M30 60c-12-8-20-16-20-26a10 10 0 0 1 20-4 10 10 0 0 1 20 4c0 10-8 18-20 26z',g('Pk'))+P('M70 56c-12-8-20-16-20-26a10 10 0 0 1 20-4 10 10 0 0 1 20 4c0 10-8 18-20 26z',g('Rd'))+P('M50 50c-12-8-20-16-20-26a10 10 0 0 1 20-4 10 10 0 0 1 20 4c0 10-8 18-20 26z',g('Rd'))));
+A('f-house',150,140,o(R(18,62,114,74,4,g('Wh'))+P('M6 66L75 8l69 58z',g('S'))+R(98,10,16,28,3,g('G'))+R(30,86,34,30,4,g('Gl'))+R(86,84,30,52,4,g('Pk'))+P('M26 80h42l-4 10H30z',g('St')))+C(110,112,3,K)+GLS('M36 110l10-16M48 112l8-12')+Ln('M47 86v30M30 101h34',3,'#FEFEF6')+o(R(30,86,34,30,4,'none'))+SH('M24 60l40-34',2.4));
+A('f-tulips',90,110,o(P('M26 106l-4-30h46l-4 30z',g('Po'))+R(18,70,54,10,4,g('Po')))+Ln('M30 70V40M45 70V30M60 70V42',3,'#4E8F2F')+o(P('M22 42c0-10 4-16 8-18l4 6 4-6c4 2 6 8 6 18-2 6-20 6-22 0z',g('R'))+P('M37 32c0-10 4-16 8-18l4 6 4-6c4 2 6 8 6 18-2 6-20 6-22 0z',g('H'))+P('M52 44c0-10 4-16 8-18l4 6 4-6c4 2 6 8 6 18-2 6-20 6-22 0z',g('Pk'))));
+A('f-pine',110,180,o(R(46,148,18,30,3,g('W'))+P('M55 6L24 56h14L14 100h16L4 152h102L80 100h16L72 56h14z',g('Gn')))+SH('M40 60l12-20M34 104l12-20M26 146l14-22',2.4));
+A('f-umbrella',140,170,o(P('M70 30v136','none')+P('M8 64C14 30 40 14 70 14s56 16 62 50c-10-8-20-8-30 0-10-8-22-8-32 0-10-8-22-8-32 0-10-8-20-8-30 0z',g('Rs'))+C(70,12,5,g('H')))+SH('M22 52q10-26 36-32',2.4));
+A('f-veggie',140,70,o(E(70,50,66,18,g('Wd')))+`${[22,48,74,100,122].map((x,i)=>`<g>${o(P(`M${x} 44c-4-10-12-14-16-12 4 6 10 10 16 12zM${x} 44c2-12 8-18 14-18-2 8-6 14-14 18zM${x} 44c0-12-2-20-6-24-2 8 0 18 6 24z`,g('L')))}${o(P(`M${x-6} 44h12l-6 14z`,g('O')))}</g>`).join('')}`);
+A('f-plant',120,172,o(P('M34 112h52l-8 56H42z',g('Po'))+R(26,102,68,16,6,g('Po'))+P('M60 104C42 78 18 72 4 80C18 96 40 102 60 104Z',g('L'))+P('M60 104C78 78 102 72 116 80C102 96 80 102 60 104Z',g('L'))+P('M60 104C46 70 30 50 14 40C20 66 38 90 60 104Z',g('L'))+P('M60 104C52 66 58 30 70 8C84 38 78 74 60 104Z',g('L')))+Ln('M60 104C44 90 26 84 10 82M60 104C66 70 66 40 70 14M60 104C76 90 94 84 110 82M60 104C46 84 32 62 18 46',1.4)+SH('M36 110h20'));
+A('f-cactus',90,140,o(P('M26 136l-4-30h46l-4 30z',g('Po'))+R(18,100,54,10,4,g('Po'))+R(34,22,22,82,11,g('Gn'))+P('M34 70H22c-6 0-8-4-8-10V44a5 5 0 0 1 10 0v14h10M56 58h10V36a5 5 0 0 1 10 0v24c0 6-4 10-10 10H56',g('Gn'))+C(45,18,6,g('Pk')))+Ln('M40 34v4M50 48v4M42 64v4M48 80v4M20 50v3M72 44v3',1.6,'#C9F2B0'));
+A('f-sunflower',90,160,o(P('M28 156l-4-28h42l-4 28z',g('Po'))+R(20,122,50,10,4,g('Po')))+Ln('M45 122V54',4,'#4E8F2F')+o(P('M45 100c-14-4-20-14-18-22 10 2 16 10 18 22zM45 88c12-6 20-4 22 2-8 4-16 2-22-2z',g('L'))+`${Array.from({length:12},(_,i)=>`<ellipse cx="45" cy="16" rx="7" ry="16" fill="url(#aH)" transform="rotate(${i*30} 45 34)"/>`).join('')}`+C(45,34,14,g('Wd')))+`<g fill="#5A3418">${[[40,30],[50,30],[45,38],[38,38],[52,38]].map(([x,y])=>C(x,y,2,'#5A3418')).join('')}</g>`);
+A('f-fish',130,100,o(R(6,8,118,88,14,g('Gl'))+R(6,76,118,20,0,g('Co')))+P('M40 44c8-10 22-10 30 0-8 10-22 10-30 0zM70 44l12-8v16z',g('O'))+P('M76 66c6-7 16-7 22 0-6 7-16 7-22 0zM98 66l9-6v12z',g('C'))+C(48,42,2,K)+C(82,64,1.8,K)+Ln('M24 76c0-12 6-18 4-30M34 76c2-10-2-16 2-24',2.4,'#4E8F2F')+C(104,30,3,'#fff')+C(110,20,2,'#fff')+o(R(6,8,118,88,14,'none')+R(2,4,126,10,4,g('S')))+GLS('M18 58l18-30M28 64l10-16'));
+A('f-gumball',90,150,o(R(36,94,18,8,2,g('G'))+P('M18 146l6-50h42l6 50z',g('Rd'))+C(45,52,40,'rgba(255,255,255,.6)'))+[[30,44,'#E8735A'],[52,36,'#F4D44C'],[44,62,'#1BBEEE'],[62,56,'#8BD35A'],[26,66,'#F7A8BE'],[58,74,'#9C7BD8'],[40,80,'#F4D44C'],[66,40,'#1BBEEE']].map(([x,y,c])=>`<circle cx="${x}" cy="${y}" r="8" fill="${c}" stroke="${K}" stroke-width="1.4"/>`).join('')+o(C(45,52,40,'none')+R(36,6,18,8,3,g('Rd'))+R(38,112,14,14,3,g('G')))+SH('M18 40a28 28 0 0 1 14-18',4));
+A('f-tree',120,170,o(R(50,104,20,62,4,g('W'))+C(36,74,30,g('L'))+C(84,74,30,g('L'))+C(60,44,38,g('L')))+SH('M36 30q10-16 28-18M16 70q2-10 10-14'));
+A('f-rocket',90,170,o(P('M14 150c0-18 8-30 16-36v40zM76 150c0-18-8-30-16-36v40z',g('Rd'))+P('M45 4c22 18 28 60 22 116H23C17 64 23 22 45 4z',g('Wh'))+C(45,62,12,g('C'))+P('M33 120h24l4 18H29z',g('G'))+P('M30 22c8-8 22-8 30 0-6-10-10-16-15-18-5 2-9 8-15 18z',g('Rd')))+P('M35 140c2 10 6 20 10 26 4-6 8-16 10-26z','#F4D44C')+GLS('M38 66a8 8 0 0 1 6-8')+SH('M32 40q-4 30 0 60'));
+A('f-lamp',80,170,o(P('M26 150C18 110 22 70 32 34H48C58 70 62 110 54 150Z',g('H')))+C(40,122,11,'#E8735A')+C(46,84,7,'#E8735A')+E(36,58,5,6,'#E8735A')+o(P('M26 150C18 110 22 70 32 34H48C58 70 62 110 54 150Z','none')+P('M30 34H50L46 12H34Z',g('S'))+P('M22 148H58L68 168H12Z',g('S')))+SH('M30 130c-4-24-2-48 4-70'));
+})();
+
+/* ---------- art: wall decor & lights ---------- */
+(()=>{const {o,g,R,C,E,P,Ln,SH,GLS,EY,SMILE,art}=AH;const K='#121417',W='#FEFEF6';
+const A=(id,w,h,s)=>{ART[id]=art(w,h,s)};
+const star=(cx,cy,r,ri)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?ri:r;d+=(i?'L':'M')+(cx+Math.cos(a)*rr).toFixed(1)+' '+(cy+Math.sin(a)*rr).toFixed(1)}return d+'z'};
+// wall stuff
+A('a-clock',100,100,o(C(50,50,44,g('H'))+C(50,50,30,W))+Ln('M50 25v5M50 70v5M25 50h5M70 50h5',2.4)+Ln('M50 50V32M50 50l12 7',4)+C(50,50,4,'#E8735A')+SH('M20 32q8-14 22-18',4));
+A('a-guitar',80,150,o(R(34,4,12,64,3,g('Wd'))+R(30,0,20,14,4,g('Wd'))+P('M40 60c-16 0-28 10-28 24 0 8 6 12 6 18-4 4-10 10-10 20 0 16 14 26 32 26s32-10 32-26c0-10-6-16-10-20 0-6 6-10 6-18 0-14-12-24-28-24z',g('O'))+C(40,104,10,g('Bk'))+R(30,124,20,6,2,g('Wd')))+Ln('M37 14v116M43 14v116',.8,'#fff')+SH('M18 112q0-14 10-20',3));
+A('a-painting',130,100,o(R(2,2,126,96,8,g('W'))+R(14,14,102,72,0,W))+P('M14 66c18-4 26-22 44-30c20-9 34 4 30 18c-4 12-18 10-20 2c10 2 12-8 4-10c-14-3-22 18-20 30c2 8 30 10 64 10v0H14z',g('C'))+o(P('M14 66c18-4 26-22 44-30c20-9 34 4 30 18c-4 12-18 10-20 2c10 2 12-8 4-10c-14-3-22 18-20 30c2 8 30 10 64 10','none'))+P('M14 80c30-2 60 4 102 0v6H14z','#193B95')+C(96,32,8,'#E8735A')+o(R(14,14,102,72,0,'none')));
+A('a-trophy',110,110,o(R(4,94,102,12,4,g('W'))+P('M30 14h50v20c0 22-12 34-25 34S30 56 30 34z',g('Go'))+P('M30 22H16c0 18 8 26 18 26M80 22h14c0 18-8 26-18 26','none')+R(48,66,14,14,2,g('Go'))+R(36,80,38,14,4,g('Wd')))+o(P(star(55,36,10,4.5),W))+SH('M38 22v18',4));
+A('a-star',100,100,o(P(star(50,52,46,20),g('H')))+EY(40,60,52,3.4)+SMILE(50,62,8)+SH('M40 30l10-20',3));
+A('a-cloud',130,80,o(P('M24 72a20 20 0 0 1 2-40 26 26 0 0 1 48-12 22 22 0 0 1 38 14 18 18 0 0 1-2 38z',g('Wh')))+SH('M30 40q6-12 20-14',4));
+A('a-dart',100,100,o(C(50,50,44,g('Rd'))+C(50,50,33,W)+C(50,50,22,g('Rd'))+C(50,50,11,W)+C(50,50,4,K))+o(P('M54 46l26-26','none')+P('M78 22l8-12 4 8 8 4-12 8z',g('C')))+SH('M18 34q8-16 24-22',4));
+A('a-kite',100,150,Ln('M50 96c-10 14 10 22 0 36s10 16 4 22',1.6)+o(P('M50 4l40 46-40 46-40-46z',g('Hs'))+P('M50 4v92M10 50h80','none'))+o(P('M44 112l-10-4 2 10zM54 128l10-2-6 8z',g('C'))));
+A('a-bow',110,70,o(P('M55 35C40 16 14 8 8 20s8 32 47 15zM55 35c15-19 41-27 47-15s-8 32-47 15z',g('Rd'))+P('M48 38l-10 30 10-4 6 6 2-30M62 38l10 30-10-4-6 6-2-30',g('Rd'))+E(55,35,9,11,g('Rd')))+SH('M18 22q8-6 20 0',3));
+A('a-mirror',90,130,o(E(45,65,40,60,g('W'))+E(45,65,30,48,g('Gl')))+GLS('M30 52l18-24M34 72l22-30')+o(P('M45 0l8 8-8 8-8-8z',g('H'))));
+A('a-map',130,100,o(P('M6 14l36-8 46 10 36-8v80l-36 8-46-10-36 8z',g('Cr'))+P('M42 6v80M88 16v80','none'))+Ln('M20 70c10-6 18 4 28-6s20-20 34-10 14 2 22-10',2.4,'#E8735A')+`<path d="M20 70c10-6 18 4 28-6s20-20 34-10 14 2 22-10" fill="none" stroke="#FEFEF6" stroke-width="0"/>`+Ln('M100 34l10 10M110 34l-10 10',3,'#B8322A')+C(20,70,4,K)+o(P('M60 36c6-8 16-4 14 4',g('L'))));
+A('a-chime',90,140,Ln('M45 0v20',1.6)+o(P('M15 34c0-10 14-16 30-16s30 6 30 16z',g('C')))+Ln('M25 34v44M38 34v62M52 34v54M65 34v40',1.4)+o(R(21,78,8,30,4,g('G'))+R(34,96,8,30,4,g('G'))+R(48,88,8,30,4,g('G'))+R(61,74,8,30,4,g('G'))+R(40,40,10,24,4,g('Pk'))));
+A('a-rainbow',140,80,`${[['#E8735A',64],['#FFB15C',54],['#F4D44C',44],['#8BD35A',34],['#1BBEEE',24]].map(([c,r])=>`<path d="M${70-r} 74a${r} ${r} 0 0 1 ${2*r} 0" fill="none" stroke="${c}" stroke-width="10"/>`).join('')}`+o(P('M6 74a64 64 0 0 1 128 0h-10a54 54 0 0 0-108 0zM16 74h0','none')+P('M46 74a24 24 0 0 1 48 0','none'))+o(P('M2 74a14 12 0 0 1 28 0zM110 74a14 12 0 0 1 28 0z',g('Wh'))));
+A('a-palette',110,90,o(P('M58 6C26 6 4 24 4 46s20 38 44 38c10 0 12-6 10-12s0-12 8-12h16c14 0 22-8 22-20C104 20 84 6 58 6z',g('W'))+C(30,54,8,'#FEFEF6'))+C(30,30,7,'#E8735A')+C(52,20,7,'#F4D44C')+C(76,22,7,'#1BBEEE')+C(88,40,7,'#8BD35A')+C(28,52,6,'#E8D9C4')+o(P('M70 70l30-40 4 4-30 40z',g('Wd'))));
+A('a-moon',100,100,o(P('M66 8a44 44 0 1 0 28 66A36 36 0 0 1 66 8z',g('Go')))+C(44,40,5,'#E0A92A')+C(36,66,7,'#E0A92A')+C(58,78,4,'#E0A92A')+SH('M30 22q10-10 22-12',4));
+A('a-fish',150,80,Ln('M0 10v70',3,'#7B4B24')+o(P('M2 14c40-8 86-4 124 18l20-14-6 24 6 24-20-14C88 74 40 74 2 68z',g('C')))+Ln('M40 16v50M70 20v48M100 28v34',1.6,'#FEFEF6')+C(118,36,6,W)+C(118,36,3,K));
+A('a-anchor',90,110,`<circle cx="45" cy="14" r="9" fill="none" stroke="${K}" stroke-width="11"/><circle cx="45" cy="14" r="9" fill="none" stroke="#7480B0" stroke-width="5"/>`+Ln('M45 24v70M28 38h34M12 66c0 20 14 32 33 32s33-12 33-32',11,K)+Ln('M45 24v70M28 38h34M12 66c0 20 14 32 33 32s33-12 33-32',5,'#7480B0')+o(P('M6 72l6-12 8 10zM84 72l-6-12-8 10z',g('S'))));
+A('a-buoy',100,100,o(C(50,50,44,g('Wh'))+C(50,50,20,'#2CA9D3'))+`${[0,90,180,270].map(a=>`<path d="M50 6a44 44 0 0 1 31 13L64 36a20 20 0 0 0-14-6z" fill="url(#aRd)" transform="rotate(${a} 50 50)"/>`).join('')}`+o(C(50,50,44,'none')+C(50,50,20,'none'))+Ln('M10 50h-6M90 50h6',3,'#7B4B24'));
+A('a-pinata',130,110,Ln('M64 0v14',1.6)+o(P('M14 70c0-30 20-50 46-50h40c14 0 22 10 18 22l-8 16c10 6 12 20 4 30H40c-16 0-26-8-26-18z',g('Pk')))+Ln('M28 50h80M20 68h96M26 86h80',4,'#F4D44C')+Ln('M30 58h76M22 78h94',4,'#1BBEEE')+o(P('M14 70c0-30 20-50 46-50h40c14 0 22 10 18 22l-8 16c10 6 12 20 4 30H40c-16 0-26-8-26-18z','none')+P('M30 96v14M54 96v14M86 96v14M106 96v14','none'))+C(104,34,3,K));
+A('a-masks',130,100,o(P('M8 14c20-8 40-8 56 0v26c0 22-14 36-28 36S8 62 8 40z',g('H'))+P('M66 30c20-8 40-8 56 0v26c0 22-14 36-28 36S66 78 66 56z',g('C')))+P('M22 36q6-6 12 0M40 36q6-6 12 0M24 52q12 14 24 0z',K)+P('M80 52q6 6 12 0M98 52q6 6 12 0M84 76q10-12 20 0z',K));
+A('a-violin',80,150,o(R(36,4,8,50,3,g('Wd'))+P('M40 44c-14 0-24 8-22 20 2 6 6 8 2 14-6 6-8 14-6 24 4 16 16 24 26 24s22-8 26-24c2-10 0-18-6-24-4-6 0-8 2-14 2-12-8-20-22-20z',g('W'))+P('M40 126v18M32 144h16','none'))+Ln('M30 84c-2 6 2 10 4 12M50 84c2 6-2 10-4 12',2)+Ln('M38 10v110M42 10v110',.8,'#fff')+SH('M26 70q0-10 8-14'));
+A('a-medal',80,120,o(P('M18 4h18l10 50H28zM62 4H44l-10 50h18z',g('C'))+C(40,80,30,g('Go'))+C(40,80,20,g('H')))+o(P(star(40,80,12,5),'#FEFEF6'))+SH('M20 72q6-14 18-18',4));
+A('a-satellite',140,100,o(R(4,30,40,40,3,g('Oc'))+R(96,30,40,40,3,g('Oc'))+P('M44 50h12M84 50h12','none')+R(54,34,32,32,8,g('G'))+P('M70 34V14','none')+C(70,10,6,g('Rd')))+Ln('M4 50h40M24 30v40M96 50h40M116 30v40',1.2,'#9BDAF7')+SH('M60 40h10',3));
+A('a-web',110,110,`<g fill="none" stroke="#FEFEF6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">${[0,45,90,135,180,225,270,315].map(a=>`<path d="M55 55L${(55+Math.cos(a*Math.PI/180)*50).toFixed(1)} ${(55+Math.sin(a*Math.PI/180)*50).toFixed(1)}"/>`).join('')}${[14,28,42].map(r=>`<path d="${Array.from({length:9},(_,i)=>{const a=i*45*Math.PI/180;return (i?'L':'M')+(55+Math.cos(a)*r).toFixed(1)+' '+(55+Math.sin(a)*r).toFixed(1)}).join('')}"/>`).join('')}</g>`+`<g fill="none" stroke="${K}" stroke-width="1" opacity=".5">${[0,45,90,135,180,225,270,315].map(a=>`<path d="M55 55L${(55+Math.cos(a*Math.PI/180)*50).toFixed(1)} ${(55+Math.sin(a*Math.PI/180)*50).toFixed(1)}"/>`).join('')}</g>`+o(C(78,80,8,g('Bk')))+EY(75,81,79,1.6));
+A('a-bat',130,70,o(P('M65 22c-8 0-12 6-12 14 0 10 6 16 12 16s12-6 12-16c0-8-4-14-12-14zM53 34C40 20 18 16 4 26c8 4 10 12 8 20 8-6 16-4 20 4 4-8 14-10 21-6M77 34c13-14 35-18 49-8-8 4-10 12-8 20-8-6-16-4-20 4-4-8-14-10-21-6',g('Be'))+P('M58 24l-2-14 8 8zM72 24l2-14-8 8z',g('Be')))+EY(60,70,34,2.6)+Ln('M61 44q4 3 8 0',1.6,'#fff'));
+A('a-sock',80,120,o(P('M18 6h40v62c0 10 4 18 12 26 8 10 2 24-12 24-10 0-16-6-24-16L20 84c-6-8-2-14-2-22z',g('Rd'))+R(14,4,48,20,6,g('Wh')))+Ln('M20 46h38M20 60h38',4,'#FEFEF6')+o(P('M50 116c-6 0-10-4-16-12l8-10c8 8 20 6 22 0 6 8 2 22-14 22z',g('Wh'))));
+A('a-fireworks',120,120,`${[['#F4D44C',60,56,40],['#E8735A',30,34,22],['#1BBEEE',92,32,22]].map(([c,x,y,r])=>Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<path d="M${(x+Math.cos(a)*r*.35).toFixed(1)} ${(y+Math.sin(a)*r*.35).toFixed(1)}L${(x+Math.cos(a)*r).toFixed(1)} ${(y+Math.sin(a)*r).toFixed(1)}" stroke="${c}" stroke-width="4" stroke-linecap="round"/>`}).join('')+C(x,y,4,c)).join('')}`+P('M4 116L60 56','none')+Ln('M30 112l20-30',2,'#FEFEF6'));
+A('a-heart',100,90,o(P('M50 84C20 64 4 46 4 28A22 22 0 0 1 50 18a22 22 0 0 1 46 10c0 18-16 36-46 56z',g('Rd')))+SH('M18 26q4-12 16-14',4));
+A('a-lucky',100,110,Ln('M50 56c4 20 10 34 20 48',4,'#2F5D33')+o(`${[0,90,180,270].map(a=>`<path d="M50 52c-4-16-24-22-30-10-6 12 14 18 30 10z" fill="url(#aL)" transform="rotate(${a+45} 50 52)"/>`).join('')}`)+SH('M30 30q4-6 10-6'));
+// lights
+A('l-star',100,100,o(P(star(50,52,46,20),g('Y')))+P(star(50,52,30,13),'#FFFBD0')+SH('M40 30l10-20',3));
+A('l-bulb',70,100,o(R(26,0,18,22,3,g('G'))+P('M35 96c-18 0-30-14-30-32 0-12 6-20 14-28 4-4 6-8 6-14h20c0 6 2 10 6 14 8 8 14 16 14 28 0 18-12 32-30 32z',g('Y')))+Ln('M28 22c0 14 14 14 14 0M30 44l5 10 5-10',1.6,'#E0A92A')+SH('M16 62q0-14 10-20',4));
+A('l-candle',60,110,o(P('M30 4c-8 10-10 18-10 22a10 10 0 0 0 20 0c0-4-2-12-10-22z',g('O'))+R(16,34,28,64,4,g('Cr'))+E(30,100,28,8,g('G')))+P('M30 16c-4 6-4 10-4 12a4 4 0 0 0 8 0c0-2 0-6-4-12z','#FFF07A')+Ln('M30 34v-6',2)+SH('M22 44v40',3));
+A('l-lantern',90,120,Ln('M45 0v12',2)+o(R(26,10,38,10,3,g('Bk'))+E(45,62,40,44,g('Rd'))+R(26,104,38,10,3,g('Bk')))+Ln('M10 44q35 10 70 0M6 62h78M10 80q35-10 70 0',1.6,'#B8322A')+Ln('M45 114v6',2)+SH('M18 46q4-16 16-24',4));
+A('l-moon',90,110,o(R(30,94,30,12,4,g('W'))+C(45,50,40,g('Cr')))+C(30,40,6,'#EFE2C2')+C(56,30,8,'#EFE2C2')+C(58,64,5,'#EFE2C2')+C(36,70,4,'#EFE2C2')+SH('M18 36q8-18 24-22',4));
+A('l-disco',90,100,Ln('M45 0v12',2)+o(C(45,52,38,g('G')))+`<g stroke="${K}" stroke-width=".8" opacity=".5" fill="none"><path d="M7 52h76M10 36h70M10 68h70M18 24h54M18 80h54M45 14v76M28 18c-8 20-8 48 0 68M62 18c8 20 8 48 0 68"/></g>`+R(36,30,10,8,1,'#F7A8BE')+R(52,46,10,8,1,'#6ED8F7')+R(28,58,10,8,1,'#F4D44C')+R(58,64,10,8,1,'#fff')+o(C(45,52,38,'none'))+P('M66 22l3-8 3 8 8 3-8 3-3 8-3-8-8-3z','#fff'));
+})();
+
+/* ---------- art: food, toys, fruit, game icons, little UI icons ---------- */
+(()=>{const {o,g,R,C,E,P,Ln,SH,GLS,EY,SMILE,art}=AH;const K='#121417',W='#FEFEF6';
+const A=(id,w,h,s)=>{ART[id]=art(w,h,s)};
+// food
+A('berry',100,100,o(P('M50 30c-4-12 4-20 16-22c-2 12-8 18-16 22z',g('L'))+C(34,50,17,g('Be'))+C(66,50,17,g('Be'))+C(50,74,17,g('Be')))+SH('M26 44a8 8 0 0 1 8-6M58 44a8 8 0 0 1 8-6M42 68a8 8 0 0 1 8-6'));
+A('chili',100,100,o(P('M70 22c10 6 12 18 6 30-10 22-34 40-62 40 20-10 34-26 40-46 4-14 8-24 16-24z',g('Rd'))+P('M70 22c2-8 8-14 16-14 0 6-4 12-10 14z',g('L')))+SH('M64 34q-4 16-14 28'));
+A('milk',80,110,o(P('M14 40l12-20h28l12 20v62H14z',g('Wh'))+R(24,8,32,12,3,g('C'))+P('M14 40h52','none')+R(14,56,52,26,0,g('C')))+P('M30 64c6-6 14-6 20 0-6 6-14 6-20 0z','#FEFEF6')+SH('M22 46v46',3));
+A('carrot',100,100,o(P('M48 26c-6-14-2-20 2-22c4 6 4 14-2 22zM50 26c8-12 16-14 22-12c-4 8-12 12-22 12zM46 28c-12-6-20-4-24 0c8 6 16 6 24 0z',g('L'))+P('M30 30c10-6 30-6 40 0c2 30-8 52-20 64c-12-12-22-34-20-64z',g('O')))+Ln('M36 46h10M54 58h10M40 70h8',2)+SH('M38 36q4-4 10-4'));
+A('cookie',100,100,o(P('M50 10a40 40 0 1 0 38 28a12 12 0 0 1-14-12a12 12 0 0 1-12-14a40 40 0 0 0-12-2z',g('Co')))+[[34,40,5],[56,56,6],[36,66,4.5],[66,76,4],[52,30,3.5]].map(([x,y,r])=>C(x,y,r,'#5A3418')).join('')+SH('M22 40q6-14 20-20'));
+A('pizza',100,100,o(P('M50 96L10 22c26-14 54-14 80 0z',g('Y'))+P('M10 22c26-14 54-14 80 0l-6 10c-22-10-46-10-68 0z',g('Co')))+C(42,44,7,'#E8584A')+C(60,52,7,'#E8584A')+C(50,70,6,'#E8584A')+C(36,60,3,'#4E8F2F')+C(64,38,3,'#4E8F2F')+SH('M24 38l14 26',3));
+A('icecream',80,110,o(P('M18 52l22 54 22-54z',g('Co'))+C(40,40,22,g('Pk'))+C(26,30,14,g('Pk'))+C(54,30,14,g('Pk'))+C(40,18,14,g('Wh')))+Ln('M24 60l20 20M34 56l16 16M30 72l12-12M44 62l-8 8',1.4,'#9C6534')+C(42,4,5,g('Rd'))+SH('M30 12q4-6 10-6'));
+A('lemon',110,90,o(P('M10 46c0-20 20-36 45-36s45 16 45 36-20 36-45 36S10 66 10 46z',g('Y'))+P('M8 46l-6-4 2 8zM102 46l6-4-2 8z',g('Y')))+SH('M28 28q12-10 30-10',4));
+A('sushi',110,80,o(R(10,30,90,40,14,'#FEFEF6')+P('M14 34c10-18 72-18 82 0 0 8-82 8-82 0z',g('O'))+R(44,24,22,48,4,g('Bk')))+Ln('M26 26c6 4 14 4 20 0M64 26c6 4 14 4 20 0',2,'#FFE0C2')+SH('M18 44v14'));
+A('honey',100,100,o(P('M18 40C10 60 12 86 26 94h48C88 86 90 60 82 40z',g('Go'))+R(14,30,72,14,6,g('H'))+P('M24 30c0-10 12-16 26-16s26 6 26 16',g('W')))+P('M30 44c0 10 6 12 6 4s4-6 6 2 6 6 6-2 6-8 8 0','#E0A92A')+SH('M24 56q-2 16 6 28'));
+A('taco',120,80,o(P('M10 70a50 50 0 0 1 100 0z',g('Y')))+Ln('M20 46c8-6 14 2 20-4s14 4 20-2 14 4 20-2 12 2 18-2',6,'#6DBA5A')+C(36,40,6,'#E8584A')+C(70,36,6,'#E8584A')+o(P('M10 70a50 50 0 0 1 100 0z','none'))+SH('M24 60q6-18 22-26'));
+A('popcorn',90,110,o(P('M14 44l10 62h42l10-62z',g('Rs'))+C(24,40,12,g('Cr'))+C(42,30,13,g('Cr'))+C(62,34,12,g('Cr'))+C(70,46,10,g('Cr'))+C(34,48,10,g('Cr'))+C(52,46,10,g('Cr')))+C(40,26,3,'#F9E58A')+C(64,30,3,'#F9E58A'));
+A('melonslice',120,90,o(P('M8 18a52 52 0 0 0 104 0z',g('L')))+P('M16 18a44 44 0 0 0 88 0z',W)+P('M22 18a38 38 0 0 0 76 0z',g('R'))+o(P('M8 18h104','none'))+[[44,32],[60,42],[76,32],[52,22],[68,22]].map(([x,y])=>E(x,y,2.6,4,K)).join(''));
+A('pretzel',110,90,`<path d="M55 70C30 90 6 66 18 40S60 14 64 38 30 62 18 40M55 70C80 90 104 66 92 40S50 14 46 38 80 62 92 40" fill="none" stroke="${K}" stroke-width="16" stroke-linecap="round"/><path d="M55 70C30 90 6 66 18 40S60 14 64 38 30 62 18 40M55 70C80 90 104 66 92 40S50 14 46 38 80 62 92 40" fill="none" stroke="#C98F4D" stroke-width="10" stroke-linecap="round"/>`+[[22,50],[46,26],[70,60],[88,34],[60,30]].map(([x,y])=>R(x,y,3,2,1,'#fff')).join(''));
+A('cupcake',90,110,o(P('M16 58l10 46h38l10-46z',g('C'))+P('M10 60c-2-16 10-22 18-20 2-12 12-18 22-16 10-4 22 4 22 14 10 0 14 12 8 22z',g('Pk'))+C(45,14,8,g('Rd')))+Ln('M30 60l4 44M45 60v44M60 60l-4 44',1.6,'#1B9FD0')+Ln('M30 48l3-2M46 38l2 2M62 50l-3-2',2.4,'#F4D44C')+SH('M22 52q2-8 10-10'));
+A('cake',120,110,o(R(12,50,96,52,8,g('Pk'))+P('M12 62c10 10 18-4 24 4s16 2 24-2 14 6 24 0 18 2 24-2v-6c0-8-6-12-12-12H24c-6 0-12 4-12 12z',g('Wh'))+R(36,24,6,26,2,g('C'))+R(57,20,6,30,2,g('H'))+R(78,24,6,26,2,g('C')))+P('M39 22c-3-4-3-8 0-12 3 4 3 8 0 12zM60 18c-3-4-3-8 0-12 3 4 3 8 0 12zM81 22c-3-4-3-8 0-12 3 4 3 8 0 12z','#F4D44C')+Ln('M20 84h80',4,'#FEFEF6'));
+// toys
+A('ball',100,100,o(C(50,50,42,g('Y')))+Ln('M14 32c22 10 50 10 72 0M14 68c22-10 50-10 72 0',3,'#FEFEF6')+o(C(50,50,42,'none'))+SH('M24 30q8-14 24-18',4));
+A('duck',110,100,o(P('M30 50c-6-24 10-42 30-40 20 2 28 22 20 36l20 4c4 26-18 42-46 42S6 78 10 60c4-10 12-12 20-10z',g('Y'))+P('M80 30l18 4-16 8z',g('O')))+EY(64,64,30,3.4).slice(0,0)+C(64,28,4,K)+C(65,27,1.4,'#fff')+o(P('M30 64c10 10 30 10 40 0','none'))+SH('M44 20q8-6 18-4'));
+A('yarn',100,100,o(C(50,50,40,g('Pk')))+Ln('M20 34c20 10 44 8 62-6M14 54c26 14 54 12 74-8M24 76c20 4 40 0 56-18M40 12c-6 24-4 52 8 78',2,'#C2557A')+o(C(50,50,40,'none'))+Ln('M84 70c8 8 10 18 4 26',2.4,'#C2557A'));
+A('blocks',110,100,o(R(10,50,44,44,6,g('R'))+R(56,50,44,44,6,g('C'))+R(33,8,44,44,6,g('H')))+`<g font-family="Caprasimo,Georgia,serif" font-size="28" text-anchor="middle" fill="${K}"><text x="32" y="82">1</text><text x="78" y="82">2</text><text x="55" y="40">3</text></g>`);
+A('yoyo',100,110,Ln('M50 0v40',1.8)+o(C(50,66,38,g('Rd'))+C(50,66,14,g('Wh')))+Ln('M24 40a38 38 0 0 1 52 0',2,'#FEFEF6')+SH('M22 54q6-14 18-20',4));
+A('drum',110,100,o(P('M10 34v40c0 12 20 22 45 22s45-10 45-22V34',g('Rd'))+E(55,34,45,16,g('Wh')))+Ln('M10 52c8 6 12-10 22 2s14-12 22 2 14-12 22 2 14-12 24-2',2,'#FEFEF6')+o(P('M70 18l30-16M40 18L14 0','none')+C(100,2,4,g('W'))+C(14,0,4,g('W'))));
+A('teddy',76,104,ART['f-teddy'].s);
+A('book',120,90,o(P('M60 18C46 8 24 6 6 12v70c18-6 40-4 54 6 14-10 36-12 54-6V12C96 6 74 8 60 18z',g('C'))+P('M60 18v70','none')+P('M12 16c16-4 32-2 44 6v58c-12-6-28-8-44-6zM108 16c-16-4-32-2-44 6v58c12-6 28-8 44-6z',g('Cr')))+Ln('M20 34h28M20 44h28M20 54h22M72 34h28M72 44h28M72 54h20',1.4,'#8E959E'));
+A('scope',120,110,o(P('M10 50l84-34 8 20-84 34z',g('Oc'))+P('M94 16l14-6 8 20-14 6z',g('H'))+P('M58 46l-18 60M58 46l20 60M58 46v60','none')+C(58,46,6,g('G')))+GLS('M28 52l40-16')+SH('M18 46l20-8',3));
+A('globe',100,120,o(P('M18 108h64M50 96v12','none')+P('M14 52a38 38 0 0 0 72 14','none')+C(50,50,34,g('C')))+P('M30 34c8 2 10 10 18 8s6 10 14 10 8-12 4-18-16-8-22-6-14-2-14 6zM42 66c6 0 8 8 4 14-6 0-10-8-4-14zM70 66c6-4 10 2 8 8-4 4-10 0-8-8z','#8BD35A')+o(C(50,50,34,'none'))+SH('M28 30q8-12 22-14',4));
+A('skate',130,70,o(P('M8 26c0-8 6-12 14-12h86c8 0 14 4 14 12s-6 12-14 12H22c-8 0-14-4-14-12z',g('Hs'))+C(32,52,10,g('C'))+C(98,52,10,g('C')))+C(32,52,3,K)+C(98,52,3,K)+SH('M22 20h50',3));
+A('trumpet',130,80,o(P('M10 34h70l40-26v62L80 44H10z',g('Go'))+R(30,20,8,16,2,g('H'))+R(44,20,8,16,2,g('H'))+R(58,20,8,16,2,g('H'))+E(120,39,6,31,g('H')))+SH('M18 38h56',3));
+A('feather',90,120,o(P('M70 6C30 14 12 52 14 90l4 4C50 90 82 60 70 6z',g('Pk'))+P('M70 6L14 112','none'))+Ln('M58 26l-14-4M50 42l-18-6M42 58l-18-6M58 40l10 6M48 58l14 6M40 74l12 6',1.6,'#C2557A'));
+A('bubbles',100,120,o(R(46,54,8,64,4,g('C'))+C(50,40,22,'none'))+`<circle cx="50" cy="40" r="15" fill="#BBEEEE" opacity=".5"/>`+o(C(80,22,10,'rgba(187,238,238,.6)')+C(18,24,8,'rgba(187,238,238,.6)')+C(84,62,6,'rgba(187,238,238,.6)'))+SH('M40 30a10 10 0 0 1 8-6M76 18a4 4 0 0 1 4-3',2.4));
+// fruit for Fruit Drop (round, made to sit in a circle)
+const fr=(id,body,top,extra='')=>A(id,100,100,o(top)+o(body)+extra);
+fr('fr-cherry',C(36,64,22,g('Rd'))+C(66,66,22,g('Rd')),P('M36 44C40 26 52 14 66 8M66 46C64 30 64 18 66 8','none')+P('M66 8c8-2 16 2 20 8-8 2-16 0-20-8z',g('L')),SH('M24 58a10 10 0 0 1 10-8M54 60a10 10 0 0 1 10-8'));
+fr('fr-straw',P('M50 94C22 80 10 54 14 36c4-14 20-18 36-12 16-6 32-2 36 12 4 18-8 44-36 58z',g('Rd')),P('M28 26l22-14 22 14-12 4-10-8-10 8z',g('L')),[[36,44],[56,40],[46,58],[64,58],[34,64],[54,76]].map(([x,y])=>E(x,y,2,3,'#FFE07A')).join('')+SH('M24 40q2-8 10-12'));
+fr('fr-grape',[[36,40],[64,40],[50,58],[30,62],[70,62],[50,82]].map(([x,y])=>C(x,y,15,g('Be'))).join(''),P('M50 26c-2-10 4-18 14-20M50 26c-8-8-20-8-26-4 6 8 16 8 26 4z',g('L')),SH('M28 34a7 7 0 0 1 7-5M56 34a7 7 0 0 1 7-5M42 52a7 7 0 0 1 7-5'));
+fr('fr-orange',C(50,54,42,g('O')),P('M50 12c-4-6-2-10 2-12M52 12c8-8 18-8 24-4-6 6-16 8-24 4z',g('L')),[[38,40],[60,48],[44,70],[66,68],[30,58]].map(([x,y])=>C(x,y,1.6,'#C25D3A')).join('')+SH('M22 46q6-18 24-24',4));
+fr('fr-lemon',P('M8 52c0-24 18-40 42-40s42 16 42 40-18 40-42 40S8 76 8 52z',g('Y'))+P('M6 52l-4-4v8zM94 52l4-4v8z',g('Y')),'',SH('M24 34q10-12 28-14',4));
+fr('fr-apple',P('M50 30c-10-10-40-8-40 22 0 26 18 44 30 44 6 0 8-4 10-4s4 4 10 4c12 0 30-18 30-44 0-30-30-32-40-22z',g('Rd')),P('M50 30c0-10 2-18 8-24M54 22c6-12 18-12 26-8-6 8-16 10-26 8z',g('L')),SH('M22 48q2-14 14-18',4));
+fr('fr-pear',P('M50 18c10 0 14 10 14 20 0 8 22 16 22 36 0 18-16 24-36 24S14 92 14 74c0-20 22-28 22-36 0-10 4-20 14-20z',g('L')),P('M50 18c0-8 2-14 6-16','none')+P('M54 10c8-6 16-4 20 0-6 6-14 6-20 0z',g('L')),SH('M28 68q2-12 12-18',4));
+fr('fr-peach',P('M50 22C24 14 8 36 10 58c2 22 20 36 40 36s38-14 40-36c2-22-14-44-40-36z',g('O')),P('M50 22c-2-8 0-14 4-18M54 14c8-8 20-8 26-2-8 6-18 6-26 2z',g('L')),Ln('M50 26c-8 20-8 44 0 66',1.6,'#C25D3A')+P('M24 44q6-14 18-18','none')+SH('M20 50q4-16 18-22',4));
+fr('fr-pine',E(50,64,32,34,g('Y')),P('M50 30L36 2l10 10 4-12 4 12 10-10z',g('L')),Ln('M24 48l40 40M36 36l40 40M24 72l28-30M40 90l36-38M28 92',1.4,'#C99A2E')+SH('M28 54q4-12 14-16',4));
+fr('fr-melon',C(50,50,44,g('Mi')),'',Ln('M50 6c-14 20-14 68 0 88M50 6c14 20 14 68 0 88M20 18c-8 24-8 48 0 64M80 18c8 24 8 48 0 64',1.8,'#4E8F2F')+SH('M24 34q8-16 22-22',4));
+fr('fr-water',C(50,50,44,g('Gn')),'',Ln('M30 12c-8 24-8 52 0 76M50 6c-6 28-6 60 0 88M70 12c8 24 8 52 0 76',4,'#9AD45C')+SH('M24 34q8-16 22-22',4));
+// game icons
+A('g-hop',120,100,o(P('M24 88a18 18 0 0 1 0-36 26 26 0 0 1 50-10 20 20 0 0 1 32 16 16 16 0 0 1-4 30z',g('Wh'))+R(26,16,40,10,5,g('H'))+R(66,34,30,10,5,g('Sk')))+SH('M32 64q6-12 20-14',3));
+A('g-bash',110,100,o(R(6,8,30,16,4,g('R'))+R(40,8,30,16,4,g('H'))+R(74,8,30,16,4,g('C'))+R(23,28,30,16,4,g('Mi'))+R(57,28,30,16,4,g('Pk'))+C(62,62,8,g('Wh'))+R(32,84,46,10,5,g('H'))));
+A('g-drop',100,100,o(P('M16 30h68v54c0 8-6 12-12 12H28c-8 0-12-4-12-12z',g('Sk')))+`<g>${o(C(36,74,13,g('Rd'))+C(64,72,15,g('O'))+C(50,48,11,g('Be')))}</g>`+o(P('M16 30h68','none')+R(10,24,80,8,4,g('W'))));
+A('g-flutter',110,100,o(P('M55 50C40 20 10 14 8 30c-2 14 16 22 47 20zM55 50C70 20 100 14 102 30c2 14-16 22-47 20zM55 52C40 66 20 84 14 72c-6-12 14-20 41-20zM55 52c15 14 35 32 41 20 6-12-14-20-41-20z',g('C'))+R(52,30,6,44,3,g('Bk')))+C(26,30,5,'#F4D44C')+C(84,30,5,'#F4D44C')+Ln('M55 30c-2-8-6-12-10-14M55 30c2-8 6-12 10-14',1.8));
+A('g-dash',120,90,o(P('M30 62c0-20 14-34 34-34h16c8 0 12 6 12 12v6l18 6c6 2 6 12 0 14H34c-4 0-4-4-4-4z',g('Rd'))+R(28,62,84,10,5,g('Wh')))+Ln('M54 40l8 8M64 36l8 8',2,'#FEFEF6')+Ln('M4 40h18M8 54h16M2 68h20',3,'#6ED8F7'));
+A('g-memory',110,100,o(`<g transform="rotate(-12 40 54)">${R(16,18,48,68,8,g('C'))}</g>`+`<g transform="rotate(10 70 50)">${R(46,14,48,68,8,g('Cr'))}</g>`)+`<text x="70" y="60" transform="rotate(10 70 50)" font-family="Caprasimo,Georgia,serif" font-size="34" text-anchor="middle" fill="${K}">?</text>`);
+// little UI icons
+A('i-lock',80,100,`<path d="M20 44V30a20 20 0 0 1 40 0v14" fill="none" stroke="${K}" stroke-width="16"/><path d="M20 44V30a20 20 0 0 1 40 0v14" fill="none" stroke="#C9CED5" stroke-width="8"/>`+o(R(8,42,64,52,10,g('H')))+C(40,64,6,K)+R(37,64,6,14,3,K));
+A('i-bed',140,90,o(R(8,10,40,70,10,g('La'))+R(8,46,124,30,10,g('Pl'))+R(18,36,30,16,8,g('Wh'))+R(4,72,132,10,4,g('W'))));
+A('i-mail',120,90,o(R(6,10,108,72,8,g('Cr'))+P('M6 18l54 36 54-36','none'))+o(P('M60 70c-10-6-16-12-16-18a8 8 0 0 1 16-2 8 8 0 0 1 16 2c0 6-6 12-16 18z',g('Rd'))));
+A('i-egg',90,110,o(P('M45 6C68 6 84 46 84 68c0 22-16 36-39 36S6 90 6 68C6 46 22 6 45 6z',g('Cr')))+C(32,56,7,'#9BDAF7')+C(58,44,5,'#F7A8BE')+C(56,76,8,'#F4D44C')+SH('M22 40q6-20 18-26',4));
+A('i-fire',80,100,o(P('M40 96c-22 0-34-14-34-32 0-20 14-28 18-44 10 8 12 18 12 24 6-6 8-16 6-30 22 12 32 32 32 50 0 18-12 32-34 32z',g('O')))+P('M40 92c-10 0-16-6-16-14 0-10 8-14 10-22 6 6 6 12 6 14 4-2 6-8 6-12 8 6 12 14 12 20 0 8-8 14-18 14z','#FFE07A'));
+A('i-leaf',90,90,o(P('M10 80C10 40 40 10 82 8c0 44-28 74-72 72z',g('O')))+Ln('M10 80L62 28M30 60l-2-16M44 46l-2-14M30 60l16 2M44 46l14 2',1.6,'#C25D3A'));
+A('i-fish',100,70,o(P('M10 36c10-16 34-24 56-14l20-14-4 28 4 28-20-14C44 60 20 52 10 36z',g('O')))+C(30,32,4,K)+C(31,31,1.4,'#fff')+Ln('M50 24c-4 8-4 16 0 24',2,'#C25D3A'));
+A('i-note',60,80,o(P('M18 66V14l36-8v52','none')+E(12,66,10,8,g('Bk'))+E(48,58,10,8,g('Bk'))));
+})();
 
 /* ================= HOME DECORATING ================= */
 /* Animal Crossing style: buy in the shop, everything you own lives in storage,
@@ -4856,12 +5103,12 @@ Object.assign(VIEWS,{
  'v-rainbow':`<div class="vb rainbow"></div><div class="vb hills"></div>`,
  'v-jungle':`<div class="vb jungle1"></div><div class="vb jungle2"></div>`,
  'v-moon':`<div class="vb spookyhill"></div>`,
- 'v-sea':`<div class="vb seabub"></div><div class="vb seafloor"></div><div class="vb seafish">🐠</div>`,
- 'v-candy':`<div class="vb candyhills"></div><div class="vb lolly">🍭</div>`,
+ 'v-sea':`<div class="vb seabub"></div><div class="vb seafloor"></div><div class="vb seafish">${artSVG('i-fish')}</div>`,
+ 'v-candy':`<div class="vb candyhills"></div><div class="vb lolly">${artSVG('f-lolly')}</div>`,
 });
 const FX_DEF={
  'fx-bubbles':{n:14,cls:'fxb'},'fx-snow':{n:26,cls:'fxs'},'fx-hearts':{n:12,cls:'fxh',ch:'♥'},'fx-fireflies':{n:16,cls:'fxf'},
- 'fx-leaves':{n:12,cls:'fxl',ch:'🍂'},'fx-confetti':{n:28,cls:'fxc'},'fx-stars':{n:18,cls:'fxt',ch:'✦'}
+ 'fx-leaves':{n:12,cls:'fxl',ch:'LEAF'},'fx-confetti':{n:28,cls:'fxc'},'fx-stars':{n:18,cls:'fxt',ch:'✦'}
 };
 
 // ---- state ----
@@ -4893,7 +5140,7 @@ const DECO_SPECIAL={
 function decoInner(it){
   if(DECO_SPECIAL[it.id])return DECO_SPECIAL[it.id]();
   if(it.kind==='rug')return `<div class="rugx${it.sq?' sq':''}${it.hex?' hex':''}" style="background:${RUGS[it.id].replace(/"/g,'&quot;')}"></div>`;
-  return `<span class="de">${it.emo||''}</span>`;
+  return ART[it.id]?artSVG(it.id):`<span class="de">${it.emo||''}</span>`;
 }
 function applyDecor(){renderHome()}
 function renderHome(){
@@ -4916,7 +5163,7 @@ function renderFx(id){
   if(!d){L2.innerHTML='';return}
   L2.innerHTML=Array.from({length:d.n},(_,i)=>{const r=Math.random;
     const st=`left:${(r()*100).toFixed(1)}%;top:${(r()*100).toFixed(1)}%;--d:${(5+r()*7).toFixed(1)}s;--dl:-${(r()*12).toFixed(1)}s;--z:${(.6+r()*.9).toFixed(2)};--h:${Math.floor(r()*360)};--dx:${(r()*60-30).toFixed(0)}px`;
-    return `<i class="${d.cls}" style="${st}">${d.ch||''}</i>`}).join('');
+    return `<i class="${d.cls}" style="${st}">${d.ch==='LEAF'?artSVG('i-leaf'):(d.ch||'')}</i>`}).join('');
 }
 // geometry: floor items stand at a depth d (0 = against the wall, 1 = front edge).
 function floorBand(){const top=L.H*.66+6,bot=L.H-L.bottom*.5;return {top,bot,pet:clamp((L.H-L.bottom-top)/(bot-top),0,1)}}
@@ -5142,7 +5389,7 @@ function todTick(dt,force){
 
 /* ================= MORE ROOMS ================= */
 // Home is free. The Backyard and Upstairs are big goals you buy in the shop, then walk between with the side tabs.
-const ROOMS={main:{name:'Home',emo:'🏠'},yard:{name:'Backyard',emo:'🌳',outdoor:1,need:'p-yard'},up:{name:'Upstairs',emo:'🛏️',need:'p-up'}};
+const ROOMS={main:{name:'Home',art:'f-house'},yard:{name:'Backyard',art:'f-pine',outdoor:1,need:'p-yard'},up:{name:'Upstairs',art:'i-bed',need:'p-up'}};
 const ROOM_ORDER=['yard','main','up'];
 const ROOM_START={
  yard:{wall:'w-yard',flooring:'fl-grass',view:'v-sunny',fx:'fx-none',items:[['f-pine',.1,.25],['f-house',.8,.18],['f-tulips',.32,.85],['f-tulips',.66,.9],['a-kite',.6,.3]]},
@@ -5170,7 +5417,7 @@ function renderRoomTabs(){
   ensureHome();const i=ROOM_ORDER.indexOf(S.roomId);
   [['#roomPrev',ROOM_ORDER[i-1]],['#roomNext',ROOM_ORDER[i+1]]].forEach(([q,id])=>{const b=$(q);if(!id){b.hidden=true;return}b.hidden=false;b.dataset.room=id;
     const own=ownsRoom(id);b.classList.toggle('locked',!own);b.setAttribute('aria-label',`Go to ${ROOMS[id].name}`);b.dataset.say=own?`Go to the ${ROOMS[id].name}`:`The ${ROOMS[id].name} is locked`;
-    b.innerHTML=`<span class="rt-emo">${own?ROOMS[id].emo:'🔒'}</span><small>${ROOMS[id].name}</small>`});
+    b.innerHTML=`<span class="rt-emo">${artSVG(own?ROOMS[id].art:'i-lock')}</span><small>${ROOMS[id].name}</small>`});
 }
 ['#roomPrev','#roomNext'].forEach(q=>$(q).addEventListener('click',e=>{audioInit();goRoom(e.currentTarget.dataset.room)}));
 
@@ -5272,7 +5519,7 @@ document.addEventListener('contextmenu',e=>{if(e.target.closest('button'))e.prev
 const CLOSE_SVG='<svg viewBox="0 0 48 48"><path d="M12 12l24 24M36 12L12 36" stroke="#121417" stroke-width="6" stroke-linecap="round"/></svg>';
 /* ================= SHARING PACK ================= */
 // Everything travels inside a link: no accounts, no server, no typing. Messages are picked from a kid-safe list.
-const MSGS=[['👋','Hi friend!'],['⭐','You are awesome!'],['🎈',"Let's play!"],['💛','Miss you!'],['🙏','Thank you!'],['🎂','Happy birthday!'],['☀️','Good morning!'],['🌙','Sweet dreams!'],['👀','Look at my Gibbi!'],['✋','High five!']];
+const MSGS=[['','Hi friend!'],['','You are awesome!'],['',"Let's play!"],['','Miss you!'],['','Thank you!'],['','Happy birthday!'],['','Good morning!'],['','Sweet dreams!'],['','Look at my Gibbi!'],['','High five!']];
 const SHARE={pending:null};
 const myFid=()=>S.fid||(S.fid=Math.random().toString(36).slice(2,10));
 function miniPet(p){return {n:p.name,g:genesOf(p),L:p.level,m:p.marks||[],w:p.wear||{},r:p.rev||null,id:p.id}}
@@ -5300,14 +5547,14 @@ function openShare(opt={}){
     const gifts=giftable();const sc=box.querySelector('.share-card');const top=sc?sc.scrollTop:0;
     box.innerHTML=`<div class="share-card${drawn++?' still':''}" role="dialog" aria-label="Send to a friend">
       <div class="sh-head"><b>Send to a friend</b><button class="icon-btn" id="shClose" aria-label="Close">${CLOSE_SVG}</button></div>
-      <div class="sh-pet"><div class="sh-mini">${scaled(p,'happy',.8)}</div><div class="sh-bub">${MSGS[st.msg][0]} ${esc(MSGS[st.msg][1])}</div></div>
-      <h3>Pick a message</h3><div class="sh-chips">${MSGS.map(([e,t],i)=>`<button class="chip2" data-msg="${i}" aria-pressed="${i===st.msg}">${e} ${esc(t)}</button>`).join('')}</div>
+      <div class="sh-pet"><div class="sh-mini">${scaled(p,'happy',.8)}</div><div class="sh-bub">${esc(MSGS[st.msg][1])}</div></div>
+      <h3>Pick a message</h3><div class="sh-chips">${MSGS.map(([e,t],i)=>`<button class="chip2" data-msg="${i}" aria-pressed="${i===st.msg}">${esc(t)}</button>`).join('')}</div>
       <h3>Send along</h3><div class="sh-kinds">
-        <button class="sh-k" data-k="card" aria-pressed="${st.kind==='card'}"><span>💌</span>Just ${esc(p.name)}</button>
-        <button class="sh-k" data-k="gift" aria-pressed="${st.kind==='gift'}"${gifts.length?'':' disabled'}><span>🎁</span>A gift</button>
-        <button class="sh-k" data-k="challenge" aria-pressed="${st.kind==='challenge'}"${games.length?'':' disabled'}><span>🏆</span>A challenge</button></div>
+        <button class="sh-k" data-k="card" aria-pressed="${st.kind==='card'}"><span>${artSVG('i-mail')}</span>Just ${esc(p.name)}</button>
+        <button class="sh-k" data-k="gift" aria-pressed="${st.kind==='gift'}"${gifts.length?'':' disabled'}><span>${artSVG('f-gifts')}</span>A gift</button>
+        <button class="sh-k" data-k="challenge" aria-pressed="${st.kind==='challenge'}"${games.length?'':' disabled'}><span>${artSVG('a-trophy')}</span>A challenge</button></div>
       ${st.kind==='gift'?`<div class="sh-pick">${gifts.map(it=>`<button class="sh-item${st.gift===it.id?' on':''}" data-gift="${it.id}">${previewItemHTML(it)}<small>${esc(it.name)}</small></button>`).join('')}</div><p class="note sh-note">Your friend gets their own copy. You keep yours.</p>`:''}
-      ${st.kind==='challenge'?`<div class="sh-pick">${games.map(g=>`<button class="sh-item${st.game===g.id?' on':''}" data-game="${g.id}"><span class="gemo" style="font-size:34px">${g.emo}</span><small>${g.name}: ${bestOf(p,g.id)}${g.unit}</small></button>`).join('')}</div>`:''}
+      ${st.kind==='challenge'?`<div class="sh-pick">${games.map(g=>`<button class="sh-item${st.game===g.id?' on':''}" data-game="${g.id}"><span class="gemo sm">${gIcon(g.id)}</span><small>${g.name}: ${bestOf(p,g.id)}${g.unit}</small></button>`).join('')}</div>`:''}
       <button class="big-play sh-send" id="shSend">Send</button>
       <div id="shOut"></div></div>`;
     box.querySelector('.share-card').scrollTop=top;
@@ -5348,10 +5595,10 @@ async function checkShareLink(){
   const already=S.redeemed.includes(o.id);
   box.innerHTML=`<div class="share-card got" role="dialog" aria-label="From a friend">
     <b class="got-title">${mine?'This is your own link!':'A friend sent you something!'}</b>
-    <div class="sh-pet big"><div class="sh-mini">${scaled(fp,'happy',.9)}</div><div class="sh-bub">${msg[0]} ${esc(msg[1])}</div></div>
+    <div class="sh-pet big"><div class="sh-mini">${scaled(fp,'happy',.9)}</div><div class="sh-bub">${esc(msg[1])}</div></div>
     <p class="got-name">${esc(fp.name)} · Level ${fp.level}</p>
     ${o.g&&ITEM[o.g]?`<div class="got-gift">${previewItemHTML(ITEM[o.g])}<div><b>${esc(ITEM[o.g].name)}</b><button class="fam-b" id="gotOpen"${already||mine?' disabled':''}>${already?'Already opened':mine?'Your own gift':'Open gift'}</button></div></div>`:''}
-    ${o.c&&GAME[o.c[0]]?`<div class="got-gift"><span class="gemo">${GAME[o.c[0]].emo}</span><div><b>Beat ${o.c[1]}${GAME[o.c[0]].unit} in ${GAME[o.c[0]].name}!</b><button class="fam-b" id="gotPlay">Play now</button></div></div>`:''}
+    ${o.c&&GAME[o.c[0]]?`<div class="got-gift"><span class="gemo">${gIcon(o.c[0])}</span><div><b>Beat ${o.c[1]}${GAME[o.c[0]].unit} in ${GAME[o.c[0]].name}!</b><button class="fam-b" id="gotPlay">Play now</button></div></div>`:''}
     ${mine?'':`<p class="note">${esc(fp.name)} is in your Friend Album now.</p>`}
     <div class="fam-btns">${mine?'':`<button class="fam-b" id="gotVisit">Invite over</button>`}<button class="fam-b alt" id="gotClose">Done</button></div></div>`;
   if(!mine)setTimeout(()=>say(`${fp.name} says: ${msg[1]}`),400);
@@ -5410,7 +5657,7 @@ function babyWith(f){
 let NEST_TAB='mine';
 function renderFriends(){
   const g=$('#nestGrid');const fr=S.friends||[];
-  let h=`<button class="ncard send" id="frSend"><div class="mini" style="align-items:center;justify-content:center"><span style="font-size:54px">💌</span></div><b>Send</b><small>Your Gibbi, a gift or a challenge</small></button>`;
+  let h=`<button class="ncard send" id="frSend"><div class="mini" style="align-items:center;justify-content:center"><span class="send-art">${artSVG('i-mail')}</span></div><b>Send</b><small>Your Gibbi, a gift or a challenge</small></button>`;
   fr.forEach((f,i)=>{h+=`<button class="ncard" data-fr="${i}"><div class="mini">${scaled(fromMini(f.pet),'happy',.5+.5*((f.pet.L||1)-1)/9)}</div><b>${esc(f.name)}</b><small>Level ${f.pet.L||1}</small></button>`});
   if(!fr.length)h+=`<div class="ncard meter"><b>No friends yet</b><small>Send your Gibbi to a friend. When they send theirs back, it shows up here.</small></div>`;
   g.innerHTML=h;
@@ -5419,7 +5666,7 @@ function friendSheet(f){
   const box=$('#shareBox');box.hidden=false;const fp=fromMini(f.pet);
   box.innerHTML=`<div class="share-card"><div class="sh-head"><b>${esc(f.name)}</b><button class="icon-btn" id="shClose" aria-label="Close">${CLOSE_SVG}</button></div>
     <div class="sh-pet big"><div class="sh-mini">${scaled(fp,'happy',.9)}</div></div><p class="got-name">Level ${fp.level}</p>
-    <div class="fr-acts"><button class="fam-b" id="frVisit">🏠 Invite over</button><button class="fam-b" id="frBaby">🥚 Hatch a baby together</button><button class="fam-b alt" id="frSend2">💌 Send something</button><button class="fam-b alt" id="frDel">Remove</button></div></div>`;
+    <div class="fr-acts"><button class="fam-b" id="frVisit">Invite over</button><button class="fam-b" id="frBaby">Hatch a baby together</button><button class="fam-b alt" id="frSend2">Send something</button><button class="fam-b alt" id="frDel">Remove</button></div></div>`;
   const close=()=>{box.hidden=true;box.innerHTML=''};
   box.onclick=e=>{if(e.target===box||e.target.closest('#shClose')){SFX.tap();close()}};
   $('#frVisit').onclick=()=>{close();startVisit(f)};
@@ -5428,6 +5675,18 @@ function friendSheet(f){
   $('#frDel').onclick=()=>{S.friends=S.friends.filter(x=>x!==f);save();close();renderNest()};
   babble(fp,'happy',2);
 }
+
+/* ================= ART: put the drawings everywhere ================= */
+// shape each drawn room item to its drawing
+['f-lamp','f-fish','f-gumball'].forEach(id=>{delete DECO_SPECIAL[id]});
+Object.keys(ART).forEach(id=>{const it=ITEM[id];if(!it||DECO_SPECIAL[id])return;if(PLACE_KINDS.includes(it.kind)&&it.kind!=='rug'&&it.kind!=='bed'){const a=ART[id];it.ar=+(a.w/a.h).toFixed(3)}});
+DECO_SPECIAL['a-shelf']=()=>`<div class="shelf2"><span>${artSVG('f-books')}</span><span>${artSVG('f-teddy')}</span><span>${artSVG('f-plant')}</span><i></i></div>`;
+const GAME_ART={hop:'g-hop',bash:'g-bash',drop:'g-drop',flutter:'g-flutter',dash:'g-dash',memory:'g-memory'};
+const gIcon=id=>artSVG(GAME_ART[id]||'g-hop','gart');
+const artOrEmo=(id,emo)=>ART[id]?artSVG(id):(emo||'');
+// memory cards: drawings instead of emoji
+const MEM_ART=['berry','cookie','pizza','icecream','lemon','cupcake','cake','duck','yarn','ball','yoyo','drum','teddy','book','globe','skate','trumpet','fr-cherry','fr-straw','fr-apple','fr-pear','fr-pine','f-mushroom','f-lolly','f-donut','f-rocket','f-ghost','f-pumpkin','f-bee','f-alien','f-octopus','f-whale','f-dino','a-star','a-heart','a-rainbow'];
+const FRUIT_ART=['fr-cherry','fr-straw','fr-grape','fr-orange','fr-lemon','fr-apple','fr-pear','fr-peach','fr-pine','fr-melon','fr-water'];
 
 function start(data){
   S=normalize(migrate(data&&data.S)||migrate(load()));
