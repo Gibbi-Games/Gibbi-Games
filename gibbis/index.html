@@ -5184,28 +5184,61 @@ function renderRoomTabs(){
 // Snap your Gibbi in its room, framed in a rounded square, and save it to the camera roll.
 let H2C=null;
 function loadH2C(){if(window.html2canvas)return Promise.resolve();if(H2C)return H2C;
-  H2C=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=ok;s.onerror=()=>{H2C=null;no()};document.head.appendChild(s)});return H2C}
+  H2C=new Promise((ok,no)=>{const s=document.createElement('script');s.src=ON_SITE?'html2canvas.min.js':'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=ok;s.onerror=()=>{H2C=null;no()};document.head.appendChild(s)});return H2C}
+// html2canvas can't draw repeating gradients, so the copy it photographs gets plain tiled ones instead
+function fixRepeat(bg){
+  let out='',k=0;const key='repeating-linear-gradient(';
+  while(true){const a=bg.indexOf(key,k);if(a<0){out+=bg.slice(k);break}
+    let d=0,e=a+key.length-1;for(;e<bg.length;e++){if(bg[e]==='(')d++;else if(bg[e]===')'){d--;if(!d)break}}
+    const args=bg.slice(a+key.length,e);const nums=[...args.matchAll(/(\d+(?:\.\d+)?)px/g)].map(m=>+m[1]);const P=Math.max(...nums,1);
+    const ang=(args.match(/^\s*(-?\d+)deg/)||[])[1];const A=ang==null?180:+ang;
+    const size=A%180===90?`${P}px 100%`:A%180===0?`100% ${P}px`:`${P}px ${P}px`;
+    const rest=bg.slice(e+1);const hasSize=/^\s*[^,]*\//.test(rest.split(',')[0]);
+    out+=bg.slice(k,a)+'linear-gradient('+args+')'+(hasSize?'':` 0 0/${size}`);k=e+1}
+  return out;
+}
+const relRect=(el,room)=>{const a=el.getBoundingClientRect(),b=room.getBoundingClientRect();return {x:a.left-b.left,y:a.top-b.top,w:a.width,h:a.height}};
+function drawSvgEl(x,svg,b){return new Promise(ok=>{let t=svg.outerHTML.replace(/<animate[^>]*\/>/g,'');if(!/xmlns=/.test(t))t=t.replace('<svg','<svg xmlns="http://www.w3.org/2000/svg"');
+  t=t.replace('<svg',`<svg width="${Math.round(b.w)}" height="${Math.round(b.h)}"`);const img=new Image();img.onload=()=>{try{x.drawImage(img,b.x,b.y,b.w,b.h)}catch(e){}ok()};img.onerror=()=>ok();
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(t)})}
+// backup camera: draws the room itself (simpler, but always works)
+async function simpleShot(room,scale){
+  const r=room.getBoundingClientRect(),W=r.width,H=r.height;const c=document.createElement('canvas');c.width=Math.round(W*scale);c.height=Math.round(H*scale);const x=c.getContext('2d');x.scale(scale,scale);
+  const h=ensureHome();const col=(str,last)=>{const m=String(str||'').match(/#[0-9a-fA-F]{6}\b/g);return m?(last?m[m.length-1]:m[0]):'#2CA9D3'};
+  const wy=H*.66;x.fillStyle=col(WALLS[h.wall],true);x.fillRect(0,0,W,wy);x.fillStyle=col(FLOORS[h.flooring]);x.fillRect(0,wy,W,H-wy);x.fillStyle='rgba(18,20,23,.15)';x.fillRect(0,wy,W,10);
+  const win=room.querySelector('.window');if(win&&getComputedStyle(win).display!=='none'){const b=relRect(win,room);x.fillStyle='#FEFEF6';rrect(x,b.x,b.y,b.w,b.h,b.w*.3);x.fill();x.fillStyle='#9BDAF7';rrect(x,b.x+9,b.y+9,b.w-18,b.h-18,b.w*.24);x.fill()}
+  const els=[...room.querySelectorAll('.deco-i')].sort((a,b)=>(parseInt(getComputedStyle(a).zIndex)||0)-(parseInt(getComputedStyle(b).zIndex)||0));
+  for(const el of els){const it=ITEM[el.dataset.id];const di=el.querySelector('.di')||el;const b=relRect(di,room);const svg=di.querySelector('svg'),de=di.querySelector('.de');
+    if(it&&it.kind==='rug'){x.fillStyle=col(RUGS[it.id]);x.beginPath();x.ellipse(b.x+b.w/2,b.y+b.h/2,b.w/2,b.h/2,0,0,7);x.fill()}
+    else if(svg)await drawSvgEl(x,svg,relRect(svg,room));
+    else{const em=de?de.textContent:[...di.querySelectorAll('span')].map(s2=>s2.textContent).join('');if(em){x.font=`${b.h*.85}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;x.textAlign='center';x.textBaseline='middle';x.fillText(em,b.x+b.w/2,b.y+b.h/2)}}}
+  for(const q of ['#visitor .pet-flip svg','#pet .pet-flip svg']){const s2=room.querySelector(q);if(s2)await drawSvgEl(x,s2,relRect(s2,room))}
+  return c;
+}
 async function takePhoto(){
   const room=$('#room');if(room.classList.contains('snap'))return;audioInit();
   tone(1800,.05,'square',.08);noise(.08,.25,3000);
   const fl=$('.flash');if(fl)anim(fl,'go',1000);
-  room.classList.add('snap');
+  room.classList.add('snap');const scale=Math.min(2,window.devicePixelRatio||1);let shot=null,err='';
   try{
-    await loadH2C();await (document.fonts&&document.fonts.ready);
-    const scale=Math.min(2,window.devicePixelRatio||1);
-    const shot=await html2canvas(room,{backgroundColor:'#2CA9D3',scale,logging:false,useCORS:true,ignoreElements:el=>el.id==='fx'||el.classList&&(el.classList.contains('toolbar')||el.classList.contains('hud')||el.classList.contains('room-tab'))});
-    room.classList.remove('snap');
-    const p=P();const pad=Math.round(shot.width*.06),cap=Math.round(shot.width*.13);
-    const c=document.createElement('canvas');c.width=shot.width+pad*2;c.height=shot.height+pad*2+cap;const x=c.getContext('2d');
-    x.fillStyle='#FEFEF6';x.fillRect(0,0,c.width,c.height);
-    x.save();rrect(x,pad,pad,shot.width,shot.height,shot.width*.07);x.clip();x.drawImage(shot,pad,pad);x.restore();
-    x.lineWidth=Math.max(3,shot.width*.008);x.strokeStyle='#121417';rrect(x,pad,pad,shot.width,shot.height,shot.width*.07);x.stroke();
-    x.fillStyle='#121417';x.textAlign='left';x.font=`${Math.round(cap*.42)}px Caprasimo,Georgia,serif`;x.fillText(p.name,pad,c.height-cap*.42);
-    x.textAlign='right';x.font=`700 ${Math.round(cap*.22)}px Outfit,system-ui,sans-serif`;x.fillStyle='#5A6670';
-    x.fillText(`Level ${p.level} · ${new Date().toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}`,c.width-pad,c.height-cap*.44);
-    x.fillText('Gibbi Games',c.width-pad,c.height-cap*.16);
-    showPhoto(c);
-  }catch(e){room.classList.remove('snap');SFX.boop();toast('star','The camera needs the internet the first time. Try again online.')}
+    await Promise.race([loadH2C(),new Promise((_,no)=>setTimeout(()=>no(new Error('slow')),8000))]);
+    shot=await html2canvas(room,{backgroundColor:'#2CA9D3',scale,logging:false,useCORS:true,
+      ignoreElements:el=>el.id==='fx'||el.id==='fxLayer'||(el.classList&&(['toolbar','hud','room-tab','snap-btn','glow','todtint','night','thought'].some(k=>el.classList.contains(k)))),
+      onclone:doc=>{doc.querySelectorAll('#room [style*="gradient"]').forEach(e=>{e.style.background=fixRepeat(e.style.background).replace(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))\s+(-?[\d.]+(?:px|%|deg)?)\s+(-?[\d.]+(?:px|%|deg))/g,'$1 $2, $1 $3')});doc.querySelectorAll('#room .rugx').forEach(e=>{const bg=e.style.background;if(/radial|conic/.test(bg)&&!/url\(/.test(bg)){const m=bg.match(/#[0-9a-fA-F]{6}/g)||['#E8735A'];e.style.background=m.length>1?`radial-gradient(${m[0]} 0, ${m[0]} 45%, ${m[1]} 46%)`:m[0]}})}});
+  }catch(e){err=String(e&&e.message||e);shot=null}
+  if(!shot||!shot.width){try{shot=await simpleShot(room,scale)}catch(e){err+=' / '+(e&&e.message||e);shot=null}}
+  room.classList.remove('snap');
+  if(!shot){SFX.boop();toast('star','The camera had a hiccup. Try again!');console.warn('photo',err);return}
+  const p=P();const pad=Math.round(shot.width*.06),cap=Math.round(shot.width*.13);
+  const c=document.createElement('canvas');c.width=shot.width+pad*2;c.height=shot.height+pad*2+cap;const x=c.getContext('2d');
+  x.fillStyle='#FEFEF6';x.fillRect(0,0,c.width,c.height);
+  x.save();rrect(x,pad,pad,shot.width,shot.height,shot.width*.07);x.clip();x.drawImage(shot,pad,pad);x.restore();
+  x.lineWidth=Math.max(3,shot.width*.008);x.strokeStyle='#121417';rrect(x,pad,pad,shot.width,shot.height,shot.width*.07);x.stroke();
+  x.fillStyle='#121417';x.textAlign='left';x.textBaseline='alphabetic';x.font=`${Math.round(cap*.42)}px Caprasimo,Georgia,serif`;x.fillText(p.name,pad,c.height-cap*.42);
+  x.textAlign='right';x.font=`700 ${Math.round(cap*.22)}px Outfit,system-ui,sans-serif`;x.fillStyle='#5A6670';
+  x.fillText(`Level ${p.level} · ${new Date().toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}`,c.width-pad,c.height-cap*.44);
+  x.fillText('Gibbi Games',c.width-pad,c.height-cap*.16);
+  showPhoto(c);
 }
 function showPhoto(c){
   const box=$('#photoBox');const url=c.toDataURL('image/png');box.hidden=false;
@@ -5419,7 +5452,7 @@ start({});
 
 <script>
 /* Auto-update: home-screen apps resume instead of reloading, so check for a newer build when the app comes back. */
-(function(){const B='v1793137649';
+(function(){const B='v1793139756';
 function keep(){try{window.__gibbiSave&&window.__gibbiSave()}catch(e){}}
 async function chk(){try{const r=await fetch('../version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
 if(j.v&&j.v!==B&&sessionStorage.getItem('gibbiReloaded')!==j.v){sessionStorage.setItem('gibbiReloaded',j.v);keep();location.reload()}}catch(e){}}
