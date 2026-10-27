@@ -795,6 +795,27 @@ svg{display:block}
 @keyframes rain{to{background-position:-12px 60px}}
 .wx.snow{background:radial-gradient(#fff 1.6px,transparent 2.2px) 0 0/18px 18px,radial-gradient(#fff 1.1px,transparent 1.6px) 9px 7px/23px 23px;animation:snowfall 6s linear infinite}
 
+
+/* ---------- rooms, photo, read-aloud ---------- */
+.room-tab{position:absolute;top:44%;z-index:6;border:0;background:var(--paper);display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 8px;box-shadow:0 4px 0 rgba(18,20,23,.3);font-size:12px;font-weight:800;min-width:58px}
+.room-tab.l{left:0;border-radius:0 20px 20px 0;padding-left:max(6px,env(safe-area-inset-left,0px))}
+.room-tab.r{right:0;border-radius:20px 0 0 20px;padding-right:max(6px,env(safe-area-inset-right,0px))}
+.room-tab .rt-emo{font-size:28px;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.room-tab.l::before,.room-tab.r::after{content:"";position:absolute;top:50%;width:0;height:0;border:7px solid transparent;transform:translateY(-50%)}
+.room-tab.l::before{left:-2px;border-right-color:var(--ink);display:none}
+.room-tab.locked{opacity:.7}
+#room.decorating .room-tab,#room.snap .room-tab,#room.decorating .snap-btn,#room.snap .snap-btn{display:none}
+.snap-btn{position:absolute;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(var(--tbh,100px) + 14px);z-index:6}
+#room.swap #lWall,#room.swap #decoWall,#room.swap #lFloor,#room.swap #decoFloor,#room.swap .pet{opacity:0;transition:opacity .25s}
+#room #lWall,#room #decoWall,#room #lFloor,#room #decoFloor{transition:opacity .25s}
+#room.outdoor .window{display:none}
+#room.snap .hud,#room.snap .toolbar,#room.snap .thought{visibility:hidden}
+#photoBox{position:absolute;inset:0;z-index:40;background:rgba(18,20,23,.55);display:grid;place-items:center;padding:16px}
+.photo-card{background:var(--paper);border-radius:28px;padding:14px;max-width:min(100%,460px);max-height:100%;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 0 var(--ink);animation:bannerin .35s cubic-bezier(.3,1.5,.5,1)}
+.photo-card img{width:100%;max-height:68vh;object-fit:contain;border-radius:16px;display:block}
+.ra-ping{animation:raping .6s}
+@keyframes raping{0%{box-shadow:0 0 0 0 rgba(244,212,76,.9)}100%{box-shadow:0 0 0 18px rgba(244,212,76,0)}}
+
 /* ---------- Color themes (picked in Grown-up stuff) ---------- */
 :root,:root[data-theme=bee]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.55) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#1BBEEE 0%, #6FD3F2 55%, #BBEEEE 100%);--th-title-ink:#121417;--th-spark:#F4D44C;--th-shop:linear-gradient(#193B95,#2CA9D3);--th-shop-ink:#FEFEF6;--th-nest:linear-gradient(#BBEEEE,#9BDAF7);--th-nest-ink:#121417;--th-arcade:linear-gradient(#2CA9D3,#1BBEEE);--th-arcade-ink:#121417}
 :root[data-theme=honey]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.6) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#F4D44C 0%, #F8E58C 55%, #FEFEF6 100%);--th-title-ink:#121417;--th-spark:#1BBEEE;--th-shop:linear-gradient(#E7C146,#F4D44C);--th-shop-ink:#121417;--th-nest:linear-gradient(#FEFEF6,#F8E58C);--th-nest-ink:#121417;--th-arcade:linear-gradient(#4A2410,#7B3F1E);--th-arcade-ink:#FEFEF6}
@@ -846,6 +867,8 @@ input,textarea,select{font-size:max(16px,1em)}
     <div class="layer fore" id="lFore"></div>
     <div class="night"></div>
     <div class="todtint"></div>
+    <button class="icon-btn snap-btn" id="snapBtn" aria-label="Take a photo"></button>
+    <button class="room-tab l" id="roomPrev" hidden></button><button class="room-tab r" id="roomNext" hidden></button>
     <div id="fxLayer"></div>
     <header class="hud pad" id="roomHud">
       <div class="hud-left">
@@ -868,6 +891,7 @@ input,textarea,select{font-size:max(16px,1em)}
     <nav class="toolbar pad" id="toolbar"></nav>
     <div class="sponge" id="sponge" hidden></div>
     <div id="decoAsk" hidden></div>
+    <div id="photoBox" hidden></div>
   </section>
 
   <section class="screen" id="bus" hidden>
@@ -976,7 +1000,7 @@ function normalize(s){
   s.pets.forEach(p=>{genesOf(p);if(!p.lv)p.lv=zeroPts();if(!p.school)p.school=Object.fromEntries(SUBJECTS.map(k=>[k,{c:0,st:0}]));p.wear=p.wear||{};p.best=p.best||{};p.needs=p.needs||{food:80,energy:80,clean:80,fun:80}});
   if(s.cur>=s.pets.length)s.cur=Math.max(0,s.pets.length-1);
   if(!s.teacher)s.teacher=randGenes();if(s.coins==null)s.coins=0;s.owned=s.owned||[];s.decor=s.decor||{};
-  if(!s.settings)s.settings={sfx:true,music:true,fast:false};
+  if(!s.settings)s.settings={sfx:true,music:true,fast:false};if(s.settings.readAloud==null)s.settings.readAloud=true;
   return s;
 }
 async function cloudInit(){
@@ -1041,6 +1065,7 @@ const sillyName=()=>pick(SYL1)+pick(SYL2);
 /* ---------------- Icons ---------------- */
 const SW='stroke="#121417" stroke-width="3" stroke-linejoin="round"';
 const I={
+ camera:`<svg viewBox="0 0 48 48"><rect x="5" y="14" width="38" height="26" rx="6" fill="#1BBEEE" ${SW}/><path d="M16 14l3-6h10l3 6" fill="#F4D44C" ${SW}/><circle cx="24" cy="27" r="8" fill="#FEFEF6" ${SW}/><circle cx="24" cy="27" r="3.5" fill="#193B95"/><circle cx="36" cy="20" r="2" fill="#FEFEF6"/></svg>`,
  store:`<svg viewBox="0 0 48 48"><path d="M8 20h32v20H8z" fill="#FEFEF6" ${SW}/><path d="M20 40V29h8v11" fill="#9BDAF7" ${SW}/><path d="M6 20l4-11h28l4 11z" fill="#1BBEEE" ${SW}/><path d="M6 20c0 4 6 4 6 0c0 4 6 4 6 0c0 4 6 4 6 0c0 4 6 4 6 0c0 4 6 4 6 0c0 4 6 4 6 0" fill="#E8735A" ${SW}/></svg>`,
  brush:`<svg viewBox="0 0 48 48"><path d="M30 6l12 12-16 16-12-12z" fill="#F4D44C" ${SW}/><path d="M14 22l12 12-4 4c-3 3-7 2-9 1-3-1-7-1-8 1 0-5 1-8 3-10z" fill="#1BBEEE" ${SW}/><path d="M33 9l6 6" stroke="#FEFEF6" stroke-width="3" stroke-linecap="round"/></svg>`,
  suds:`<svg viewBox="0 0 48 48"><circle cx="19" cy="29" r="12" fill="#fff" ${SW}/><circle cx="34" cy="16" r="8" fill="#fff" ${SW}/><circle cx="37" cy="34" r="5" fill="#fff" ${SW}/><path d="M12 25a8 8 0 0 1 6-6" stroke="#B7B2DC" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M30 13a4 4 0 0 1 3-3" stroke="#B7B2DC" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`,
@@ -1716,7 +1741,7 @@ function layoutRoom(){
   const r=room.getBoundingClientRect();L.W=r.width;L.H=r.height;
   L.size=clamp(Math.min(L.W*.56,L.H*.4),130,440);
   const tb=$('#toolbar').getBoundingClientRect().height||100;
-  L.bottom=Math.max(L.H*.09,tb+12);
+  L.bottom=Math.max(L.H*.09,tb+12);room.style.setProperty('--tbh',tb+'px');
   L.minX=L.size*.55;L.maxX=L.W-L.size*.55;
   petEl.style.width=petEl.style.height=L.size+'px';petEl.style.bottom=L.bottom+'px';
   layoutHome();
@@ -1750,7 +1775,7 @@ function tool(t){
 }
 function buildHud(){
   $('#needs').innerHTML=['food','energy','clean','fun'].map(k=>`<div class="need" data-n="${k}" style="--c:${NEED_COLOR[k]}" aria-label="${k}"><span>${I[NEED_ICON[k]]}</span></div>`).join('');
-  $('#gearBtn').innerHTML=I.gear;$('#decoBtn').innerHTML=I.brush;$('#shopIc').innerHTML=I.store;
+  $('#gearBtn').innerHTML=I.gear;$('#decoBtn').innerHTML=I.brush;$('#snapBtn').innerHTML=I.camera;$('#shopIc').innerHTML=I.store;
 }
 let hudT=0;
 function hud(force){
@@ -3396,6 +3421,7 @@ function openSettings(confirming=false){
     <div><h3>Settings</h3><div class="toggles">
       <button class="toggle" data-s="sfx" aria-pressed="${S.settings.sfx}"><span>Sound effects &amp; voice</span><i></i></button>
       <button class="toggle" data-s="music" aria-pressed="${S.settings.music}"><span>Music</span><i></i></button>
+      <button class="toggle" data-s="readAloud" aria-pressed="${S.settings.readAloud!==false}"><span>Read buttons aloud<small>Press and hold any button to hear what it does.</small></span><i></i></button>
       <p class="note" style="text-align:left" id="voiceNote"></p>
       <button class="toggle" data-s="fast" aria-pressed="${!!S.settings.fast}"><span>Fast growth<small>For trying things out. Grows 10× faster.</small></span><i></i></button></div></div>
     <details class="fold"><summary><h3>Secrets found · ${found} of ${SECRETS.length}</h3><span>Show</span></summary><div class="secrets">${SECRETS.map(s=>S.secrets.includes(s[0])?`<div class="secret found">${s[1]}<small>${s[2]}</small></div>`:`<div class="secret">???<small>Keep playing</small></div>`).join('')}</div></details>
@@ -3485,8 +3511,8 @@ const ITEMS=[
 ];
 const ITEM=Object.fromEntries(ITEMS.map(x=>[x.id,x]));
 const WEAR_KINDS=['hat','face','neck','back'];
-const ROOM_KINDS=['furn','wallitem','light','rug','bed','wall','flooring','view','fx','theme'];
-const KIND_NAME={hat:'Hats',face:'Face',neck:'Neck',back:'Back',body:'Outfits',furn:'Furniture',wallitem:'Wall Stuff',light:'Lights',rug:'Rugs',bed:'Beds',wall:'Wallpaper',flooring:'Floors',view:'Windows',fx:'Effects',theme:'Room Sets',food:'Food',toy:'Toys'};
+const ROOM_KINDS=['furn','wallitem','light','rug','bed','wall','flooring','view','fx','theme','place'];
+const KIND_NAME={hat:'Hats',face:'Face',neck:'Neck',back:'Back',body:'Outfits',furn:'Furniture',wallitem:'Wall Stuff',light:'Lights',rug:'Rugs',bed:'Beds',wall:'Wallpaper',flooring:'Floors',view:'Windows',fx:'Effects',theme:'Room Sets',place:'New Rooms',food:'Food',toy:'Toys'};
 const maxLevel=()=>Math.max(1,...S.pets.map(p=>p.level||1));
 const owns=id=>!!(ITEM[id]&&(ITEM[id].def||(S.owned||[]).includes(id)));
 function itemState(it){
@@ -4133,6 +4159,7 @@ function previewItemHTML(it,big){
   if(it.kind==='wall')return `<div class="iswatch" style="background:${WALLS[it.id].replace(/"/g,'&quot;')}"></div>`;
   if(it.kind==='flooring')return `<div class="iswatch" style="background:${FLOORS[it.id].replace(/"/g,'&quot;')}"></div>`;
   if(it.kind==='fx'){const d=FX_DEF[it.id];return `<div class="iswatch fxsw" style="background:linear-gradient(#2CA9D3,#193B95)">${d?[[18,22],[60,14],[36,52],[78,58],[12,70],[52,80]].map(([x,y],k)=>`<i class="${d.cls}" style="left:${x}%;top:${y}%;--z:.8;--h:${k*60}">${d.ch||''}</i>`).join(''):'<b style="color:#FEFEF6;font-size:18px">Off</b>'}</div>`}
+  if(it.kind==='place'){const st=ROOM_START[it.room];const em=st.items.map(i=>ITEM[i[0]]&&ITEM[i[0]].emo).filter(Boolean).slice(0,3);return `<div class="iswatch themesw" style="background:${WALLS[st.wall].replace(/"/g,'&quot;')}"><div class="tfl" style="background:${FLOORS[st.flooring].replace(/"/g,'&quot;')}"></div><div class="tem">${em.map(e=>`<span>${e}</span>`).join('')}</div></div>`}
   if(it.kind==='theme'){const t=it.set;const em=t.items.map(i=>ITEM[i[0]]&&ITEM[i[0]].emo).filter(Boolean).slice(0,3);return `<div class="iswatch themesw" style="background:${WALLS[t.wall].replace(/"/g,'&quot;')}"><div class="tfl" style="background:${FLOORS[t.flooring].replace(/"/g,'&quot;')}"></div><div class="tem">${em.map(e=>`<span>${e}</span>`).join('')}</div></div>`}
   if(it.kind==='rug')return `<div class="iswatch rugsw${it.hex?' hexsw':''}" style="background:${RUGS[it.id].replace(/"/g,'&quot;')}"></div>`;
   if(DECO_SPECIAL[it.id]&&it.kind!=='bed'&&it.id!=='a-shelf'){const ar=it.ar||1,hh=Math.min(64,92/ar);return `<div class="iemo dsp"><div class="deco-prev" style="width:${hh*ar}px;height:${hh}px;font-size:${hh*.92}px">${DECO_SPECIAL[it.id]()}</div></div>`}
@@ -4144,7 +4171,7 @@ function previewItemHTML(it,big){
   if(it.id==='f-plant')return `<div class="iemo">🪴</div>`;
   return `<div class="iemo">${it.emo||''}</div>`;
 }
-const TABS=[['wear','Wear',['hat','face','neck','back','body']],['room','Room',['furn','wallitem','light','rug','bed','wall','flooring','view','fx','theme']],['food','Food',['food']],['toy','Toys',['toy']]];
+const TABS=[['wear','Wear',['hat','face','neck','back','body']],['room','Room',['furn','wallitem','light','rug','bed','wall','flooring','view','fx','theme','place']],['food','Food',['food']],['toy','Toys',['toy']]];
 function renderShop(){
   const p=P();const tab=TABS.find(t=>t[0]===SH.tab);if(!tab[2].includes(SH.kind))SH.kind=tab[2][0];
   $('#shopTabs').innerHTML=TABS.map(t=>`<button class="stab" data-tab="${t[0]}" aria-pressed="${t[0]===SH.tab}">${t[1]}</button>`).join('');
@@ -4166,6 +4193,7 @@ function renderShop(){
       else if(SURF_KINDS.includes(it.kind))btn=used?`<span class="ibtn on">In room</span>`:`<span class="ibtn">Use</span>`;
       else if(PLACE_KINDS.includes(it.kind))btn=`<span class="ibtn${nPl?' on':''}">${nPl?`In room${nPl>1?' ×'+nPl:''} · Add`:'Place it'}</span>`;
       else if(it.kind==='theme')btn=`<span class="ibtn">Use</span>`;
+      else if(it.kind==='place')btn=`<span class="ibtn">Go there</span>`;
       else btn=`<span class="ibtn on">Owned</span>`;
     }else if(s==='game'){const g=GAME[it.game[0]];btn=`<span class="ibtn lock">${g.emo} ${it.game[1]}${g.unit} in ${g.name}</span>`}
     else if(s==='locked')btn=`<span class="ibtn lock">Level ${it.lvl}</span>`;
@@ -4184,7 +4212,7 @@ $('#shopGrid').addEventListener('click',e=>{
   if(s==='game'){SFX.boop();const g=GAME[it.game[0]];toast('star',`Score ${it.game[1]}${g.unit} in ${g.name} to win this!`);return}
   if(s==='buy'){
     if((S.coins||0)<it.price){SFX.boop();anim(b,'a-shake',500);toast('coin',`You need ${it.price-(S.coins||0)} more coins.`);return}
-    S.coins-=it.price;S.owned=S.owned||[];S.owned.push(it.id);if(it.kind==='theme')themeParts(it.set).forEach(id=>{if(!owns(id))S.owned.push(id)});SFX.chime();
+    S.coins-=it.price;S.owned=S.owned||[];S.owned.push(it.id);if(it.kind==='theme')themeParts(it.set).forEach(id=>{if(!owns(id))S.owned.push(id)});if(it.kind==='place')roomParts(it.id).forEach(id=>{if(!owns(id))S.owned.push(id)});SFX.chime();
     const r=b.getBoundingClientRect(),a=appXY(r.left+r.width/2,r.top+r.height/3);sparkles(a.x,a.y,14);say(`You got the ${it.name}!`);
   }
   // owned: equip / use
@@ -4192,6 +4220,7 @@ $('#shopGrid').addEventListener('click',e=>{
   else if(SURF_KINDS.includes(it.kind)){ensureHome()[SURF_KEY[it.kind]]=it.id}
   else if(PLACE_KINDS.includes(it.kind)&&s==='owned'){save();enterDecorate(it.kind,it.id);return}
   else if(it.kind==='theme'&&s==='owned'){save();enterDecorate('theme');askTheme(it.id);return}
+  else if(it.kind==='place'){save();enterRoom();goRoom(it.room);return}
   save();renderShop();
 });
 $('#shopHome').onclick=()=>{audioInit();SFX.pop();enterRoom()};
@@ -4789,11 +4818,14 @@ const FX_DEF={
 
 // ---- state ----
 function ensureHome(){
-  if(S.home&&Array.isArray(S.home.items))return S.home;
-  const d=S.decor||{};
-  S.home={wall:d.wall||'w-dots',flooring:'fl-wood',view:d.view||'v-sunny',fx:'fx-none',nid:10,items:[
-    {u:1,id:d.rug||'r-round',x:.5,d:.55},{u:2,id:d.bed||'b-basket',x:.8,d:.12},{u:3,id:d.art||'a-shelf',x:.7,y:.36},{u:4,id:d.floor||'f-plant',x:.07,d:.92}]};
-  return S.home;
+  if(!S.rooms){
+    let h=S.home&&Array.isArray(S.home.items)?S.home:null;
+    if(!h){const d=S.decor||{};h={wall:d.wall||'w-dots',flooring:'fl-wood',view:d.view||'v-sunny',fx:'fx-none',nid:10,items:[
+      {u:1,id:d.rug||'r-round',x:.5,d:.55},{u:2,id:d.bed||'b-basket',x:.8,d:.12},{u:3,id:d.art||'a-shelf',x:.7,y:.36},{u:4,id:d.floor||'f-plant',x:.07,d:.92}]}}
+    S.rooms={main:h};delete S.home;
+  }
+  if(!S.roomId||!S.rooms[S.roomId])S.roomId='main';
+  return S.rooms[S.roomId];
 }
 const placed=id=>ensureHome().items.filter(i=>i.id===id).length;
 
@@ -4828,7 +4860,7 @@ function renderHome(){
     const el=document.createElement('div');el.className=`deco-i m-${m}${it.glow?' lit':''}${it.float?' floaty':''}${USE_OF[i.id]?' usable':''}`;el.dataset.u=i.u;el.dataset.id=i.id;
     el.innerHTML=`${it.glow?`<b class="glow" style="--gc:${it.glow}"></b>`:''}<div class="di${i.f?' flip':''}">${decoInner(it)}</div>`;
     (m==='wall'||m==='ceil'?wall:flo).appendChild(el)});
-  room.classList.toggle('disco',h.items.some(i=>i.id==='l-disco'));
+  room.classList.toggle('disco',h.items.some(i=>i.id==='l-disco'));room.classList.toggle('outdoor',!!(ROOMS[S.roomId]||{}).outdoor);renderRoomTabs();
   renderFx(h.fx);layoutHome();
 }
 function renderFx(id){
@@ -5055,6 +5087,102 @@ function todTick(dt,force){
   if(wx!==TOD.wx||force){const w=$('#room .window .wx');if(w)w.className='wx'+(wx?' '+wx:'');TOD.wx=wx}
 }
 
+/* ================= MORE ROOMS ================= */
+// Home is free. The Backyard and Upstairs are big goals you buy in the shop, then walk between with the side tabs.
+const ROOMS={main:{name:'Home',emo:'🏠'},yard:{name:'Backyard',emo:'🌳',outdoor:1,need:'p-yard'},up:{name:'Upstairs',emo:'🛏️',need:'p-up'}};
+const ROOM_ORDER=['yard','main','up'];
+const ROOM_START={
+ yard:{wall:'w-yard',flooring:'fl-grass',view:'v-sunny',fx:'fx-none',items:[['f-pine',.1,.25],['f-house',.8,.18],['f-tulips',.32,.85],['f-tulips',.66,.9],['a-kite',.6,.3]]},
+ up:{wall:'w-plain',flooring:'fl-carpet',view:'v-sunny',fx:'fx-none',items:[['r-blue',.5,.55],['b-basket',.8,.12],['f-books',.12,.35],['l-bulb',.5,.12]]},
+};
+[['p-yard','place','Backyard',500,3],['p-up','place','Upstairs',800,5],['w-yard','wall','Sunny Yard',60,3],
+ ['f-house','furn','Gibbi House',120,3,'🏡',.66],['f-tulips','furn','Tulips',20,1,'🌷',.36],['f-pine','furn','Pine Tree',50,2,'🌲',.8],['f-umbrella','furn','Beach Umbrella',45,3,'⛱️',.7],['f-veggie','furn','Veggie Patch',30,2,'🥕',.32]
+].forEach(([id,kind,name,price,lvl,emo,s2])=>{if(ITEM[id])return;const o={id,kind,name,price,lvl,...(emo?{emo}:{}),...(s2?{s:s2}:{})};ITEMS.push(o);ITEM[id]=o});
+ITEM['p-yard'].room='yard';ITEM['p-up'].room='up';
+WALLS['w-yard']=`url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="110"><path d="M8 110V30l12-14 12 14v80zM48 110V30l12-14 12 14v80z" fill="#FEFEF6" stroke="#121417" stroke-width="3"/><path d="M0 60h80M0 90h80" stroke="#121417" stroke-width="3"/><path d="M0 57h80v6H0zM0 87h80v6H0z" fill="#FEFEF6"/></svg>')}") 0 100%/80px 110px repeat-x,radial-gradient(ellipse 60px 22px at 30% 30%,#fff 0 98%,transparent) 0 0/260px 200px,linear-gradient(#1BBEEE,#BBEEEE 80%)`;
+USE.hide.push('f-house');USE_OF['f-house']='hide';
+const roomParts=id=>{const st=ROOM_START[ITEM[id].room];return [st.wall,st.flooring,st.view,st.fx,...st.items.map(i=>i[0])]};
+const ownsRoom=id=>id==='main'||owns(ROOMS[id].need);
+function newRoom(id){
+  const st=ROOM_START[id];let n=10;
+  return {wall:st.wall,flooring:st.flooring,view:st.view,fx:st.fx,nid:30,items:st.items.map(([iid,x,v])=>{n++;const m=mountOf(ITEM[iid]);return m==='wall'||m==='ceil'?{u:n,id:iid,x,y:v}:{u:n,id:iid,x,d:v}})};
+}
+function goRoom(id){
+  if(!ownsRoom(id)){SFX.boop();const it=ITEM[ROOMS[id].need];toast('star',`Get the ${it.name} in the shop!`);return}
+  if(R.state==='sleep'||R.state==='tobed')wake(true);if(R.state==='bath')endBath(false);if(R.state==='use')endUse(true);exitPlay(true);closeTray();
+  S.rooms[id]=S.rooms[id]||newRoom(id);const room=$('#room');room.classList.add('swap');SFX.whoosh?SFX.whoosh():SFX.pop();
+  setTimeout(()=>{S.roomId=id;R.x=id===S._from?R.x:.5;R.tx=R.x;renderHome();renderRoomTabs();save();room.classList.remove('swap');say(ROOMS[id].name)},260);
+}
+function renderRoomTabs(){
+  ensureHome();const i=ROOM_ORDER.indexOf(S.roomId);
+  [['#roomPrev',ROOM_ORDER[i-1]],['#roomNext',ROOM_ORDER[i+1]]].forEach(([q,id])=>{const b=$(q);if(!id){b.hidden=true;return}b.hidden=false;b.dataset.room=id;
+    const own=ownsRoom(id);b.classList.toggle('locked',!own);b.setAttribute('aria-label',`Go to ${ROOMS[id].name}`);b.dataset.say=own?`Go to the ${ROOMS[id].name}`:`The ${ROOMS[id].name} is locked`;
+    b.innerHTML=`<span class="rt-emo">${own?ROOMS[id].emo:'🔒'}</span><small>${ROOMS[id].name}</small>`});
+}
+['#roomPrev','#roomNext'].forEach(q=>$(q).addEventListener('click',e=>{audioInit();goRoom(e.currentTarget.dataset.room)}));
+
+/* ================= PHOTO MODE ================= */
+// Snap your Gibbi in its room, framed in a rounded square, and save it to the camera roll.
+let H2C=null;
+function loadH2C(){if(window.html2canvas)return Promise.resolve();if(H2C)return H2C;
+  H2C=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=ok;s.onerror=()=>{H2C=null;no()};document.head.appendChild(s)});return H2C}
+async function takePhoto(){
+  const room=$('#room');if(room.classList.contains('snap'))return;audioInit();
+  tone(1800,.05,'square',.08);noise(.08,.25,3000);
+  const fl=$('.flash');if(fl)anim(fl,'go',1000);
+  room.classList.add('snap');
+  try{
+    await loadH2C();await (document.fonts&&document.fonts.ready);
+    const scale=Math.min(2,window.devicePixelRatio||1);
+    const shot=await html2canvas(room,{backgroundColor:'#2CA9D3',scale,logging:false,useCORS:true,ignoreElements:el=>el.id==='fx'||el.classList&&(el.classList.contains('toolbar')||el.classList.contains('hud')||el.classList.contains('room-tab'))});
+    room.classList.remove('snap');
+    const p=P();const pad=Math.round(shot.width*.06),cap=Math.round(shot.width*.13);
+    const c=document.createElement('canvas');c.width=shot.width+pad*2;c.height=shot.height+pad*2+cap;const x=c.getContext('2d');
+    x.fillStyle='#FEFEF6';x.fillRect(0,0,c.width,c.height);
+    x.save();rrect(x,pad,pad,shot.width,shot.height,shot.width*.07);x.clip();x.drawImage(shot,pad,pad);x.restore();
+    x.lineWidth=Math.max(3,shot.width*.008);x.strokeStyle='#121417';rrect(x,pad,pad,shot.width,shot.height,shot.width*.07);x.stroke();
+    x.fillStyle='#121417';x.textAlign='left';x.font=`${Math.round(cap*.42)}px Caprasimo,Georgia,serif`;x.fillText(p.name,pad,c.height-cap*.42);
+    x.textAlign='right';x.font=`700 ${Math.round(cap*.22)}px Outfit,system-ui,sans-serif`;x.fillStyle='#5A6670';
+    x.fillText(`Level ${p.level} · ${new Date().toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}`,c.width-pad,c.height-cap*.44);
+    x.fillText('Gibbi Games',c.width-pad,c.height-cap*.16);
+    showPhoto(c);
+  }catch(e){room.classList.remove('snap');SFX.boop();toast('star','The camera needs the internet the first time. Try again online.')}
+}
+function showPhoto(c){
+  const box=$('#photoBox');const url=c.toDataURL('image/png');box.hidden=false;
+  box.innerHTML=`<div class="photo-card"><img alt="Photo of ${esc(P().name)}" src="${url}"><div class="fam-btns"><button class="fam-b" id="phSave">Save photo</button><button class="fam-b alt" id="phClose">Done</button></div></div>`;
+  $('#phClose').onclick=()=>{SFX.tap();box.hidden=true;box.innerHTML=''};
+  $('#phSave').onclick=()=>{SFX.pop();c.toBlob(async b=>{const name=`${P().name}-gibbi.png`;const f=new File([b],name,{type:'image/png'});
+    try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:P().name});return}}catch(e){if(e&&e.name==='AbortError')return}
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000)},'image/png')};
+  say(`Say cheese, ${P().name}!`);
+}
+$('#snapBtn').addEventListener('click',()=>{if(scene!=='room'||DECO.on)return;takePhoto()});
+
+/* ================= READ-ALOUD BUTTONS ================= */
+// Press and hold any button and the narrator says what it does. Letting go after it speaks doesn't press it.
+const SAY_TOOL={food:'Feed your Gibbi',bath:'Bath time',bed:'Bedtime',toys:'Play with toys',play:'Games',school:'Go to school'};
+const SAY_ID={coinBtn:'The shop',decoBtn:'Decorate your room',nestBtn:'Your nest of Gibbis',gearBtn:'Grown-up stuff',snapBtn:'Take a photo',
+  shopHome:'Go home',nestHome:'Go home',arcadeHome:'Go home',gameHome:'Go home',schoolHome:'Go home',busSkip:'Skip the bus ride',dpDone:'All done decorating'};
+const RA={t:null,b:null,x:0,y:0,spoke:null};
+function labelOf(b){
+  if(b.dataset.say)return b.dataset.say;if(b.dataset.t&&SAY_TOOL[b.dataset.t])return SAY_TOOL[b.dataset.t];if(SAY_ID[b.id])return SAY_ID[b.id];
+  if(b.dataset.g&&GAME[b.dataset.g])return GAME[b.dataset.g].name+'. '+GAME[b.dataset.g].how;
+  if(b.dataset.item&&ITEM[b.dataset.item]){const it=ITEM[b.dataset.item];const st=itemState(it);return it.name+(st==='buy'?`. ${it.price} coins`:st==='locked'?`. Unlocks at level ${it.lvl}`:'')}
+  if(b.dataset.place&&ITEM[b.dataset.place])return ITEM[b.dataset.place].name;if(b.dataset.surf&&ITEM[b.dataset.surf])return ITEM[b.dataset.surf].name;
+  const t=(b.getAttribute('aria-label')||b.textContent||'').replace(/\s+/g,' ').trim();return t.length>1&&t.length<120?t:'';
+}
+document.addEventListener('pointerdown',e=>{
+  clearTimeout(RA.t);RA.spoke=null;if(!S||!S.settings||S.settings.readAloud===false)return;
+  const b=e.target.closest('button');if(!b||b.closest('#tray')||b.closest('.deco-i')||b.closest('#memGrid')||b.id==='eggBtn')return;
+  RA.b=b;RA.x=e.clientX;RA.y=e.clientY;
+  RA.t=setTimeout(()=>{const t=labelOf(b);if(!t)return;RA.spoke=b;anim(b,'ra-ping',600);const was=S.settings.sfx;S.settings.sfx=true;say(t);S.settings.sfx=was},520);
+},true);
+document.addEventListener('pointermove',e=>{if(RA.t&&Math.hypot(e.clientX-RA.x,e.clientY-RA.y)>12)clearTimeout(RA.t)},true);
+document.addEventListener('pointerup',()=>clearTimeout(RA.t),true);document.addEventListener('pointercancel',()=>clearTimeout(RA.t),true);
+document.addEventListener('click',e=>{if(RA.spoke&&e.target.closest('button')===RA.spoke){e.preventDefault();e.stopPropagation()}RA.spoke=null},true);
+document.addEventListener('contextmenu',e=>{if(e.target.closest('button'))e.preventDefault()});
+
 function start(data){
   S=normalize(migrate(data&&data.S)||migrate(load()));
   if(data&&data.S)CLOUD.state=data.cloud||'checking';
@@ -5072,7 +5200,7 @@ start({});
 
 <script>
 /* Auto-update: home-screen apps resume instead of reloading, so check for a newer build when the app comes back. */
-(function(){const B='v1793136865';
+(function(){const B='v1793137232';
 function keep(){try{window.__gibbiSave&&window.__gibbiSave()}catch(e){}}
 async function chk(){try{const r=await fetch('../version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
 if(j.v&&j.v!==B&&sessionStorage.getItem('gibbiReloaded')!==j.v){sessionStorage.setItem('gibbiReloaded',j.v);keep();location.reload()}}catch(e){}}
