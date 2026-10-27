@@ -13,7 +13,7 @@ head = f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content="Hatch a Gibbi, raise it, play games together and dress it up. A Gibbi Games original.">
 <meta name="theme-color" content="#2B2140">

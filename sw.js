@@ -1,6 +1,6 @@
 // Offline support: pages load from the network when possible (so updates arrive right away)
 // and fall back to the saved copy when there's no connection.
-const VERSION='v1793128164';
+const VERSION='v1793129290';
 const CACHE='gibbi-'+VERSION;
 const CORE=['./','./index.html','./gibbis/','./gibbis/index.html','./manifest.webmanifest','./gibbis/manifest.webmanifest','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
