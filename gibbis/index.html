@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Gibbis</title>
 <meta name="description" content="Hatch a Gibbi, raise it, play games together and dress it up. A Gibbi Games original.">
-<meta name="theme-color" content="#2B2140">
+<meta name="theme-color" content="#1BBEEE">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -4415,5 +4415,15 @@ start({});
 })();
 </script>
 
+<script>
+/* Auto-update: home-screen apps resume instead of reloading, so check for a newer build when the app comes back. */
+(function(){const B='v1793129480';
+function keep(){try{typeof save==='function'&&save()}catch(e){}}
+async function chk(){try{const r=await fetch('../version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
+if(j.v&&j.v!==B&&sessionStorage.getItem('gibbiReloaded')!==j.v){sessionStorage.setItem('gibbiReloaded',j.v);keep();location.reload()}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk();else keep()});
+addEventListener('pagehide',keep);addEventListener('pageshow',e=>{if(e.persisted)chk()});setTimeout(chk,1200);
+})();
+</script>
 </body>
 </html>
