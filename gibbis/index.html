@@ -475,7 +475,7 @@ svg{display:block}
 /* ---------- Game ---------- */
 #game{background:#121417;touch-action:none}
 #gc{position:absolute;inset:0;display:block}
-.ghud{z-index:5;align-items:center}
+.ghud{z-index:9;align-items:center}
 .gmid{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;pointer-events:none;color:var(--ink)}
 .gmid small{font-size:14px;font-weight:800;opacity:.7}
 .gmid b{font-size:clamp(30px,8vw,46px);font-weight:900;line-height:1;color:var(--paper);-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill;font-variant-numeric:tabular-nums}
@@ -816,6 +816,55 @@ svg{display:block}
 .ra-ping{animation:raping .6s}
 @keyframes raping{0%{box-shadow:0 0 0 0 rgba(244,212,76,.9)}100%{box-shadow:0 0 0 18px rgba(244,212,76,0)}}
 
+
+/* ---------- sharing pack ---------- */
+#shareBox{position:absolute;inset:0;z-index:45;background:rgba(18,20,23,.5);display:grid;place-items:center;padding:16px;overflow:auto}
+.share-card{background:var(--paper);border-radius:28px;padding:16px;width:min(100%,460px);max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 0 var(--ink);animation:bannerin .3s cubic-bezier(.3,1.5,.5,1)}
+.share-card.still{animation:none}
+.share-card h3{margin:4px 0 0;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#5A6670}
+.sh-head{display:flex;align-items:center;justify-content:space-between}
+.sh-head b{font-family:var(--title);font-weight:400;font-size:26px}
+.sh-pet{display:flex;align-items:center;gap:8px}
+.sh-pet.big{flex-direction:column}
+.sh-mini{width:110px;height:110px;flex:none}
+.sh-pet.big .sh-mini{width:170px;height:170px}
+.sh-mini svg{width:100%;height:100%;overflow:visible}
+.sh-bub{background:#fff;border:3px solid var(--ink);border-radius:20px;padding:8px 14px;font-size:18px;position:relative}
+.sh-chips{display:flex;gap:6px;flex-wrap:wrap}
+.sh-chips .chip2[aria-pressed="true"],.sh-k[aria-pressed="true"]{background:var(--sun);border-color:var(--ink)}
+.sh-kinds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sh-k{border:2px solid rgba(18,20,23,.25);background:rgba(255,244,222,.5);border-radius:18px;padding:8px 4px;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.sh-k span{font-size:28px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.sh-k:disabled{opacity:.4}
+.sh-pick{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 6px;touch-action:pan-x}
+.sh-item{flex:none;width:92px;border:2px solid rgba(18,20,23,.2);border-radius:16px;background:#fff;padding:5px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.sh-item.on{border:3px solid var(--ink);background:#FBF3C8}
+.sh-item small{font-size:12px;line-height:1.1;text-align:center}
+.sh-item .ipet,.sh-item .iemo,.sh-item .iswatch{border-radius:10px}
+.sh-item .iemo{font-size:34px}
+.sh-note{text-align:left;margin:0}
+.sh-send{align-self:center;margin-top:4px}
+.got-title{font-family:var(--title);font-weight:400;font-size:26px;text-align:center;line-height:1.1}
+.got-name{margin:0;text-align:center;font-size:18px}
+.got-gift{display:flex;align-items:center;gap:12px;background:rgba(244,212,76,.25);border-radius:18px;padding:10px}
+.got-gift>.ipet,.got-gift>.iemo,.got-gift>.iswatch{width:90px;flex:none;border-radius:12px}
+.got-gift>div{display:flex;flex-direction:column;gap:6px;flex:1}
+.fr-acts{display:grid;gap:8px}
+.ntabs{position:absolute;top:80px;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:1fr 1fr;gap:6px;background:rgba(255,244,222,.35);padding:5px;border-radius:999px;z-index:2;width:min(92%,360px)}
+#nest .nest-scroll{top:136px}
+.ncard.send{background:var(--sun)}
+.chal{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-style:normal;font-size:12px;border-radius:999px;padding:3px 10px;white-space:nowrap;max-width:96%;overflow:hidden;text-overflow:ellipsis}
+.chal.won{background:#3D6B2F}
+.gcard{position:relative}
+.visitor{position:absolute;left:0;z-index:3;pointer-events:auto;cursor:pointer}
+.visitor .pet-anim,.visitor .pet-flip{width:100%;height:100%;transform-origin:50% 100%}
+.visitor .pet-flip{transition:transform .35s}
+.visitor svg{width:100%;height:100%;overflow:visible;animation:breathe 2.6s ease-in-out infinite;transform-origin:50% 92%}
+.visitor.walking .pet-anim{animation:bob .38s ease-in-out infinite}
+.v-tag{position:absolute;left:50%;top:22%;transform:translateX(-50%);background:var(--paper);border-radius:999px;padding:2px 10px;font-size:13px;white-space:nowrap;box-shadow:0 2px 0 rgba(18,20,23,.25);z-index:2}
+#room.decorating .visitor{opacity:.4;pointer-events:none}
+.photo-card img{-webkit-touch-callout:default;-webkit-user-select:auto;user-select:auto}
+
 /* ---------- Color themes (picked in Grown-up stuff) ---------- */
 :root,:root[data-theme=bee]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.55) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#1BBEEE 0%, #6FD3F2 55%, #BBEEEE 100%);--th-title-ink:#121417;--th-spark:#F4D44C;--th-shop:linear-gradient(#193B95,#2CA9D3);--th-shop-ink:#FEFEF6;--th-nest:linear-gradient(#BBEEEE,#9BDAF7);--th-nest-ink:#121417;--th-arcade:linear-gradient(#2CA9D3,#1BBEEE);--th-arcade-ink:#121417}
 :root[data-theme=honey]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.6) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#F4D44C 0%, #F8E58C 55%, #FEFEF6 100%);--th-title-ink:#121417;--th-spark:#1BBEEE;--th-shop:linear-gradient(#E7C146,#F4D44C);--th-shop-ink:#121417;--th-nest:linear-gradient(#FEFEF6,#F8E58C);--th-nest-ink:#121417;--th-arcade:linear-gradient(#4A2410,#7B3F1E);--th-arcade-ink:#FEFEF6}
@@ -926,6 +975,7 @@ input,textarea,select{font-size:max(16px,1em)}
       <h2 class="nest-title">Nest</h2>
       <div style="width:52px"></div>
     </header>
+    <div class="ntabs" id="nestTabs"><button class="stab" data-nt="mine" aria-pressed="true">My Gibbis</button><button class="stab" data-nt="friends" aria-pressed="false">Friends</button></div>
     <div class="nest-scroll pad"><div class="nest-grid" id="nestGrid"></div></div>
   </section>
 
@@ -947,6 +997,7 @@ input,textarea,select{font-size:max(16px,1em)}
     <div class="shop-wrap pad"><div class="stabs" id="shopTabs"></div><div class="skinds" id="shopKinds"></div><div class="skinds styles" id="shopStyles"></div><div class="shop-stage" id="shopStage"></div><div class="shop-grid" id="shopGrid"></div></div>
   </section>
 
+  <div id="shareBox" hidden></div>
   <div id="fx"></div>
   <div class="flash" id="flash"></div>
   <div class="sheet" id="sheet" hidden></div>
@@ -1699,7 +1750,8 @@ function hatch(){
   for(let i=0;i<8;i++){const ang=Math.random()*Math.PI*2;spawn('',a.x,a.y,'shell',1000,{dx:Math.cos(ang)*rand(80,180),dy:Math.sin(ang)*rand(60,160)-40})}
   sparkles(a.x,a.y,14);
   if(S.eggs>0)S.eggs--;
-  S.pets.push(makePet());S.cur=S.pets.length-1;save();
+  const bb=S.babies&&S.babies.length?S.babies.shift():null;const np=makePet();if(bb){np.genes=bb.g;np.hue=bb.g.h;np.revOrder=revealOrder(np.genes);np.parents=[bb.a,bb.b];setTimeout(()=>toast('star',`A baby of ${bb.a} and ${bb.b}!`),1400)}
+  S.pets.push(np);S.cur=S.pets.length-1;save();
   const hp=$('#hatchPet');hp.innerHTML=scaled(P(),'happy',.62);hp.hidden=false;hp.classList.remove('pop');void hp.offsetWidth;hp.classList.add('pop');
   setTimeout(()=>{SFX.giggle();showNamer()},900);
 }
@@ -1735,7 +1787,7 @@ function enterRoom(){
   petAnim.className='pet-anim';
   room.classList.remove('is-night','is-bath');$('#sponge').hidden=true;closeTray();
   exitPlay(true);if(R.toy&&R.toy.el)R.toy.el.remove();R.toy=null;R.skate=false;R.toyGo=false;
-  buildToolbar();buildHud();applyDecor();layoutRoom();todTick(0,true);hud(true);R.key='';greetBack();
+  buildToolbar();buildHud();applyDecor();layoutRoom();todTick(0,true);hud(true);showVisitor();setTimeout(checkShareLink,700);R.key='';greetBack();
 }
 function layoutRoom(){
   const r=room.getBoundingClientRect();L.W=r.width;L.H=r.height;
@@ -2022,7 +2074,7 @@ function urgentNeed(){
 function roomTick(dt){
   const p=P();R.idleT+=dt;
   if(R.play)playTick(dt);R.mv=(R.mv||0)-dt;if(room.scrollLeft||room.scrollTop){room.scrollLeft=0;room.scrollTop=0}
-  todTick(dt);
+  todTick(dt);visitTick(dt);
   if(R.state==='use')useTick(dt);
   if(R.state==='idle'){
     R.useT=(R.useT==null?14:R.useT)-dt;if(R.useT<=0){R.useT=rand(22,38);autoUse()}
@@ -3265,7 +3317,7 @@ function enterSchool(){
 function buildDesks(){
   const d=$('#desks');d.innerHTML='';SC.seats=[];
   const teacher={genes:S.teacher||(S.teacher=randGenes()),level:10,marks:['math','math','math','english','english','science','history','history','sweet'],rev:null,sick:false};
-  const mates=S.pets.filter((_,i)=>i!==S.cur).slice(0,3);while(mates.length<3)mates.push(fakePet(ri(2,6)));
+  const mates=S.pets.filter((_,i)=>i!==S.cur).slice(0,3);shuffle((S.friends||[]).slice()).forEach(f=>{if(mates.length<3)mates.push(fromMini(f.pet))});while(mates.length<3)mates.push(fakePet(ri(2,6)));
   const order=[{p:teacher,cls:'teach'},{p:mates[0]},{p:P(),cls:'me'},{p:mates[1]},{p:mates[2]}];
   if(window.innerWidth<480)order.splice(3,2);
   const dw=d.clientWidth-24,dh=d.clientHeight;
@@ -3387,14 +3439,19 @@ function enterNest(){
   show('nest');$('#nestHome').innerHTML=I.home;renderNest();
 }
 function renderNest(){
+  $$('#nestTabs [data-nt]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.nt===NEST_TAB));
+  if(NEST_TAB==='friends'){renderFriends();return}
   const g=$('#nestGrid');let h='';
-  for(let i=0;i<S.eggs;i++)h+=`<button class="ncard" data-egg="1"><div class="mini" style="align-items:center"><div class="egg">${eggSVG((i*97+40)%360)}</div></div><b>New egg</b><small>Tap to hatch</small></button>`;
+  const nb=(S.babies||[]).length;for(let i=0;i<S.eggs;i++)h+=`<button class="ncard" data-egg="1"><div class="mini" style="align-items:center"><div class="egg">${eggSVG(i<nb?(S.babies[i].g.h):(i*97+40)%360)}</div></div><b>${i<nb?'Baby egg':'New egg'}</b><small>${i<nb?`${esc(S.babies[i].a)} + ${esc(S.babies[i].b)}`:'Tap to hatch'}</small></button>`;
   S.pets.forEach((p,i)=>{h+=`<button class="ncard${i===S.cur?' cur':''}" data-pet="${i}"><div class="mini">${scaled(p,i===S.cur?'happy':'ok',.5+.5*(p.level-1)/9)}</div><b>${esc(p.name||'???')}</b><small>Level ${p.level}${p.sick?' · sick':''}</small></button>`});
   h+=`<div class="ncard meter"><div class="mini" style="align-items:center;justify-content:center;opacity:.5"><div style="width:46%">${I.egg}</div></div><b>Next egg</b><div class="mbar"><i style="width:${Math.round(S.eggMeter)}%"></i></div><small>Care, play and learn to fill it</small></div>`;
   g.innerHTML=h;
 }
+$('#nestTabs').addEventListener('click',e=>{const b=e.target.closest('[data-nt]');if(!b)return;SFX.tap();NEST_TAB=b.dataset.nt;renderNest()});
 $('#nestGrid').addEventListener('click',e=>{
   audioInit();
+  if(e.target.closest('#frSend')){SFX.pop();openShare();return}
+  const fr=e.target.closest('[data-fr]');if(fr){SFX.pop();friendSheet(S.friends[+fr.dataset.fr]);return}
   const eg=e.target.closest('[data-egg]');if(eg){SFX.pop();startHatch();return}
   const pc=e.target.closest('[data-pet]');if(pc){SFX.pop();S.cur=+pc.dataset.pet;save();R.key='';enterRoom();setTimeout(()=>babble(P(),'happy',3),250)}
 });
@@ -3602,6 +3659,7 @@ function textParts(ctx,dt){for(let i=PARTS.length-1;i>=0;i--){const p=PARTS[i];i
 function gCoin(n=1){GM.coins+=n;tone(1320,.08,'square',.06);tone(1760,.1,'square',.05,null,.06)}
 function gScore(v){
   GM.score=v;
+  {const ch=(S.challenges||{})[GM.id];if(ch&&!ch.won&&v>ch.score){ch.won=true;save();toast('star',`You beat ${ch.name}'s ${ch.score}!`);SFX.level()}}
   const p=P();const id=GM.id;
   for(const it of gameUnlocks(id)){if(v>=it.game[1]&&!owns(it.id)&&!GM.gotThisRun.has(it.id)){GM.gotThisRun.add(it.id);S.owned=S.owned||[];S.owned.push(it.id);GM.newUnlocks.push(it.id);toast('star',`Unlocked: ${it.name}!`);SFX.level();save()}}
 }
@@ -3999,7 +4057,8 @@ function nextGoal(p,id){const it=gameUnlocks(id).find(x=>!owns(x.id));return it}
 function renderArcade(){
   const p=P();
   $('#arcadeGrid').innerHTML=GAMES.map(g=>{const b=bestOf(p,g.id);const goal=nextGoal(p,g.id);const prog=goal?clamp(b/goal.game[1],0,1):1;
-   return `<button class="gcard" data-g="${g.id}"><span class="gemo">${g.emo}</span><b>${g.name}</b><small>Best: ${b}${g.unit}</small>${goal?`<div class="gprog"><i style="width:${Math.round(prog*100)}%"></i></div><div class="gprize"><span class="pv">${previewItemHTML(goal)}</span><small>Score ${goal.game[1]}${g.unit}<br>win ${esc(goal.name)}</small></div>`:`<small class="ggoal">All prizes won!</small>`}</button>`}).join('');
+   const ch=(S.challenges||{})[g.id];
+   return `<button class="gcard" data-g="${g.id}">${ch?`<i class="chal${ch.won?' won':''}">${ch.won?`Beat ${esc(ch.name)}!`:`Beat ${esc(ch.name)}'s ${ch.score}${g.unit}`}</i>`:''}<span class="gemo">${g.emo}</span><b>${g.name}</b><small>Best: ${b}${g.unit}</small>${goal?`<div class="gprog"><i style="width:${Math.round(prog*100)}%"></i></div><div class="gprize"><span class="pv">${previewItemHTML(goal)}</span><small>Score ${goal.game[1]}${g.unit}<br>win ${esc(goal.name)}</small></div>`:`<small class="ggoal">All prizes won!</small>`}</button>`}).join('');
   $$('.coin-count').forEach(el=>el.textContent=S.coins||0);
 }
 $('#arcadeGrid').addEventListener('click',e=>{const c=e.target.closest('[data-g]');if(!c)return;audioInit();SFX.pop();startGame(c.dataset.g)});
@@ -4039,8 +4098,8 @@ function gameOver(quit){
    <span class="ocoins">${COIN_SVG}+${earned} coins</span>
    ${GM.newUnlocks.map(u=>`<span class="ounlock">Unlocked: ${esc(ITEM[u].name)}! Wear it from the shop.</span>`).join('')}
    ${goal?`<div class="gprog"><i style="width:${Math.round(clamp(Math.max(prev,GM.score)/goal.game[1],0,1)*100)}%"></i></div><small>Score ${goal.game[1]}${g.unit} to win ${esc(goal.name)}</small>`:''}
-   <div class="obtns"><button class="obtn alt" id="oArcade">Games</button><button class="obtn" id="oAgain">Play again</button></div></div>`;
-  $('#oAgain').onclick=()=>{SFX.pop();startGame(id)};$('#oArcade').onclick=()=>{SFX.pop();enterArcade()};
+   <div class="obtns"><button class="obtn alt" id="oArcade">Games</button><button class="obtn" id="oAgain">Play again</button></div>${Math.max(prev,GM.score)>0?`<button class="link-btn" id="oChal">🏆 Challenge a friend</button>`:''}</div>`;
+  $('#oAgain').onclick=()=>{SFX.pop();startGame(id)};if($('#oChal'))$('#oChal').onclick=()=>{SFX.pop();openShare({kind:'challenge',game:id})};$('#oArcade').onclick=()=>{SFX.pop();enterArcade()};
   if(isBest&&GM.score>0){SFX.chime();sparkles(GM.W/2,GM.H*.35,20);say(`New best! ${GM.score}${g.unit==='m'?' meters':''}!`)}
   else if(!quit)say(pick(['Nice try!','Good game!','So close!','Play again?']));
   setTimeout(()=>babble(p,isBest?'happy':'ask',3),600);
@@ -5150,7 +5209,7 @@ async function takePhoto(){
 }
 function showPhoto(c){
   const box=$('#photoBox');const url=c.toDataURL('image/png');box.hidden=false;
-  box.innerHTML=`<div class="photo-card"><img alt="Photo of ${esc(P().name)}" src="${url}"><div class="fam-btns"><button class="fam-b" id="phSave">Save photo</button><button class="fam-b alt" id="phClose">Done</button></div></div>`;
+  box.innerHTML=`<div class="photo-card"><img alt="Photo of ${esc(P().name)}" src="${url}"><div class="fam-btns"><button class="fam-b" id="phSave">Save photo</button><button class="fam-b alt" id="phClose">Done</button></div><p class="note" style="margin:0 auto">Or press and hold the picture to save it.</p></div>`;
   $('#phClose').onclick=()=>{SFX.tap();box.hidden=true;box.innerHTML=''};
   $('#phSave').onclick=()=>{SFX.pop();c.toBlob(async b=>{const name=`${P().name}-gibbi.png`;const f=new File([b],name,{type:'image/png'});
     try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:P().name});return}}catch(e){if(e&&e.name==='AbortError')return}
@@ -5183,6 +5242,166 @@ document.addEventListener('pointerup',()=>clearTimeout(RA.t),true);document.addE
 document.addEventListener('click',e=>{if(RA.spoke&&e.target.closest('button')===RA.spoke){e.preventDefault();e.stopPropagation()}RA.spoke=null},true);
 document.addEventListener('contextmenu',e=>{if(e.target.closest('button'))e.preventDefault()});
 
+const CLOSE_SVG='<svg viewBox="0 0 48 48"><path d="M12 12l24 24M36 12L12 36" stroke="#121417" stroke-width="6" stroke-linecap="round"/></svg>';
+/* ================= SHARING PACK ================= */
+// Everything travels inside a link: no accounts, no server, no typing. Messages are picked from a kid-safe list.
+const MSGS=[['👋','Hi friend!'],['⭐','You are awesome!'],['🎈',"Let's play!"],['💛','Miss you!'],['🙏','Thank you!'],['🎂','Happy birthday!'],['☀️','Good morning!'],['🌙','Sweet dreams!'],['👀','Look at my Gibbi!'],['✋','High five!']];
+const SHARE={pending:null};
+const myFid=()=>S.fid||(S.fid=Math.random().toString(36).slice(2,10));
+function miniPet(p){return {n:p.name,g:genesOf(p),L:p.level,m:p.marks||[],w:p.wear||{},r:p.rev||null,id:p.id}}
+function fromMini(m){return {name:m.n,genes:m.g,level:m.L||1,marks:m.m||[],wear:m.w||{},rev:m.r||null,id:m.id,sick:false}}
+async function packObj(o){const bytes=new TextEncoder().encode(JSON.stringify(o));
+  try{if(window.CompressionStream){const cs=new CompressionStream('deflate-raw');const w=cs.writable.getWriter();w.write(bytes);w.close();return 'B1'+b64u(new Uint8Array(await new Response(cs.readable).arrayBuffer()))}}catch(e){}
+  return 'B0'+b64u(bytes)}
+async function unpackObj(code){const kind=code.slice(0,2),body=unb64u(code.slice(2));let bytes=body;
+  if(kind==='B1'){const ds=new DecompressionStream('deflate-raw');const w=ds.writable.getWriter();w.write(body);w.close();bytes=new Uint8Array(await new Response(ds.readable).arrayBuffer())}else if(kind!=='B0')throw new Error('bad');
+  return JSON.parse(new TextDecoder().decode(bytes))}
+const shareBase=()=>ON_SITE?location.origin+location.pathname:SITE_URL;
+// friends
+function addFriend(o){
+  S.friends=S.friends||[];const key=o.f+'|'+o.p.id;let f=S.friends.find(x=>x.key===key);
+  if(f){f.pet=o.p;f.name=o.p.n;f.seen=Date.now()}else{f={key,fid:o.f,name:o.p.n,pet:o.p,added:Date.now(),seen:Date.now()};S.friends.unshift(f);S.friends=S.friends.slice(0,60)}
+  return f;
+}
+function giftable(){return ITEMS.filter(it=>owns(it.id)&&!it.def&&!['food','theme','place'].includes(it.kind))}
+
+// ---- send ----
+function openShare(opt={}){
+  const p=P();const box=$('#shareBox');box.hidden=false;const st={kind:opt.kind||'card',msg:0,gift:opt.gift||null,game:opt.game||null};
+  const games=GAMES.filter(g=>bestOf(p,g.id)>0);
+  let drawn=0;const draw=()=>{
+    const gifts=giftable();const sc=box.querySelector('.share-card');const top=sc?sc.scrollTop:0;
+    box.innerHTML=`<div class="share-card${drawn++?' still':''}" role="dialog" aria-label="Send to a friend">
+      <div class="sh-head"><b>Send to a friend</b><button class="icon-btn" id="shClose" aria-label="Close">${CLOSE_SVG}</button></div>
+      <div class="sh-pet"><div class="sh-mini">${scaled(p,'happy',.8)}</div><div class="sh-bub">${MSGS[st.msg][0]} ${esc(MSGS[st.msg][1])}</div></div>
+      <h3>Pick a message</h3><div class="sh-chips">${MSGS.map(([e,t],i)=>`<button class="chip2" data-msg="${i}" aria-pressed="${i===st.msg}">${e} ${esc(t)}</button>`).join('')}</div>
+      <h3>Send along</h3><div class="sh-kinds">
+        <button class="sh-k" data-k="card" aria-pressed="${st.kind==='card'}"><span>💌</span>Just ${esc(p.name)}</button>
+        <button class="sh-k" data-k="gift" aria-pressed="${st.kind==='gift'}"${gifts.length?'':' disabled'}><span>🎁</span>A gift</button>
+        <button class="sh-k" data-k="challenge" aria-pressed="${st.kind==='challenge'}"${games.length?'':' disabled'}><span>🏆</span>A challenge</button></div>
+      ${st.kind==='gift'?`<div class="sh-pick">${gifts.map(it=>`<button class="sh-item${st.gift===it.id?' on':''}" data-gift="${it.id}">${previewItemHTML(it)}<small>${esc(it.name)}</small></button>`).join('')}</div><p class="note sh-note">Your friend gets their own copy. You keep yours.</p>`:''}
+      ${st.kind==='challenge'?`<div class="sh-pick">${games.map(g=>`<button class="sh-item${st.game===g.id?' on':''}" data-game="${g.id}"><span class="gemo" style="font-size:34px">${g.emo}</span><small>${g.name}: ${bestOf(p,g.id)}${g.unit}</small></button>`).join('')}</div>`:''}
+      <button class="big-play sh-send" id="shSend">Send</button>
+      <div id="shOut"></div></div>`;
+    box.querySelector('.share-card').scrollTop=top;
+  };
+  draw();
+  box.onclick=async e=>{
+    const t=e.target;if(t===box||t.closest('#shClose')){SFX.tap();box.hidden=true;box.innerHTML='';return}
+    const m=t.closest('[data-msg]');if(m){st.msg=+m.dataset.msg;SFX.tap();draw();return}
+    const k=t.closest('[data-k]');if(k&&!k.disabled){st.kind=k.dataset.k;SFX.tap();draw();return}
+    const g=t.closest('[data-gift]');if(g){st.gift=g.dataset.gift;SFX.tap();draw();return}
+    const gm=t.closest('[data-game]');if(gm){st.game=gm.dataset.game;SFX.tap();draw();return}
+    if(t.closest('#shSend')){
+      if(st.kind==='gift'&&!st.gift){SFX.boop();toast('star','Pick a gift first.');return}
+      if(st.kind==='challenge'&&!st.game){SFX.boop();toast('star','Pick a game first.');return}
+      const o={v:1,f:myFid(),p:miniPet(p),m:st.msg,id:Math.random().toString(36).slice(2,10)};
+      if(st.kind==='gift')o.g=st.gift;if(st.kind==='challenge')o.c=[st.game,bestOf(p,st.game)];
+      const url=shareBase()+'#gb='+(await packObj(o));save();
+      const text=`${p.name} says "${MSGS[st.msg][1]}"${o.g?` and sent you a ${ITEM[o.g].name}!`:o.c?` Can you beat ${o.c[1]}${GAME[o.c[0]].unit} in ${GAME[o.c[0]].name}?`:''}`;
+      SFX.chime();
+      try{if(navigator.share){await navigator.share({title:'Gibbi Games',text,url});box.hidden=true;box.innerHTML='';toast('star','Sent!');return}}catch(err){if(err&&err.name==='AbortError')return}
+      $('#shOut').innerHTML=`<textarea class="fam-code" readonly>${esc(url)}</textarea><button class="fam-b" id="shCopy">Copy link</button>`;
+      $('#shCopy').onclick=async()=>{try{await navigator.clipboard.writeText(url);toast('star','Link copied! Paste it in a message.')}catch(err){$('#shOut textarea').select()}};
+    }
+  };
+}
+
+// ---- receive ----
+function readShareHash(){const m=location.hash.match(/[#&]gb=([A-Za-z0-9_-]+)/);if(!m)return;SHARE.pending=m[1];try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+readShareHash();
+window.addEventListener('hashchange',()=>{readShareHash();if(SHARE.pending&&scene==='room')checkShareLink()});
+async function checkShareLink(){
+  if(!SHARE.pending||!S||!S.pets||!S.pets.length)return;const code=SHARE.pending;SHARE.pending=null;
+  let o;try{o=await unpackObj(code)}catch(e){toast('star',"That friend link didn't work.");return}
+  if(!o||!o.p||!o.f)return;
+  const mine=o.f===myFid();const fp=fromMini(o.p);const msg=MSGS[o.m]||MSGS[0];
+  if(!mine)addFriend(o);save();
+  const box=$('#shareBox');box.hidden=false;S.redeemed=S.redeemed||[];
+  const already=S.redeemed.includes(o.id);
+  box.innerHTML=`<div class="share-card got" role="dialog" aria-label="From a friend">
+    <b class="got-title">${mine?'This is your own link!':'A friend sent you something!'}</b>
+    <div class="sh-pet big"><div class="sh-mini">${scaled(fp,'happy',.9)}</div><div class="sh-bub">${msg[0]} ${esc(msg[1])}</div></div>
+    <p class="got-name">${esc(fp.name)} · Level ${fp.level}</p>
+    ${o.g&&ITEM[o.g]?`<div class="got-gift">${previewItemHTML(ITEM[o.g])}<div><b>${esc(ITEM[o.g].name)}</b><button class="fam-b" id="gotOpen"${already||mine?' disabled':''}>${already?'Already opened':mine?'Your own gift':'Open gift'}</button></div></div>`:''}
+    ${o.c&&GAME[o.c[0]]?`<div class="got-gift"><span class="gemo">${GAME[o.c[0]].emo}</span><div><b>Beat ${o.c[1]}${GAME[o.c[0]].unit} in ${GAME[o.c[0]].name}!</b><button class="fam-b" id="gotPlay">Play now</button></div></div>`:''}
+    ${mine?'':`<p class="note">${esc(fp.name)} is in your Friend Album now.</p>`}
+    <div class="fam-btns">${mine?'':`<button class="fam-b" id="gotVisit">Invite over</button>`}<button class="fam-b alt" id="gotClose">Done</button></div></div>`;
+  if(!mine)setTimeout(()=>say(`${fp.name} says: ${msg[1]}`),400);
+  const close=()=>{box.hidden=true;box.innerHTML=''};
+  $('#gotClose').onclick=()=>{SFX.tap();close()};
+  if($('#gotVisit'))$('#gotVisit').onclick=()=>{SFX.pop();close();startVisit(S.friends.find(x=>x.key===o.f+'|'+o.p.id))};
+  if($('#gotOpen'))$('#gotOpen').onclick=()=>{if(already||mine)return;S.redeemed.push(o.id);S.owned=S.owned||[];if(!owns(o.g))S.owned.push(o.g);else addCoins(Math.round((ITEM[o.g].price||20)/2));
+    save();SFX.level();const r=$('#gotOpen').getBoundingClientRect();const a=appXY(r.left+r.width/2,r.top);sparkles(a.x,a.y,18);say(`You got the ${ITEM[o.g].name}!`);$('#gotOpen').disabled=true;$('#gotOpen').textContent='Opened!'};
+  if($('#gotPlay'))$('#gotPlay').onclick=()=>{S.challenges=S.challenges||{};S.challenges[o.c[0]]={score:o.c[1],name:fp.name,won:false};save();close();startGame(o.c[0])};
+}
+
+// ---- visits ----
+const VIS={el:null,f:null,x:.3,tx:.3,dir:1,wait:2,heartT:4};
+function startVisit(f){
+  if(!f)return;S.visit={key:f.key,until:Date.now()+4*60*1000};save();if(scene!=='room')enterRoom();else showVisitor();
+  setTimeout(()=>{say(`${f.name} came to visit!`);babble(fromMini(f.pet),'happy',3)},500);
+}
+function showVisitor(){
+  const v=S.visit;let el=$('#visitor');
+  if(!v||v.until<Date.now()||!S.friends){if(el)el.remove();VIS.f=null;if(v&&v.until<Date.now()){delete S.visit}return}
+  const f=S.friends.find(x=>x.key===v.key);if(!f){delete S.visit;return}
+  if(!el){el=document.createElement('div');el.id='visitor';el.className='visitor';$('#room').insertBefore(el,$('#room .night'))}
+  VIS.f=f;const fp=fromMini(f.pet);el.innerHTML=`<div class="v-tag">${esc(f.name)}</div><div class="pet-anim"><div class="pet-flip">${petSVG(fp,'happy')}</div></div>`;
+  el.onclick=()=>{audioInit();anim(el.querySelector('.pet-anim'),'a-jump',700);babble(fp,'happy',2);temp('giggle',900);const r=el.getBoundingClientRect(),a=appXY(r.left+r.width/2,r.top+r.height*.4);hearts(a.x,a.y,3)};
+}
+function visitTick(dt){
+  const el=$('#visitor');if(!VIS.f||!el)return;
+  if(S.visit&&S.visit.until<Date.now()){say(`Bye bye, ${VIS.f.name}!`);delete S.visit;el.remove();VIS.f=null;save();return}
+  const fp=VIS.f.pet;const sc=petScale(fp.L||1)*.92;VIS.wait-=dt;
+  if(VIS.wait<=0){VIS.tx=rand(.05,.95);VIS.wait=rand(3,7)}
+  const d=VIS.tx-VIS.x;if(Math.abs(d)>.01){VIS.dir=Math.sign(d);VIS.x+=Math.sign(d)*Math.min(Math.abs(d),.1*dt);el.classList.add('walking')}else el.classList.remove('walking');
+  const px=L.minX+VIS.x*(L.maxX-L.minX);el.style.width=el.style.height=L.size+'px';el.style.bottom=(L.bottom+L.H*.02)+'px';
+  el.style.transform=`translate(${px-L.size/2}px,0)`;el.querySelector('.pet-flip').style.transform=`scale(${VIS.dir*sc},${sc})`;
+  VIS.heartT-=dt;if(VIS.heartT<=0){VIS.heartT=rand(6,12);if(Math.abs(px-petPx())<L.size*.7&&R.state==='idle'){const c=petCenter();hearts(c.x,c.top,2);temp('happy',1200)}}
+}
+
+// ---- babies together ----
+function mixGenes(a,b){
+  const pk=k=>Math.random()<.5?a[k]:b[k];const g={};
+  ['ears','tail','wings','pattern','body','eyes','patchSide','spots'].forEach(k=>g[k]=JSON.parse(JSON.stringify(pk(k))));
+  const hm=(x,y)=>{let d=((y-x+540)%360)-180;return Math.round((x+d*rand(.3,.7)+rand(-12,12)+360)%360)};
+  g.h=hm(a.h,b.h);g.bh=hm(a.bh,b.bh);g.ah=hm(a.ah,b.ah);g.s=Math.round((a.s+b.s)/2);g.l=Math.round((a.l+b.l)/2);
+  g.es=+(((a.es||1)+(b.es||1))/2).toFixed(2);g.eg=Math.round(((a.eg||22)+(b.eg||22))/2);
+  const ex=[...new Set([...(a.extras||[]),...(b.extras||[])])];g.extras=shuffle(ex).slice(0,2);
+  return g;
+}
+function babyWith(f){
+  const p=P();const day=24*3600*1000;
+  if(p.level<3){SFX.boop();toast('star',`${p.name} needs to reach level 3 first.`);return}
+  if(f.baby&&Date.now()-f.baby<day){SFX.boop();toast('star','One baby egg per friend each day. Come back tomorrow!');return}
+  f.baby=Date.now();S.babies=S.babies||[];S.babies.push({g:mixGenes(genesOf(p),f.pet.g),a:p.name,b:f.name});S.eggs=(S.eggs||0)+1;save();
+  SFX.level();say(`A baby egg from ${p.name} and ${f.name}!`);toast('star','A baby egg is in your nest!');
+}
+
+// ---- friend album (in the nest) ----
+let NEST_TAB='mine';
+function renderFriends(){
+  const g=$('#nestGrid');const fr=S.friends||[];
+  let h=`<button class="ncard send" id="frSend"><div class="mini" style="align-items:center;justify-content:center"><span style="font-size:54px">💌</span></div><b>Send</b><small>Your Gibbi, a gift or a challenge</small></button>`;
+  fr.forEach((f,i)=>{h+=`<button class="ncard" data-fr="${i}"><div class="mini">${scaled(fromMini(f.pet),'happy',.5+.5*((f.pet.L||1)-1)/9)}</div><b>${esc(f.name)}</b><small>Level ${f.pet.L||1}</small></button>`});
+  if(!fr.length)h+=`<div class="ncard meter"><b>No friends yet</b><small>Send your Gibbi to a friend. When they send theirs back, it shows up here.</small></div>`;
+  g.innerHTML=h;
+}
+function friendSheet(f){
+  const box=$('#shareBox');box.hidden=false;const fp=fromMini(f.pet);
+  box.innerHTML=`<div class="share-card"><div class="sh-head"><b>${esc(f.name)}</b><button class="icon-btn" id="shClose" aria-label="Close">${CLOSE_SVG}</button></div>
+    <div class="sh-pet big"><div class="sh-mini">${scaled(fp,'happy',.9)}</div></div><p class="got-name">Level ${fp.level}</p>
+    <div class="fr-acts"><button class="fam-b" id="frVisit">🏠 Invite over</button><button class="fam-b" id="frBaby">🥚 Hatch a baby together</button><button class="fam-b alt" id="frSend2">💌 Send something</button><button class="fam-b alt" id="frDel">Remove</button></div></div>`;
+  const close=()=>{box.hidden=true;box.innerHTML=''};
+  box.onclick=e=>{if(e.target===box||e.target.closest('#shClose')){SFX.tap();close()}};
+  $('#frVisit').onclick=()=>{close();startVisit(f)};
+  $('#frBaby').onclick=()=>{close();babyWith(f);renderNest()};
+  $('#frSend2').onclick=()=>{close();openShare()};
+  $('#frDel').onclick=()=>{S.friends=S.friends.filter(x=>x!==f);save();close();renderNest()};
+  babble(fp,'happy',2);
+}
+
 function start(data){
   S=normalize(migrate(data&&data.S)||migrate(load()));
   if(data&&data.S)CLOUD.state=data.cloud||'checking';
@@ -5200,7 +5419,7 @@ start({});
 
 <script>
 /* Auto-update: home-screen apps resume instead of reloading, so check for a newer build when the app comes back. */
-(function(){const B='v1793137232';
+(function(){const B='v1793137649';
 function keep(){try{window.__gibbiSave&&window.__gibbiSave()}catch(e){}}
 async function chk(){try{const r=await fetch('../version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
 if(j.v&&j.v!==B&&sessionStorage.getItem('gibbiReloaded')!==j.v){sessionStorage.setItem('gibbiReloaded',j.v);keep();location.reload()}}catch(e){}}
