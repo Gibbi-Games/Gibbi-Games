@@ -768,6 +768,33 @@ svg{display:block}
 .bedprev{width:80%;aspect-ratio:2.4}
 .iswatch.bedsw{background:#E7EDE7}
 .deco-prev{display:grid;place-items:center}
+
+/* ---------- furniture use ---------- */
+#room:not(.decorating) .deco-i.usable{pointer-events:auto;cursor:pointer}
+.tapme .di{animation:tapme .4s}
+@keyframes tapme{50%{scale:1.08 .92}}
+.usebump{animation:usebump .5s}
+@keyframes usebump{30%{scale:1.06 .94}60%{scale:.97 1.04}}
+/* ---------- real day and night ---------- */
+.todtint{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.2s,background 1.2s;mix-blend-mode:multiply;z-index:4}
+#room.tod-morning .todtint{background:#FFE3C2;opacity:.18}
+#room.tod-evening .todtint{background:#F7B58A;opacity:.32}
+#room.tod-night .todtint{background:#3B3F7A;opacity:.42}
+#room.is-night .todtint{opacity:0}
+#room.tod-evening .glow{opacity:.75}
+#room.tod-night .glow{opacity:.95}
+#room.tod-night .deco-i.lit .di,#room.tod-evening .deco-i.lit .di{filter:brightness(1.12)}
+#room.tod-morning .window:not([data-view="v-space"]):not([data-view="v-sea"]):not([data-view="v-moon"]):not([data-view="v-candy"]) .sky{background:linear-gradient(#FBC9A8,#FFF1D6)}
+#room.tod-evening .window:not([data-view="v-space"]):not([data-view="v-sea"]):not([data-view="v-moon"]):not([data-view="v-candy"]) .sky{background:linear-gradient(#4E3F9E,#F7B58A)}
+#room.tod-evening .window .sun{background:#E8735A;top:46%}
+#room.tod-night .window:not([data-view="v-space"]):not([data-view="v-sea"]):not([data-view="v-moon"]):not([data-view="v-candy"]) .sky{background:radial-gradient(#fff 1px,transparent 1.5px) 0 0/22px 22px,radial-gradient(#F4D44C 1px,transparent 1.5px) 11px 9px/31px 31px,linear-gradient(#0B0D14,#2A2560)}
+#room.tod-night .window .sun{background:#FEFEF6;box-shadow:inset -10px -4px 0 #B7B2DC}
+.wx{position:absolute;inset:0;z-index:2;pointer-events:none}
+.wx.rain{background:repeating-linear-gradient(105deg,transparent 0 9px,rgba(255,255,255,.55) 9px 10px,transparent 10px 22px);background-size:40px 60px;animation:rain .5s linear infinite}
+.wx.rain::before{content:"";position:absolute;inset:0;background:rgba(90,102,112,.35)}
+@keyframes rain{to{background-position:-12px 60px}}
+.wx.snow{background:radial-gradient(#fff 1.6px,transparent 2.2px) 0 0/18px 18px,radial-gradient(#fff 1.1px,transparent 1.6px) 9px 7px/23px 23px;animation:snowfall 6s linear infinite}
+
 /* ---------- Color themes (picked in Grown-up stuff) ---------- */
 :root,:root[data-theme=bee]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.55) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#1BBEEE 0%, #6FD3F2 55%, #BBEEEE 100%);--th-title-ink:#121417;--th-spark:#F4D44C;--th-shop:linear-gradient(#193B95,#2CA9D3);--th-shop-ink:#FEFEF6;--th-nest:linear-gradient(#BBEEEE,#9BDAF7);--th-nest-ink:#121417;--th-arcade:linear-gradient(#2CA9D3,#1BBEEE);--th-arcade-ink:#121417}
 :root[data-theme=honey]{--th-title:radial-gradient(circle at 50% 40%, rgba(254,254,246,.6) 0 17%, transparent 17.5%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='2'/%3E%3C/svg%3E"),linear-gradient(#F4D44C 0%, #F8E58C 55%, #FEFEF6 100%);--th-title-ink:#121417;--th-spark:#1BBEEE;--th-shop:linear-gradient(#E7C146,#F4D44C);--th-shop-ink:#121417;--th-nest:linear-gradient(#FEFEF6,#F8E58C);--th-nest-ink:#121417;--th-arcade:linear-gradient(#4A2410,#7B3F1E);--th-arcade-ink:#FEFEF6}
@@ -810,7 +837,7 @@ input,textarea,select{font-size:max(16px,1em)}
 
   <section class="screen" id="room" hidden>
     <div class="layer wall" id="lWall">
-      <div class="window"><div class="sky"></div><div class="sun"></div><div id="viewX"></div></div>
+      <div class="window"><div class="sky"></div><div class="sun"></div><div id="viewX"></div><div class="wx"></div></div>
     </div>
     <div id="decoWall"></div>
     <div class="layer floor" id="lFloor"></div><div id="decoFloor"></div>
@@ -818,6 +845,7 @@ input,textarea,select{font-size:max(16px,1em)}
     <div class="thought" id="thought" hidden></div>
     <div class="layer fore" id="lFore"></div>
     <div class="night"></div>
+    <div class="todtint"></div>
     <div id="fxLayer"></div>
     <header class="hud pad" id="roomHud">
       <div class="hud-left">
@@ -1678,11 +1706,11 @@ let bathBubbles=[];
 function enterRoom(){
   if(DECO.on)exitDecorate();
   show('room');
-  Object.assign(R,{state:'idle',tx:R.x,lift:0,temp:null,nap:false,lock:false});
+  Object.assign(R,{state:'idle',tx:R.x,lift:0,temp:null,nap:false,lock:false,use:null,useGo:false,dy:0,dyT:0,dsc:1,dscT:1});petEl.style.opacity='';
   petAnim.className='pet-anim';
   room.classList.remove('is-night','is-bath');$('#sponge').hidden=true;closeTray();
   exitPlay(true);if(R.toy&&R.toy.el)R.toy.el.remove();R.toy=null;R.skate=false;R.toyGo=false;
-  buildToolbar();buildHud();applyDecor();layoutRoom();hud(true);R.key='';greetBack();
+  buildToolbar();buildHud();applyDecor();layoutRoom();todTick(0,true);hud(true);R.key='';greetBack();
 }
 function layoutRoom(){
   const r=room.getBoundingClientRect();L.W=r.width;L.H=r.height;
@@ -1710,6 +1738,7 @@ function buildToolbar(){
 }
 function setToolOn(t,on){const b=$(`#toolbar [data-t="${t}"]`);if(b)b.classList.toggle('on',on)}
 function tool(t){
+  if(R.state==='use')endUse(true);R.useGo=false;
   R.idleT=0;if(R.lock)return;
   if(t!=='toys')exitPlay(true);
   if(t==='food'){const tr=$('#tray');if(tr.hidden||tr.dataset.mode!=='food')openTray();else closeTray();return}
@@ -1823,6 +1852,7 @@ function feed(food){
 /* pet touch */
 let G=null;
 petEl.addEventListener('pointerdown',e=>{
+  if(R.state==='use'&&scene==='room'){endUse(true);R.useGo=false}
   if(scene!=='room'||R.play)return;e.preventDefault();audioInit();
   try{petEl.setPointerCapture(e.pointerId)}catch(_){}
   G={id:e.pointerId,x0:e.clientX,y0:e.clientY,lx:e.clientX,ly:e.clientY,t0:now(),moved:0,rub:0,held:false};R.idleT=0;
@@ -1967,14 +1997,17 @@ function urgentNeed(){
 function roomTick(dt){
   const p=P();R.idleT+=dt;
   if(R.play)playTick(dt);R.mv=(R.mv||0)-dt;if(room.scrollLeft||room.scrollTop){room.scrollLeft=0;room.scrollTop=0}
+  todTick(dt);
+  if(R.state==='use')useTick(dt);
   if(R.state==='idle'){
+    R.useT=(R.useT==null?14:R.useT)-dt;if(R.useT<=0){R.useT=rand(22,38);autoUse()}
     R.nextWander-=dt;
     if(R.nextWander<=0){R.tx=rand(.12,.88);R.state='walk';R.nextWander=rand(3,7)}
     if(R.idleT>25&&!isSad()){R.idleT=0;idleTrick()}
   }
   if(R.state==='walk'||R.state==='tobed'){
-    const sp=(isSad()?.06:.12)*(R.state==='tobed'?1.6:1);const d=R.tx-R.x;
-    if(Math.abs(d)<.008){R.x=R.tx;if(R.state==='tobed')startSleep();else{R.state='idle';if(R.toyGo&&R.toy){R.toyGo=false;playToy()}}}
+    const sp=(isSad()?.06:.12)*(R.state==='tobed'?1.6:R.useGo&&!(R.use&&R.use.auto)?4.5:R.useGo?2:1);const d=R.tx-R.x;
+    if(Math.abs(d)<.008){R.x=R.tx;if(R.state==='tobed')startSleep();else{R.state='idle';if(R.useGo){R.useGo=false;startUse()}else if(R.toyGo&&R.toy){R.toyGo=false;playToy()}}}
     else{R.dir=Math.sign(d);R.x+=Math.sign(d)*Math.min(Math.abs(d),sp*dt)}
   }
   if(R.state==='sleep'){
@@ -1989,7 +2022,9 @@ function roomTick(dt){
     if(R.lift<=0){R.lift=0;R.state='idle';anim(petAnim,'a-bounce',550);SFX.boing();temp('happy',800)}
   }
   if(p.sick&&R.state==='idle'){R.sneezeT-=dt;if(R.sneezeT<=0){R.sneezeT=rand(6,10);SFX.sneeze();anim(petAnim,'a-sneeze',600)}}
-  const px=petPx();const sc=petScale(p.level);
+  R.dy=R.dy||0;R.dsc=R.dsc||1;R.dyT=R.dyT||0;R.dscT=R.dscT||1;R.dy+=(R.dyT-R.dy)*Math.min(1,dt*7);R.dsc+=(R.dscT-R.dsc)*Math.min(1,dt*7);
+  petEl.style.bottom=(L.bottom+R.dy)+'px';
+  const px=petPx();const sc=petScale(p.level)*R.dsc;
   petEl.style.transform=`translate(${px-L.size/2}px,${-R.lift}px)`;
   const trick=R.play&&R.play.trick&&R.lift>0?` rotate(${R.dir*Math.min(360,R.lift/(L.H*.18)*360)}deg)`:'';
   petFlip.style.transition=trick?'none':'';
@@ -4790,7 +4825,7 @@ function renderHome(){
   const wall=$('#decoWall'),flo=$('#decoFloor');
   wall.querySelectorAll('.deco-i').forEach(e=>e.remove());flo.innerHTML='';
   h.items.forEach(i=>{const it=ITEM[i.id];if(!it)return;const m=mountOf(it);
-    const el=document.createElement('div');el.className=`deco-i m-${m}${it.glow?' lit':''}${it.float?' floaty':''}`;el.dataset.u=i.u;el.dataset.id=i.id;
+    const el=document.createElement('div');el.className=`deco-i m-${m}${it.glow?' lit':''}${it.float?' floaty':''}${USE_OF[i.id]?' usable':''}`;el.dataset.u=i.u;el.dataset.id=i.id;
     el.innerHTML=`${it.glow?`<b class="glow" style="--gc:${it.glow}"></b>`:''}<div class="di${i.f?' flip':''}">${decoInner(it)}</div>`;
     (m==='wall'||m==='ceil'?wall:flo).appendChild(el)});
   room.classList.toggle('disco',h.items.some(i=>i.id==='l-disco'));
@@ -4826,6 +4861,7 @@ const DECO_CATS=[['furn','Furniture'],['wallitem','Wall'],['light','Lights'],['r
 function enterDecorate(cat,placeId){
   if(scene!=='room')enterRoom();
   if(R.state==='sleep'||R.state==='tobed')wake(true);if(R.state==='bath')endBath(false);exitPlay(true);closeTray();
+  if(R.state==='use')endUse(true);R.useGo=false;
   DECO.on=true;DECO.sel=null;DECO.collapsed=false;if(cat)DECO.cat=cat;R.state='deco';
   $('#room').classList.add('decorating');$('#decoPanel').hidden=false;renderDecoPanel();
   if(placeId)addDeco(placeId);
@@ -4932,6 +4968,93 @@ function bedTarget(){
 }
 
 I.shop=I.store;
+/* ================= GIBBIS USE FURNITURE ================= */
+// Tap a piece of furniture and your Gibbi goes and uses it. Now and then it wanders over on its own.
+const USE={
+ sit:['f-chair','f-couch','f-log','f-mushroom','f-donut','f-rock'],
+ slide:['f-slide'],splash:['f-tub','f-fountain'],
+ watch:['f-tv','f-computer','f-arcade','f-fish','f-crystal'],
+ dance:['f-radio','f-drums','f-piano','l-disco'],
+ hide:['f-tent'],ride:['f-carousel','f-ufo'],blast:['f-rocket'],float:['f-balloons'],spook:['f-ghost'],
+ hug:['f-teddy','f-dino','f-octopus','f-whale','f-alien','f-bee','f-robot','f-turkey','f-snowman','f-chick'],
+};
+const USE_OF={};Object.entries(USE).forEach(([k,ids])=>ids.forEach(id=>USE_OF[id]=k));
+const USE_PATH={sit:'sleepy',slide:'brave',splash:'wild',watch:'science',dance:'wild',hide:'sweet',ride:'brave',blast:'brave',float:'sweet',spook:'brave',hug:'sweet'};
+const USE_TIME={sit:4.5,slide:4.2,splash:4,watch:4.5,dance:4,hide:3.4,ride:4.5,blast:3.2,float:4,spook:2.4,hug:3.2};
+const NOTE='<svg viewBox="0 0 24 24"><path d="M9 18a3 3 0 1 1-2-2.8V4l11-2v12.2A3 3 0 1 1 16 11.4V6.4L9 7.7z" fill="#121417"/></svg>';
+function usableItems(){return ensureHome().items.filter(i=>USE_OF[i.id])}
+function itemEl(u){return document.querySelector(`.deco-i[data-u="${u}"]`)}
+function goUse(u,auto){
+  const i=ensureHome().items.find(x=>x.u===u);if(!i||R.lock)return false;const type=USE_OF[i.id];if(!type)return false;
+  if(R.state==='sleep'||R.state==='tobed'||R.state==='bath'||R.play||R.state==='held'||R.state==='evolve')return false;
+  if(R.state==='use')endUse(true);
+  const ix=ITEM[i.id].kind==='light'?i.x:i.x;const px=ix*L.W;
+  const pxc=clamp(px,L.W*.06,L.W*.94);R.use={u,type,t:0,auto,ix:pxc};R.tx=(pxc-L.minX)/(L.maxX-L.minX);R.state='walk';R.useGo=true;R.idleT=0;
+  if(!auto){const el=itemEl(u);if(el)anim(el,'tapme',400);SFX.tap()}
+  return true;
+}
+function autoUse(){
+  if(isSad()||DECO.on)return false;const list=usableItems();if(!list.length)return false;
+  return goUse(pick(list).u,true);
+}
+function startUse(){
+  const U=R.use;if(!U)return;const el=itemEl(U.u);if(!el){R.use=null;R.state='idle';return}
+  U.h=el.getBoundingClientRect().height;U.w=el.getBoundingClientRect().width;U.t=0;U.dur=USE_TIME[U.type];U.fx=0;
+  R.state='use';R.dir=1;
+  {const it0=ITEM[(ensureHome().items.find(x=>x.u===U.u)||{}).id];const ii=ensureHome().items.find(x=>x.u===U.u);if(ii&&it0&&mountOf(it0)==='floor'){const fb=floorBand();const yI=fb.top+ii.d*(fb.bot-fb.top);R.dyT=(L.H-L.bottom)-yI+2;R.dscT=(.72+.4*ii.d)/(.72+.4*fb.pet)}}
+  const i=ensureHome().items.find(x=>x.u===U.u);U.flip=i&&i.f;
+  ({sit:()=>{SFX.boing();anim(petAnim,'a-jump',700)},slide:()=>{},splash:()=>{SFX.bubble&&SFX.bubble();addNeed('clean',ITEM[i.id].id==='f-tub'?25:6)},
+    watch:()=>{temp('happy',U.dur*1000)},dance:()=>{},hide:()=>{},ride:()=>{SFX.boing()},blast:()=>{tone(200,.9,'sawtooth',.12,900)},float:()=>{tone(500,.5,'sine',.12,900)},
+    spook:()=>{say('Boo!');SFX.boing();anim(petAnim,'a-jump',700);temp('dizzy',900)},hug:()=>{temp('happy',2500)}})[U.type]();
+  gain(USE_PATH[U.type],1);addNeed('fun',8);
+  const it=el.querySelector('.di');if(it)anim(it,'usebump',500);
+}
+function endUse(cut){
+  const U=R.use;R.use=null;petEl.style.opacity='';R.dyT=0;R.dscT=1;if(R.x<0||R.x>1){R.tx=clamp(R.x,0,1);R.state='walk'}if(R.lift>4)anim(petAnim,'a-bounce',550);R.lift=0;if(R.state==='use')R.state='idle';if(R.x<0||R.x>1){R.tx=clamp(R.x,0,1);R.state='walk'}R.nextWander=rand(2,4);
+  if(U&&!cut&&U.type==='hide'){anim(petAnim,'a-jump',700);say('Peekaboo!');SFX.boing()}
+  if(U&&!cut&&!U.auto)babble(P(),'happy',2);
+}
+function useTick(dt){
+  const U=R.use;if(!U){R.state='idle';return}U.t+=dt;const t=U.t,d=U.dur,k=t/d;const c=petCenter();
+  const seat={sit:.38,splash:.22,watch:0,dance:0,hug:0}[U.type];
+  switch(U.type){
+   case 'sit':R.lift=U.h*seat*Math.min(1,t*4);if(Math.random()<dt*.6)temp('happy',800);break;
+   case 'splash':R.lift=U.h*seat*Math.min(1,t*4);U.fx-=dt;if(U.fx<=0){U.fx=.18;spawn('',c.x+rand(-c.w*.5,c.w*.5),c.top+c.h*.7,'burst',700,{dx:rand(-50,50),dy:rand(-90,-30),style:{width:'14px',height:'14px',borderRadius:'50%',background:'radial-gradient(circle at 30% 30%,#fff,#BBEEEE)',border:'2px solid #fff'}})}break;
+   case 'slide':{const dir=U.flip?-1:1;const cyc=(t%2.1)/2.1;const left=U.ix-dir*U.w*.32,right=U.ix+dir*U.w*.32;
+     let x,lift;if(cyc<.45){const q=cyc/.45;x=left;lift=U.h*.8*q}else{const q=Math.min(1,(cyc-.45)/.35);x=left+(right-left)*q;lift=U.h*.8*(1-q);if(q>0&&q<.1){temp('giggle',600);if(!U.wh){U.wh=1;tone(800,.35,'sine',.12,300)}}}
+     if(cyc<.1)U.wh=0;R.x=(x-L.minX)/(L.maxX-L.minX);R.lift=lift;R.dir=dir;break}
+   case 'watch':R.lift=0;U.fx-=dt;if(U.fx<=0){U.fx=.9;spawn(Math.random()<.5?I.star:NOTE,c.x+rand(-20,20),c.top,'float',1100,{dx:rand(-20,20),size:22});if(Math.random()<.4){temp('giggle',700);SFX.giggle&&SFX.giggle()}}break;
+   case 'dance':U.fx-=dt;if(U.fx<=0){U.fx=.5;anim(petAnim,Math.random()<.5?'a-wiggle':'a-bounce',500);spawn(NOTE,c.x+rand(-c.w*.5,c.w*.5),c.top,'float',1100,{dx:rand(-30,30),size:24});tone(pick([523,587,659,784,880]),.18,'triangle',.12)}R.dir=Math.sin(t*4)>0?1:-1;break;
+   case 'hide':petEl.style.opacity=t<.3?String(1-t/.3):t>d-.25?String((t-(d-.25))/.25):'0';break;
+   case 'ride':R.lift=U.h*.3+Math.sin(t*5)*U.h*.08;{const x=U.ix+Math.sin(t*1.6)*U.w*.25;R.x=(x-L.minX)/(L.maxX-L.minX);R.dir=Math.cos(t*1.6)>0?1:-1}break;
+   case 'blast':R.lift=k<.45?L.H*.5*(k/.45)**2:L.H*.5*Math.max(0,1-(k-.45)/.4);if(k<.45&&Math.random()<dt*20)spawn('',c.x+rand(-10,10),c.top+c.h,'burst',500,{dy:rand(30,90),dx:rand(-20,20),style:{width:'12px',height:'12px',borderRadius:'50%',background:pick(['#F4D44C','#E8735A','#FEFEF6'])}});break;
+   case 'float':R.lift=U.h*Math.min(1,t*.8)*(k>.8?(1-k)/.2:1)+Math.sin(t*3)*6;break;
+   case 'spook':R.lift=0;break;
+   case 'hug':U.fx-=dt;if(U.fx<=0){U.fx=.6;hearts(c.x,c.top,1)}break;
+  }
+  if(t>=d)endUse(false);
+}
+// tapping furniture in the room
+document.getElementById('room').addEventListener('click',e=>{
+  if(DECO.on||scene!=='room')return;const el=e.target.closest('.deco-i.usable');if(!el)return;audioInit();goUse(+el.dataset.u,false);
+});
+
+/* ================= REAL DAY AND NIGHT ================= */
+// The room follows the real clock: soft morning, bright day, warm evening, cozy night. Lamps glow on their own after dark.
+let TOD={k:'',wx:'',chk:0};
+function todOf(h){return h>=6&&h<10?'morning':h>=10&&h<17?'day':h>=17&&h<20?'evening':'night'}
+function weatherNow(d){
+  // a little weather now and then, the same for everyone in the same hour
+  const seed=(d.getFullYear()*400+d.getMonth()*32+d.getDate())*24+d.getHours();const r=((Math.sin(seed*12.9898)*43758.5453)%1+1)%1;
+  if(r<.16)return [11,0,1].includes(d.getMonth())?'snow':'rain';return '';
+}
+function todTick(dt,force){
+  TOD.chk-=dt;if(TOD.chk>0&&!force)return;TOD.chk=20;
+  const d=new Date();const k=todOf(d.getHours()),wx=weatherNow(d);const room=$('#room');
+  if(k!==TOD.k||force){['morning','day','evening','night'].forEach(x=>room.classList.toggle('tod-'+x,x===k));TOD.k=k}
+  if(wx!==TOD.wx||force){const w=$('#room .window .wx');if(w)w.className='wx'+(wx?' '+wx:'');TOD.wx=wx}
+}
+
 function start(data){
   S=normalize(migrate(data&&data.S)||migrate(load()));
   if(data&&data.S)CLOUD.state=data.cloud||'checking';
@@ -4949,7 +5072,7 @@ start({});
 
 <script>
 /* Auto-update: home-screen apps resume instead of reloading, so check for a newer build when the app comes back. */
-(function(){const B='v1793136385';
+(function(){const B='v1793136865';
 function keep(){try{window.__gibbiSave&&window.__gibbiSave()}catch(e){}}
 async function chk(){try{const r=await fetch('../version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
 if(j.v&&j.v!==B&&sessionStorage.getItem('gibbiReloaded')!==j.v){sessionStorage.setItem('gibbiReloaded',j.v);keep();location.reload()}}catch(e){}}
