@@ -1467,8 +1467,21 @@ function fakePet(level){const g=randGenes();revealOrder(g);const marks=Array.fro
 
 /* ---------------- Audio ---------------- */
 let AC=null, master=null, musicGain=null, noiseBuf=null, musicTimer=null, musicMode='day', mStep=0, mNext=0;
+// iPhones mute web audio when the ring switch is on silent. A game isn't a ringtone, so ask to play like a music app does.
+function playThroughSilent(){
+  try{if(navigator.audioSession&&navigator.audioSession.type!=='playback'){navigator.audioSession.type='playback';return}}catch(e){}
+  if(navigator.audioSession||window.__silentEl||!/iP(hone|ad|od)|Macintosh/.test(navigator.userAgent)||!('ontouchend' in document))return;
+  // older iOS: a looping, silent sound file switches the page to playback mode
+  try{const n=800,b=new ArrayBuffer(44+n),v=new DataView(b),w=(o,t)=>[...t].forEach((c,i)=>v.setUint8(o+i,c.charCodeAt(0)));
+    w(0,'RIFF');v.setUint32(4,36+n,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,8000,true);v.setUint32(28,8000,true);v.setUint16(32,1,true);v.setUint16(34,8,true);w(36,'data');v.setUint32(40,n,true);for(let i=0;i<n;i++)v.setUint8(44+i,128);
+    const el=document.createElement('audio');el.src=URL.createObjectURL(new Blob([b],{type:'audio/wav'}));el.loop=true;el.setAttribute('playsinline','');el.setAttribute('x-webkit-airplay','deny');
+    const pr=el.play();if(pr&&pr.catch)pr.catch(()=>{window.__silentEl=null});window.__silentEl=el}catch(e){}
+}
+playThroughSilent();
+document.addEventListener('visibilitychange',()=>{if(!AC)return;try{if(document.hidden){AC.suspend();window.__silentEl&&window.__silentEl.pause()}else{playThroughSilent();window.__silentEl&&window.__silentEl.play().catch(()=>{});AC.resume()}}catch(e){}});
 function audioInit(){
-  if(AC){if(AC.state==='suspended')AC.resume();return}
+  playThroughSilent();
+  if(AC){if(AC.state!=='running')AC.resume();return}
   try{
     AC=new (window.AudioContext||window.webkitAudioContext)();
     master=AC.createGain();master.gain.value=.6;master.connect(AC.destination);
